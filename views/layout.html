@@ -13,13 +13,15 @@
 {% endblock %}
 
 {% block extraHead %}
-  {#
-    This block outputs its contents in the HTML document's <head>.
-    It is a good place to put extra <script> <link> and <meta> tags.
-  #}
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300|Playfair+Display|EB+Garamond|Abril+Fatface" rel="stylesheet">
+
 {% endblock %}
 
 {% block beforeMain %}
+  <div class="site-menu-icon-wrapper">
+    <img src="/uploads/ui/menuIcon.png" srcset="/uploads/ui/menuIcon.png 1x, /uploads/ui/menuIcon@2x.png 2x" alt="">
+  </div>
+
   {#
     We recommend you use the beforeMain block for global page components
     like headers or navigation.

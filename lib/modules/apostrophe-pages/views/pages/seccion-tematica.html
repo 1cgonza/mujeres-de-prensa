@@ -1,0 +1,35 @@
+{% import "macros/singletons.html" as singletons %}
+{% import "macros/areas.html" as areas %}
+{% extends "layout.html" %}
+
+{% block main %}
+  <article class="contentWrapper">
+    <section class="parallaxSection">
+      <div class="pageTitleBlock absoluteCenter">
+        {{ apos.singleton(data.page, 'decoTop', 'apostrophe-images', {
+          minSize: [ 700, 350 ],
+          aspectRatio: [ 2, 1 ],
+          limit: 1,
+          addLabel: 'Decoration',
+          editLabel: 'Change decoration',
+          size: 'full'
+        }) }}
+        <h1 class="pageTitle">{{data.page.title}}</h1>
+
+        <div class="pageSubtitle">{{ singletons.getTextBlock(data.page, 'subtitle') }}</div>
+
+        {{ apos.singleton(data.page, 'decoBottom', 'apostrophe-images', {
+          minSize: [ 700, 350 ],
+          aspectRatio: [ 2, 1 ],
+          limit: 1,
+          addLabel: 'Decoration',
+          editLabel: 'Change decoration',
+          size: 'full'
+        }) }}
+      </div>
+    </section>
+
+    {{ areas.getParallaxSection(data.page, 'parallaxSection') }}
+  </article>
+
+{% endblock %}

@@ -1,33 +1,79 @@
-@import "utils/reset.less";
+@import 'utils/reset.less';
+@import 'utils/colors.less';
+@import 'utils/typography.less';
 
-// Delete the boilerplate CSS below when you are ready to dive in and customize your sites:
-body { background-color: @apos-light; }
-
-.main-content {
-  font-family: 'Karla', sans-serif;
-  margin: 200px auto;
-  padding: 20px;
-  max-width: 500px;
-  color: @apos-white;
-  background-color: @apos-primary;
-  .apos-drop-shadow;
-
-  .login-link {
-    float: right;
-    color: @apos-white;
-  }
-
-  // Basic rich-text editor styles:
-  h3 {
-    font-size: 24px;
-    margin-bottom: 12px;
-  }
-
-  h4 {
-    font-size: 20px;
-    margin-bottom: 10px;
-  }
-
-  strong { font-weight: bold; }
-  em { font-style: italic; }
+body {
+  .fontMain;
 }
+
+.absoluteCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.site-menu-icon-wrapper {
+  background-color: @siteBlue;
+  position: fixed;
+  right: 0;
+  top: 0;
+  line-height: 0;
+  width: 72px;
+  height: 73px;
+  z-index: 9999;
+}
+
+.contentWrapper {
+  .parallaxSection {
+    width: 100%;
+    min-height:100vh;
+    position: relative;
+    background-color: white;
+
+    .innerSection {
+      display: inline-block;
+      vertical-align: top;
+      margin-top: 3em;
+    }
+
+    &.cols1 {
+      .innerSection {
+        width: 60%;
+        display: block;
+        margin: 0 auto;
+      }
+    }
+
+    &.cols2 {
+      .innerSection {
+        width: 40%;
+
+        &.col1 {
+          margin-left: 6.67%;
+          margin-right: 6.67%;
+        }
+      }
+    }
+  }
+
+  .pageTitleBlock {
+    text-align: center;
+    width: 60%;
+
+
+    .pageTitle {
+      text-transform: uppercase;
+      font-size: 20px;
+      letter-spacing: 6px;
+    }
+
+    .pageSubtitle {
+      .fontSub;
+      text-align: center;
+      padding-top: 2em;
+      letter-spacing: 2px;
+    }
+  }
+}
+

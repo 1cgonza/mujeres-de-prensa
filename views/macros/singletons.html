@@ -1,0 +1,14 @@
+{% macro getTextBlock(context, name) %}
+  {{ apos.singleton(context, name, 'apostrophe-rich-text', {
+    toolbar: [ 'Styles', 'Bold', 'Italic', 'Link', 'Unlink', 'BulletedList', 'Blockquote', 'Align Left', 'Centre', 'Align Right', 'Justify' ],
+    styles: [
+    { name: 'Montserrat', element: 'p', attributes: {class: 'fontLight'} },
+    { name: 'Playfair Display', element: 'p', attributes: {class: 'fontMain'} },
+    { name: 'EB Garamond', element: 'p', attributes: {class: 'fontSub'} },
+    { name: 'Abril Fatface', element: 'p', attributes: {class: 'fontFat'} }
+  ],
+  controls: {
+    movable: false
+  }
+  }) }}
+{% endmacro %}

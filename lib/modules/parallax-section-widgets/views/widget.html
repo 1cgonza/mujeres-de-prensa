@@ -1,0 +1,29 @@
+<section class="parallaxSection {{data.widget.layout}}" data-rellax-speed={{data.widget.speed}}>
+  <div class="innerSection col1">
+    {{ apos.area(data.widget, 'col1Body', {
+      widgets: {
+        'apostrophe-rich-text': {
+          toolbar: [ 'Bold', 'Italic' ]
+        },
+        'apostrophe-images': {
+          size: 'full'
+        }
+      }
+    }) }}
+  </div>
+
+  {% if data.widget.layout === 'cols2' %}
+  <div class="innerSection col2">
+    {{ apos.area(data.widget, 'col2Body', {
+      widgets: {
+        'apostrophe-rich-text': {
+          toolbar: [ 'Bold', 'Italic' ]
+        },
+        'apostrophe-images': {
+          size: 'full'
+        }
+      }
+    }) }}
+  </div>
+  {% endif %}
+</section>

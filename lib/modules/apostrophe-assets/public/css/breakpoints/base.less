@@ -1,0 +1,211 @@
+body {
+  .fontMain;
+}
+
+.absoluteCenter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.center {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.resetFontSize {
+  font-size: 16px;
+}
+
+ol {
+  list-style: decimal;
+  padding-left: 2em;
+}
+
+.site-menu-icon-wrapper {
+  background-color: @siteBlue;
+  position: fixed;
+  right: 0;
+  top: 0;
+  line-height: 0;
+  width: 72px;
+  height: 73px;
+  z-index: 9999;
+}
+
+.contentWrapper {
+  .parallaxSection {
+    width: 100%;
+    min-height:100vh;
+    position: relative;
+    font-size: 0;
+
+    .innerSection {
+      .resetFontSize;
+      display: inline-block;
+      vertical-align: top;
+    }
+  }
+
+  .pageTitleBlock {
+    text-align: center;
+
+    .pageTitle {
+      text-transform: uppercase;
+      font-size: 20px;
+      letter-spacing: 6px;
+    }
+
+    .pageSubtitle {
+      text-align: center;
+      padding-top: 2em;
+      letter-spacing: 2px;
+    }
+  }
+}
+
+.sectionCalle {
+  .deco {
+    background-size: contain;
+    background-position: center;
+    display: block;
+    background-repeat: no-repeat;
+  }
+
+  .pageTitleBlock {
+    top: 55%;
+    .resetFontSize;
+
+    .decoTop {
+      background-image: url(/uploads/ui/calle/Calle_ornamento_titulo_superior.svg);
+      margin-bottom: 3em;
+      height: 20px;
+    }
+
+    .decoBottom {
+      background-image: url(/uploads/ui/calle/Calle_ornamento_titulo_inferior.svg);
+      margin-top: 3em;
+      height: 20px;
+    }
+
+    .decoEnd {
+      background-image: url(/uploads/ui/calle/Calle_ornamento_titulo_centro.svg);
+      margin-top: 1.5em;
+      height: 30px;
+    }
+
+    .sectionName {
+      margin-top: 3em;
+      letter-spacing: 1px;
+      font-size: 0.8em;
+    }
+  }
+
+  .pageIndex {
+    .col1 {
+      .pageTitle {
+        font-size: 4em;
+        line-height: 1.2em;
+        margin-bottom: 0.3em;
+        text-align: center;
+      }
+
+      .titleDeco {
+        background-image: url(/uploads/ui/calle/Calle_ornamento_curva.svg);
+        height: 20vh;
+      }
+
+      .decoTop {
+
+      }
+
+      .decoBottom {
+        transform: rotate(180deg);
+      }
+    }
+
+    .col2 {
+      .sectionTitle {
+        font-size: 2em;
+        color: @siteBlue;
+        margin: 0 auto;
+        padding: 3em 0 1em;
+      }
+
+      .indexDeco {
+        background-image: url(/uploads/ui/calle/Calle_ornamento_Barra.svg);
+        height: 20px;
+        background-size: 90%;
+      }
+
+      .decoBottom {
+        transform: rotate(180deg);
+      }
+
+      .indexWrapper {
+        background-image: url(/uploads/ui/calle/Calle_fondo_marco.svg);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        min-height: 40vh;
+        margin: 5em auto;
+      }
+
+      .sectionIndex {
+        margin: 0 auto;
+        font-size: 1.3em;
+        padding-bottom: 3em;
+      }
+    }
+  }
+
+  .pageIntro {
+    .titleBlock {
+
+    }
+
+    .titleDeco {
+      background-image: url(/uploads/ui/calle/Calle_ornamento_linea.svg);
+      height: 5px;
+    }
+
+    .titleDecoSide, .sectionTitle {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .titleDecoSide {
+      background-image: url(/uploads/ui/calle/Calle_ornamento_mano.svg);
+      height: 30px;
+      width: 100px;
+    }
+
+    .decoLeft {
+      margin-right: 2em;
+    }
+
+    .decoRight {
+      -moz-transform: scaleX(-1);
+      -o-transform: scaleX(-1);
+      -webkit-transform: scaleX(-1);
+      transform: scaleX(-1);
+      filter: FlipH;
+      -ms-filter: 'FlipH';
+      margin-left: 2em;
+    }
+
+    .sectionTitle {
+      font-size: 1.5em;
+      line-height: 1.4em;
+      padding: 1em 0;
+    }
+
+    .col1 {
+      .separator {
+        background-image: url(/uploads/ui/calle/Calle_ornamento_linea.svg);
+        height: 10px;
+      }
+    }
+  }
+  
+}

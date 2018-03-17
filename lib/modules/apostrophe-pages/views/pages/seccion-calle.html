@@ -1,0 +1,56 @@
+{% import "macros/singletons.html" as singletons %}
+{% import "macros/areas.html" as areas %}
+{% extends "layout.html" %}
+
+{% block main %}
+  <article class="contentWrapper sectionCalle">
+    <section class="parallaxSection">
+      <div class="pageTitleBlock absoluteCenter ld-60">
+        <span class="titleDeco deco decoTop"></span>
+        <h1 class="pageTitle">{{data.page.title}}</h1>
+        <div class="pageSubtitle">{{ singletons.getTextBlock(data.page, 'subtitle') }}</div>
+        <span class="titleDeco deco decoBottom"></span>
+        <div class="sectionName">{{ singletons.getTextBlock(data.page, 'sectionName') }}</div>
+        <span class="titleDeco deco decoEnd"></span>
+      </div>
+    </section>
+
+    <section class="parallaxSection pageIndex" data-rellax-speed="-4">
+      <div class="innerSection col1 ld-50">
+        <span class="titleDeco deco decoTop"></span>
+        <div class="pageTitle">{{ singletons.getTextBlock(data.page, 'pageTwoTitle') }}</div>
+        <span class="titleDeco deco decoBottom"></span>
+      </div>
+      <div class="innerSection col2 ld-50">
+        <span class="indexDeco deco decoTop"></span>
+        <div class="indexWrapper ld-90">
+          <div class="sectionTitle">{{ singletons.getTextBlock(data.page, 'pageTwoTitle2') }}</div>
+          <div class="sectionIndex">{{ singletons.getTextBlock(data.page, 'pageTwoIndex') }}</div>
+        </div>
+        <span class="indexDeco deco decoBottom"></span>
+      </div>
+    </section>
+
+    <section class="parallaxSection pageIntro" data-rellax-speed="-4">
+      <div class="innerSection col1 ld-50">
+        <div class="titleBlock center">
+          <span class="titleDeco deco decoTop ld-20 center"></span>
+          <span class="titleDecoSide deco decoLeft"></span>
+          <div class="sectionTitle">{{ singletons.getTextBlock(data.page, 'pageIntroTitle') }}</div>
+          <span class="titleDecoSide deco decoRight"></span>
+          <span class="titleDeco deco decoBottom ld-20 center"></span>
+        </div>
+
+        <div class="ld-50 center">
+          <span class="separator deco"></span>
+          <div class="sectionTitle">{{ singletons.getTextBlock(data.page, 'pageIntroTitle') }}</div>
+        </div>
+      </div>
+
+      <div class="innerSection col2 ld-50">
+
+      </div>
+    </section>
+  </article>
+
+{% endblock %}

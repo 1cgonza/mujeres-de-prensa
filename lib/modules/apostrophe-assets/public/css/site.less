@@ -1,79 +1,17 @@
 @import 'utils/reset.less';
 @import 'utils/colors.less';
 @import 'utils/typography.less';
+@import 'utils/grid.less';
 
-body {
-  .fontMain;
+@import 'breakpoints/base.less';
+
+@media only screen and (min-width: 768px) {
+  @import 'breakpoints/768up';
 }
-
-.absoluteCenter {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+@media only screen and (min-width: 1030px) {
+  @import 'breakpoints/1030up';
 }
-
-.site-menu-icon-wrapper {
-  background-color: @siteBlue;
-  position: fixed;
-  right: 0;
-  top: 0;
-  line-height: 0;
-  width: 72px;
-  height: 73px;
-  z-index: 9999;
-}
-
-.contentWrapper {
-  .parallaxSection {
-    width: 100%;
-    min-height:100vh;
-    position: relative;
-    background-color: white;
-
-    .innerSection {
-      display: inline-block;
-      vertical-align: top;
-      margin-top: 3em;
-    }
-
-    &.cols1 {
-      .innerSection {
-        width: 60%;
-        display: block;
-        margin: 0 auto;
-      }
-    }
-
-    &.cols2 {
-      .innerSection {
-        width: 40%;
-
-        &.col1 {
-          margin-left: 6.67%;
-          margin-right: 6.67%;
-        }
-      }
-    }
-  }
-
-  .pageTitleBlock {
-    text-align: center;
-    width: 60%;
-
-
-    .pageTitle {
-      text-transform: uppercase;
-      font-size: 20px;
-      letter-spacing: 6px;
-    }
-
-    .pageSubtitle {
-      .fontSub;
-      text-align: center;
-      padding-top: 2em;
-      letter-spacing: 2px;
-    }
-  }
+@media only screen and (min-width: 1240px) {
+  @import 'breakpoints/1240up';
 }
 

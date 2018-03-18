@@ -2,6 +2,7 @@
 _ARCHIVOS
 
 #General
+.DS_Store
 locales
 npm-debug.log
 data

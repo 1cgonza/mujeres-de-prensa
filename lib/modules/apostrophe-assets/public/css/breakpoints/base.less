@@ -2,6 +2,19 @@ body {
   .fontMain;
 }
 
+.selection {
+  background-color: rgba(249, 232, 83, 0.85);
+  color: black;
+}
+
+::-moz-selection {
+  .selection;
+}
+
+::selection {
+  .selection;
+}
+
 .absoluteCenter {
   position: absolute;
   top: 50%;
@@ -14,8 +27,55 @@ body {
   margin: 0 auto;
 }
 
+.blockCenter {
+  margin: 0 auto;
+}
+
 .resetFontSize {
   font-size: 16px;
+}
+
+.contentBlock {
+  line-height: 1.5;
+  hyphens: auto;
+}
+
+.innerSection {
+  position: relative;
+  min-height: 100vh;
+}
+
+.gridCol {
+  display: inline-block;
+}
+
+article {
+  padding-bottom: 20em;
+}
+
+section {
+  width: 100%;
+  min-height:100vh;
+  position: relative;
+  font-size: 0;
+  background-color: white;
+}
+
+.horiozontalFlip {
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: 'FlipH';
+}
+
+.contentBackground {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
 ol {
@@ -34,18 +94,17 @@ ol {
   z-index: 9999;
 }
 
-.contentWrapper {
-  .parallaxSection {
-    width: 100%;
-    min-height:100vh;
-    position: relative;
-    font-size: 0;
+.deco {
+  background-size: contain;
+  background-position: center;
+  display: block;
+  background-repeat: no-repeat;
+}
 
-    .innerSection {
-      .resetFontSize;
-      display: inline-block;
-      vertical-align: top;
-    }
+.contentWrapper {
+  .innerSection {
+    .resetFontSize;
+    vertical-align: top;
   }
 
   .pageTitleBlock {
@@ -65,14 +124,18 @@ ol {
   }
 }
 
-.sectionCalle {
-  .deco {
-    background-size: contain;
-    background-position: center;
-    display: block;
-    background-repeat: no-repeat;
+.contentBackground {
+  .apos-slideshow-item {
+    background-size: cover;
+    max-width: 100%;
+    height: 100vh;
   }
+}
 
+/*=============================
+=            Calle            =
+=============================*/
+.sectionCalle {
   .pageTitleBlock {
     top: 55%;
     .resetFontSize;
@@ -103,6 +166,8 @@ ol {
   }
 
   .pageIndex {
+    padding-top: 100px;
+
     .col1 {
       .pageTitle {
         font-size: 4em;
@@ -177,12 +242,7 @@ ol {
     }
 
     .decoRight {
-      -moz-transform: scaleX(-1);
-      -o-transform: scaleX(-1);
-      -webkit-transform: scaleX(-1);
-      transform: scaleX(-1);
-      filter: FlipH;
-      -ms-filter: 'FlipH';
+      .horiozontalFlip;
       margin-left: 2em;
     }
 
@@ -193,11 +253,194 @@ ol {
     }
 
     .col1 {
+      margin-top: 3em;
+
       .separator {
         background-image: url(/uploads/ui/calle/Calle_ornamento_linea.svg);
-        height: 10px;
+        height: 20px;
+        margin: 2em 0;
+      }
+
+      .endDeco {
+        background-image: url(/uploads/ui/calle/Calle_ornamento_matera.svg);
+        height: 50px;
+        margin: 2em 0;
+      }
+    }
+
+    .col2 {
+      .deco {
+        background-image: url(/uploads/ui/calle/Calle_ornamento_Barras_inserto.svg);
+        height: 3em;
+      }
+
+      .decoBottom {
+        transform: rotate(180deg);
+      }
+
+      .sectionQuote {
+        font-size: 2em;
+        margin: 2em 0;
       }
     }
   }
-  
+
+  .pageContent1 {
+    .contentBackground {
+      max-height: 100vh;
+      overflow: hidden;
+    }
+
+    .innerSection {
+      background-color: rgba(61, 191, 224, 0.95);
+      min-height: 100vh;
+      float: right;
+      margin-right: 10%;
+      z-index: 2;
+
+      .titleDeco {
+        background-image: url(/uploads/ui/calle/Calle_ornamento_hueco.svg);
+        height: 60px;
+        margin: 20em 0 2em 0;
+      }
+    }
+
+    .sectionContent {
+      padding: 4em;
+      color: white;
+    }
+  }
+}
+
+/*=====  End of Calle  ======*/
+
+.acerca {
+  .pageDeco {
+    background-image: url(/uploads/ui/acerca/Acerca_deco.svg);
+    height: 50px;
+    margin-top: 6em;
+  }
+
+  .pageTitle {
+    .fontFat;
+    text-transform: uppercase;
+    margin: 4em 0 3em 0;
+    font-size: 1.6em;
+  }
+
+  .decoBottom {
+    background-image: url(/uploads/ui/acerca/Acerca_deco2-80.jpg);
+    width: 279px;
+    height: 122px;
+    margin-top: 5em;
+  }
+}
+
+.sectionTras {
+
+  .pageIntro {
+    .pageTitle {
+      .fontMain;
+      font-weight: 700;
+      font-style: italic;
+      font-size: 1.55em;
+      margin: 0.2em 0;
+      text-transform: uppercase;
+    }
+
+    .titleDeco {
+      background-image: url(/uploads/ui/tras/Tras_deco_titulo.svg);
+      height: 50px;
+
+      &.decoBottom {
+        transform: rotate(180deg);
+      }
+    }
+
+    .col1 {
+      &.innerSection {
+        margin: 8em 0 2em 0;
+      }
+    }
+    
+    .sectionContent {
+      margin-top: 4em;
+    }
+
+    .col2 {
+      .contentBackground {
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
+    }
+  }
+
+  .profileSection {
+    margin: 100px 0;
+
+    .titleDeco {
+      background-image: url(/uploads/ui/tras/TrasRevistas_Titulo_deco1.svg);
+      height: 40px;
+    }
+
+    .titleDecoWrapper {
+      .fontThin;
+      color: @siteOrange;
+
+      .titleDeco {
+        width: 20%;
+
+        &.decoRight {
+          .horiozontalFlip;
+        }
+      }
+
+      .titleDeco, .sectionName {
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      .sectionName {
+        font-size: 0.85em;
+        letter-spacing: 1.2px;
+        font-weight: 300;
+      }
+    }
+
+    .profileTitle {
+      .fontThin;
+      text-transform: uppercase;
+      font-size: 1.6em;
+      margin: 1.5em auto 1em auto;
+    }
+
+    .decoBottom {
+      background-image: url(/uploads/ui/tras/TrasRevistas_Titulo_deco2.svg);
+      height: 20px;
+    }
+
+    .publicationName {
+      .fontThin;
+      color: @siteOrange;
+      margin-top: 0.8em;
+    }
+
+    .col1 {
+      .sectionContent {
+        margin-top: 2em;
+      }
+    }
+  }
+}
+
+// Parallax
+.columns {
+  .fixedCol {
+    position: absolute;
+  }
+}
+.landingSection {
+  z-index: 1;
 }

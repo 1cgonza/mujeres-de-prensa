@@ -6,10 +6,24 @@
       { name: 'Playfair Display', element: 'p', attributes: {class: 'fontMain'} },
       { name: 'EB Garamond', element: 'p', attributes: {class: 'fontSub'} },
       { name: 'Abril Fatface', element: 'p', attributes: {class: 'fontFat'} },
-      { name: 'Lora', element: 'p', attributes: {class: 'fontIndex'} }
+      { name: 'Lora', element: 'p', attributes: {class: 'fontIndex'} },
+      { name: 'Pacifico', element: 'p', attributes: {class: 'fontQuote'} },
+      { name: 'Lato', element: 'p', attributes: {class: 'fontThin'} }
     ],
-  controls: {
-    movable: false
-  }
+    controls: {
+      movable: false
+    }
+  }) }}
+{% endmacro %}
+
+{% macro getImageSection(context, name, limit) %}
+  {{ apos.singleton(context, name, 'apostrophe-images', {
+      size: 'full',
+      noHeight: true,
+      focalPoint: true,
+      limit: limit,
+      controls: {
+        movable: false
+      }
   }) }}
 {% endmacro %}

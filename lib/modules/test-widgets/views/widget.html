@@ -1,0 +1,12 @@
+
+<div class="wrapper">
+  {{ apos.area(data.widget, 'areaLeft', {
+    widgets: {
+      'apostrophe-rich-text': { toolbar: [ 'Bold', 'Italic' ] }
+    }
+  }) }}
+
+  {{ apos.singleton(data.widget, 'areaRight', 'apostrophe-rich-text', {
+    toolbar: [ 'Bold', 'Italic' ]
+  }) }}
+</div>

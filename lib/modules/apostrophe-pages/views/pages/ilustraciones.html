@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block main %}
+  <article class="contentWrapper sectionIlustraciones parallax">
+    <section class="landingSection">
+      <div class="pageTitleBlock absoluteCenter ld-40">
+        <h1 class="pageTitle absoluteCenter">{{data.page.title}}</h1>
+      </div>
+    </section>
+
+    {{
+      apos.area(data.page, 'illustrations', {
+        widgets: {
+          'illustrations': {
+            controls: {
+              position: 'top-right'
+            }
+          }
+        }
+      })
+    }}
+  </article>
+{% endblock %}

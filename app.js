@@ -6,7 +6,9 @@ var apos = require('apostrophe')({
     'apostrophe-templates': {
       viewsFolderFallback: path.join(__dirname, 'views')
     },
-    'parallax-section-widgets': {},
-    'profiles-widgets': {}
+    'profiles-widgets': {},
+    'link-widgets': {},
+    'page-link-widgets': {},
+    'illustrations-widgets': {}
   }
 });

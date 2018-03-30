@@ -1,0 +1,24 @@
+{% import "macros/singletons.html" as singletons %}
+
+<section class="illustrationSection columns">
+  <div class="innerSection gridCol col1 ld-50">    
+    <div class="blockCenter ld-60">{{ apos.singleton(data.widget, 'title', 'apostrophe-rich-text', {
+      toolbar: ['Styles'],
+      addLabel: 'Title',
+      styles: [
+        { name: 'Title', element: 'h3', attributes: {class: 'reviewTitle'} }
+      ],
+      controls: {
+        movable: false
+      }
+    }) }}
+    </div>
+    <span class="titleDeco deco"></span>
+    <div class="authorName blockCenter ld-50 center">{{ singletons.getMinimalTextBlock(data.widget, 'by', 'Author') }}</div>
+    <div class="sectionContent contentBlock blockCenter ld-50">{{ singletons.getTextBlock(data.widget, 'contentArea', 'Review') }}</div>
+  </div>
+
+  <div class="innerSection gridCol fixedCol col2 ld-50">
+    <div class="zoomImg">{{ singletons.getImageSection(data.widget, 'illustration', 1, 'Illustration') }}</div>
+  </div>
+</section>

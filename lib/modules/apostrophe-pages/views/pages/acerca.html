@@ -3,12 +3,12 @@
 
 {% block main %}
   <article class="contentWrapper acerca">
-    <section class="parallaxSection">
-      <div class="innerSection center ld-60">
+    <section class="">
+      <div class="innerSection blockCenter ld-60">
         <span class="pageDeco deco decoTop"></span>
-        <h1 class="pageTitle">{{data.page.title}}</h1>
+        <h1 class="pageTitle center">{{data.page.title}}</h1>
 
-        <div class="contentBlock ld-50 blockCenter">{{ singletons.getTextBlock(data.page, 'sectionContent') }}</div>
+        <div class="contentBlock ld-50 blockCenter">{{ singletons.getTextBlock(data.page, 'pageIntroContent') }}</div>
 
         <span class="deco decoBottom center"></span>
       </div>

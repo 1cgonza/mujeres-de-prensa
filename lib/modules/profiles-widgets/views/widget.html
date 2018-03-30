@@ -1,6 +1,6 @@
 {% import "macros/singletons.html" as singletons %}
 
-<section class="parallaxSection profileSection">
+<section class="profileSection columns">
   <div class="innerSection gridCol col1 ld-50">
     <div class="titleDecoWrapper center">
       <span class="titleDeco deco decoLeft"></span>
@@ -8,13 +8,24 @@
       <span class="titleDeco deco decoRight"></span>
     </div>
     
-    <h3 class="profileTitle center">{{ data.widget.name }}</h3>
+    <div class="blockCenter ld-50">{{ apos.singleton(data.widget, 'name', 'apostrophe-rich-text', {
+      toolbar: ['Styles'],
+      defaultElement: 'h3',
+      addLabel: 'Name',
+      styles: [
+        { name: 'Title', element: 'h3', attributes: {class: 'profileTitle'} }
+      ],
+      controls: {
+        movable: false
+      }
+    }) }}
+    </div>
     <span class="titleDeco deco decoBottom"></span>
-    <p class="publicationName center">{{ data.widget.publication }}</p>
-    <div class="sectionContent contentBlock blockCenter ld-50">{{ singletons.getTextBlock(data.widget, 'contentArea') }}</div>
+    <div class="publicationName blockCenter ld-50 center">{{ singletons.getMinimalTextBlock(data.widget, 'publication', 'Publication name') }}</div>
+    <div class="sectionContent contentBlock blockCenter ld-50">{{ singletons.getTextBlock(data.widget, 'contentArea', 'Bio') }}</div>
   </div>
 
-  <div class="innerSection gridCol col2 ld-50">
-    <div class="contentBackground">{{ singletons.getImageSection(data.widget, 'profileImg', 1) }}</div>
+  <div class="innerSection gridCol fixedCol col2 ld-50">
+    <div class="contentBackground">{{ singletons.getImageSection(data.widget, 'profileImg', 1, 'Profile picture') }}</div>
   </div>
 </section>

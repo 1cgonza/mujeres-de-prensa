@@ -15,6 +15,19 @@ body {
   .selection;
 }
 
+a, a:visited {
+  color: @linkColor;
+  text-decoration: none;
+  border: 1px transparent;
+  transition: all 0.25s ease-in-out;
+
+  &:hover, &:focus {
+    color: lighten(@linkColor, 20%);
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+  }
+}
+
 .absoluteCenter {
   position: absolute;
   top: 50%;
@@ -28,6 +41,7 @@ body {
 }
 
 .blockCenter {
+  display: block;
   margin: 0 auto;
 }
 
@@ -76,22 +90,17 @@ section {
   top: 0;
   left: 0;
   width: 100%;
+
+  .apos-slideshow-item {
+    background-size: cover;
+    max-width: 100%;
+    height: 100vh;
+  }
 }
 
 ol {
   list-style: decimal;
   padding-left: 2em;
-}
-
-.site-menu-icon-wrapper {
-  background-color: @siteBlue;
-  position: fixed;
-  right: 0;
-  top: 0;
-  line-height: 0;
-  width: 72px;
-  height: 73px;
-  z-index: 9999;
 }
 
 .deco {
@@ -124,36 +133,153 @@ ol {
   }
 }
 
-.contentBackground {
+.fullViewImage {
   .apos-slideshow-item {
-    background-size: cover;
-    max-width: 100%;
+    background-size: contain;
     height: 100vh;
   }
 }
 
-/*=============================
-=            Calle            =
-=============================*/
+/************************************************
+|           Menu                                |
+************************************************/
+#siteMenu {
+  position: fixed;
+  top: 0;
+  right: -50%;
+  display: block;
+  height: 100%;
+  background-color: white;
+  z-index: 9999;
+  .transition(all, 0.25s);
+
+  &.active {
+    right: 0;
+    overflow: auto;
+  }
+
+  #siteMenuLinks {
+    position: absolute;
+    width: 60%;
+    right: 3em;
+    top: 3em;
+
+    .linkEle {
+      margin: 1em 0;
+      padding: 0.5em;
+
+      a.pageLink, a.pageLink:active {
+        color: black;
+        border: 2px solid @siteBlue;
+        padding: 0.5em;
+
+        &:hover, &:focus {
+          border: 2px dotted;
+        }
+      }
+
+      &:nth-child(even) {
+        margin-left: 20px;
+      }
+      
+    }
+
+    #secondaryNav {
+      text-align: right;
+
+      .linkEle {
+        &:nth-child(even) {
+          margin-right: 20px;
+        }
+      }
+    }
+  }
+}
+
+#siteMenuIcon {
+  background-image: url(../uploads/ui/menuOrnament.svg);
+  background-color: @siteBlue;
+  background-repeat: no-repeat;
+  background-size: 60%;
+  background-position: center;
+  position: fixed;
+  right: 0;
+  top: 0;
+  line-height: 0;
+  width: 50px;
+  height: 50px;
+  z-index: 9999;
+  cursor: pointer;
+  .transition();
+  //.rotate(0deg);
+
+  &:hover {
+    background-color: pink;
+    //.rotate(180deg);
+  }
+}
+
+#blackout {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: 9999;
+  opacity: 100%;
+  .transition();
+
+  &.hidden {
+    //z-index: 0;
+    width: 0px;
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+/********************* End Menu *********************/
+
+.bgColorColSection {
+  .innerSection {
+    background-color: rgba(61, 191, 224, 0.95);
+    min-height: 100vh;
+    margin-left: 10%;
+    z-index: 2;
+
+    .titleDeco {
+      background-image: url(../uploads/ui/calle/Calle_ornamento_hueco.svg);
+      height: 60px;
+      margin: 20em 0 2em 0;
+    }
+
+    .sectionContent {
+      padding: 4em;
+      color: white;
+    }
+  }
+}
+/************************************************
+|           Calle                               |
+************************************************/
 .sectionCalle {
   .pageTitleBlock {
     top: 55%;
     .resetFontSize;
 
     .decoTop {
-      background-image: url(/uploads/ui/calle/Calle_ornamento_titulo_superior.svg);
+      background-image: url(../uploads/ui/calle/Calle_ornamento_titulo_superior.svg);
       margin-bottom: 3em;
       height: 20px;
     }
 
     .decoBottom {
-      background-image: url(/uploads/ui/calle/Calle_ornamento_titulo_inferior.svg);
+      background-image: url(../uploads/ui/calle/Calle_ornamento_titulo_inferior.svg);
       margin-top: 3em;
       height: 20px;
     }
 
     .decoEnd {
-      background-image: url(/uploads/ui/calle/Calle_ornamento_titulo_centro.svg);
+      background-image: url(../uploads/ui/calle/Calle_ornamento_titulo_centro.svg);
       margin-top: 1.5em;
       height: 30px;
     }
@@ -177,7 +303,7 @@ ol {
       }
 
       .titleDeco {
-        background-image: url(/uploads/ui/calle/Calle_ornamento_curva.svg);
+        background-image: url(../uploads/ui/calle/Calle_ornamento_curva.svg);
         height: 20vh;
       }
 
@@ -195,7 +321,7 @@ ol {
       }
 
       .indexDeco {
-        background-image: url(/uploads/ui/calle/Calle_ornamento_Barra.svg);
+        background-image: url(../uploads/ui/calle/Calle_ornamento_Barra.svg);
         height: 20px;
         background-size: 90%;
       }
@@ -205,7 +331,7 @@ ol {
       }
 
       .indexWrapper {
-        background-image: url(/uploads/ui/calle/Calle_fondo_marco.svg);
+        background-image: url(../uploads/ui/calle/Calle_fondo_marco.svg);
         background-repeat: no-repeat;
         background-size: 100% 100%;
         min-height: 40vh;
@@ -222,7 +348,7 @@ ol {
 
   .pageIntro {
     .titleDeco {
-      background-image: url(/uploads/ui/calle/Calle_ornamento_linea.svg);
+      background-image: url(../uploads/ui/calle/Calle_ornamento_linea.svg);
       height: 5px;
     }
 
@@ -232,7 +358,7 @@ ol {
     }
 
     .titleDecoSide {
-      background-image: url(/uploads/ui/calle/Calle_ornamento_mano.svg);
+      background-image: url(../uploads/ui/calle/Calle_ornamento_mano.svg);
       height: 30px;
       width: 100px;
     }
@@ -256,13 +382,13 @@ ol {
       margin-top: 3em;
 
       .separator {
-        background-image: url(/uploads/ui/calle/Calle_ornamento_linea.svg);
+        background-image: url(../uploads/ui/calle/Calle_ornamento_linea.svg);
         height: 20px;
         margin: 2em 0;
       }
 
       .endDeco {
-        background-image: url(/uploads/ui/calle/Calle_ornamento_matera.svg);
+        background-image: url(../uploads/ui/calle/Calle_ornamento_matera.svg);
         height: 50px;
         margin: 2em 0;
       }
@@ -270,7 +396,7 @@ ol {
 
     .col2 {
       .deco {
-        background-image: url(/uploads/ui/calle/Calle_ornamento_Barras_inserto.svg);
+        background-image: url(../uploads/ui/calle/Calle_ornamento_Barras_inserto.svg);
         height: 3em;
       }
 
@@ -286,37 +412,99 @@ ol {
   }
 
   .pageContent1 {
-    .contentBackground {
-      max-height: 100vh;
-      overflow: hidden;
-    }
-
     .innerSection {
-      background-color: rgba(61, 191, 224, 0.95);
-      min-height: 100vh;
-      float: right;
-      margin-right: 10%;
-      z-index: 2;
+      // using float breaks the height of the container so using this margin hack instead.
+      // breakpoints need to consider this.
+      margin-left: 60%;
 
-      .titleDeco {
-        background-image: url(/uploads/ui/calle/Calle_ornamento_hueco.svg);
-        height: 60px;
-        margin: 20em 0 2em 0;
-      }
-    }
-
-    .sectionContent {
-      padding: 4em;
-      color: white;
+      // .titleDeco {
+      //   background-image: url(../uploads/ui/calle/Calle_ornamento_hueco.svg);
+      // }
     }
   }
+
+  .pageContent2 {
+    .col1 {
+      padding: 20em 0 5em 0;
+    }
+
+    .col2 .fullViewImage {
+      padding: 5% 0 5% 0;
+      height: 100vh;
+      width: 100%;
+
+      .apos-slideshow-item {
+        height: 90vh;
+      }
+    }
+  }
+
+  // .pageContent3 {
+  //   .titleDeco {
+  //     background-image: url(../uploads/ui/calle/Calle_ornamento_estrella.svg)
+  //   }
+  // }
+
+  .pageQuote {
+    .innerSection {
+      background-image: url(../uploads/ui/calle/Calle_ornamento_barraLateral1.svg);
+      background-position: 20px;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
+    .titleDeco {
+      background-image: url(../uploads/ui/calle/Calle_ornamento_barra2.svg);
+      height: 30px;
+    }
+
+    .sectionTitle {
+      font-size: 2em;
+      line-height: 1.2;
+      margin: 2em 0;
+    }
+  }
+
+  .pageContent4 {
+    .titleDeco {
+      background-image: url(../uploads/ui/calle/Calle_ornamento_estrella.svg);
+    }
+  }
+
+  .pageContentEnd {    
+    .col1 {
+      background-image: url(../uploads/ui/calle/Calle_ornamento_marco2.svg);
+      background-size: 90%;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .col2 {
+      .titleDeco {
+        background-image: url(../uploads/ui/calle/Calle_ornamento_fin.svg);
+        height: 25px;
+        margin: 10em 0 5em 0;
+      }
+      
+      transform: translateX(100%);
+    }
+  }
+
+  .divider {
+    background-image: url(../uploads/ui/calle/Calle_ornamento_Barrasfin.svg);
+    background-repeat: no-repeat;
+    background-size: 90%;
+    background-position: center;
+    padding: 10em;
+  }
 }
+/********************* End Calle *********************/
 
-/*=====  End of Calle  ======*/
-
+/************************************************
+|           Acerca de                           |
+************************************************/
 .acerca {
   .pageDeco {
-    background-image: url(/uploads/ui/acerca/Acerca_deco.svg);
+    background-image: url(../uploads/ui/acerca/Acerca_deco.svg);
     height: 50px;
     margin-top: 6em;
   }
@@ -329,15 +517,92 @@ ol {
   }
 
   .decoBottom {
-    background-image: url(/uploads/ui/acerca/Acerca_deco2-80.jpg);
+    background-image: url(../uploads/ui/acerca/Acerca_deco2-80.jpg);
     width: 279px;
     height: 122px;
     margin-top: 5em;
   }
 }
 
-.sectionTras {
+/********************* End Acerca de *********************/
 
+/************************************************
+|           Reseñas Ilustradas                  |
+************************************************/
+.sectionIlustraciones {
+  .landingSection {
+    .pageTitleBlock {
+      width: 40vh;
+      height: 40vh;
+      background-image: url(../uploads/ui/ornamentos/Reseñas_marcoTitulo.svg);
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .pageTitle {
+      .fontFat;
+      letter-spacing: 1px;
+      font-size: 3vh;
+      color: @siteOrange;
+    }
+  }
+
+  .illustrationSection {
+    .col1 {
+      margin-top: 5em;
+
+      .reviewTitle {
+        .fontFat;
+        font-size: 1.4em;
+        line-height: 1.2;
+        text-transform: uppercase;
+        text-align: center;
+      }
+
+      .titleDeco {
+        background-image: url(../uploads/ui/ornamentos/Reseñas_ornamentoTitulo.svg);
+        height: 15px;
+        margin: 1em 0;
+      }
+
+      .authorName {
+        .fontIndex;
+        font-style: italic;
+      }
+
+      .sectionContent {
+        margin-top: 4em;
+      }
+    }
+
+    .zoomImg {
+      height: 90vh;
+      border: 3px solid;
+      padding: 2.5vh;
+      margin: 5vh;
+      cursor: crosshair;
+  
+      .apos-slideshow-item {
+        height: 84vh;
+        line-height: 0;
+        border: 3px dashed;
+        background-size: contain;
+        background-color: white;
+        background-position: center center;
+        text-align: center;
+      }
+
+      img {
+        width: auto;
+        height: 100%;
+      }
+    }
+  }
+}
+
+/********************* Reseñas Ilustradas *********************/
+
+.sectionTras, .sectionRevistas {
   .pageIntro {
     .pageTitle {
       .fontMain;
@@ -349,7 +614,7 @@ ol {
     }
 
     .titleDeco {
-      background-image: url(/uploads/ui/tras/Tras_deco_titulo.svg);
+      background-image: url(../uploads/ui/tras/Tras_deco_titulo.svg);
       height: 50px;
 
       &.decoBottom {
@@ -381,7 +646,7 @@ ol {
     margin: 100px 0;
 
     .titleDeco {
-      background-image: url(/uploads/ui/tras/TrasRevistas_Titulo_deco1.svg);
+      background-image: url(../uploads/ui/tras/TrasRevistas_Titulo_deco1.svg);
       height: 40px;
     }
 
@@ -414,10 +679,12 @@ ol {
       text-transform: uppercase;
       font-size: 1.6em;
       margin: 1.5em auto 1em auto;
+      width: 90%; 
+      text-align: center;
     }
 
     .decoBottom {
-      background-image: url(/uploads/ui/tras/TrasRevistas_Titulo_deco2.svg);
+      background-image: url(../uploads/ui/tras/TrasRevistas_Titulo_deco2.svg);
       height: 20px;
     }
 
@@ -440,7 +707,4 @@ ol {
   .fixedCol {
     position: absolute;
   }
-}
-.landingSection {
-  z-index: 1;
 }

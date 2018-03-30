@@ -1,43 +1,98 @@
 {# Automatically extends the right outer layout and also handles AJAX siutations #}
 {% extends data.outerLayout %}
+{% set context = data.piece or data.page %}
 
-{% block title %}
-  {# Create a useful, SEO-friendly title tag based on what we have #}
-  {% if data.piece %}
-    {{ data.piece.title }}
-  {% elseif data.page %}
-    {{ data.page.title }}
-  {% else %}
-    {{ apos.log('Looks like you forgot to override the title block in a template that does not have access to an Apostrophe page or piece.') }}
+{% if context %}
+  {% set ogImageDefault = apos.images.first(data.global.ogImage, 'ogImage') or apos.images.first(context.body, 'body') %}
+  {% set ogImage = apos.images.first(context.ogImage, 'ogImage') %}
+  {% set ogSiteName = data.global.projectTitle or data.global.siteTitle %}
+  {% set ogDescription = context.seoDescription or apos.areas.plaintext(context.pageIntroContent) or data.global.ogDescription %}
+  {% set ogType = 'article' %}
+  {% set seoTitle = context.title + ' - ' + data.global.siteTitle + ' | ' + data.global.projectTitle %}
+
+  {% if (context.type == 'home') %}
+    {% set ogType = 'website' %}
+    {% set seoTitle = data.global.siteTitle + ' | ' + data.global.projectTitle %}
   {% endif %}
-{% endblock %}
 
-{% block extraHead %}
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:300|Playfair+Display:400,700i|EB+Garamond|Abril+Fatface|Pacifico" rel="stylesheet">
+  {% block title %}{{ seoTitle }}{% endblock %}
 
-{% endblock %}
+  {% block extraHead %}
+    <meta charset="utf-8">
+    <meta property="og:site_name" content="{{ ogSiteName }}">
+    <meta property="og:url"       content="{{ context._url }}">
+    <meta property="og:title"     content="{{ context.title }}">
+    <meta property="og:locale"    content="es_LA">
+    <meta property="og:type"      content="{{ ogType }}" />
+    {% if ogImage %}
+      <meta property="og:image" content="{{ apos.attachments.url(ogImage, { size: 'full' }) }}" />
+    {% elif ogImageDefault %}
+      <meta property="og:image" content="{{ apos.attachments.url(ogImageDefault, { size: 'full' }) }}" />
+    {% endif %}
+    <meta property="og:description" name="description" content="{{ ogDescription | truncate(320) | e }}" />
+    {# Twitter #}
+    <meta name="twitter:card" content="summary_large_image" />
+    {% if data.global.twitterSite %}
+      <meta name="twitter:site" content="{{ data.global.twitterSite }}" />
+    {% endif %}
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300|Playfair+Display:400,400i,700,700i|EB+Garamond:400,400i,700|Abril+Fatface|Pacifico" rel="stylesheet">
+  {% endblock %}
 
-{% block beforeMain %}
-  <div class="site-menu-icon-wrapper">
-    <img src="/uploads/ui/menuIcon.png" srcset="/uploads/ui/menuIcon.png 1x, /uploads/ui/menuIcon@2x.png 2x" alt="">
-  </div>
+  {% block beforeMain %}
+    <div id="blackout" class="hidden"></div>
+    <nav id="siteMenu" class="ld-50">
+      <div id="siteMenuLinks">
+      <div id="primaryNav">{{ apos.area(data.global, 'navigation', {
+          widgets: {
+            'page-link': {
+              controls: {
+                position: 'bottom-right'
+              }
+            },
+            link: {}
+          }
+        })
+      }}</div>
 
-  {#
-    We recommend you use the beforeMain block for global page components
-    like headers or navigation.
-  #}
-{% endblock %}
+      <div id="secondaryNav">{{ apos.area(data.global, 'navigation2', {
+          widgets: {
+            'page-link': {
+              controls: {
+                position: 'bottom-right'
+              }
+            },
+            link: {}
+          }
+          
+        })
+      }}</div>
+      </div>
+    </nav>
+    <span id="siteMenuIcon"></span>
+  {% endblock %}
 
-{% block main %}
-  {#
-    Usually, your page templates in the apostrophe-pages module will override
-    this block. It is safe to assume this is where your page-specific content
-    should go.
-  #}
-{% endblock %}
+  {% block main %}
+    {#
+      Usually, your page templates in the apostrophe-pages module will override
+      this block. It is safe to assume this is where your page-specific content
+      should go.
+    #}
+  {% endblock %}
 
-{% block afterMain %}
-  {#
-    This would be a great place to put a global footer.
-  #}
-{% endblock %}
+  {% block afterMain %}
+    {% if data.global.analytics %}
+      <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', {{ data.global.analytics | json }} ]);
+        _gaq.push(['_trackPageview']);
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+      </script>
+    {% endif %}
+  {% endblock %}
+{% else %}
+
+{% endif %}

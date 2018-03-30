@@ -1,5 +1,15 @@
-{% macro getTextBlock(context, name) %}
+{% macro getMinimalTextBlock(context, name, label) %}
   {{ apos.singleton(context, name, 'apostrophe-rich-text', {
+    addLabel: label,
+    controls: {
+      movable: false
+    }
+  }) }}
+{% endmacro %}
+
+{% macro getTextBlock(context, name, label) %}
+  {{ apos.singleton(context, name, 'apostrophe-rich-text', {
+    addLabel: label,
     toolbar: ['Styles', 'Bold', 'Italic', 'Link', 'Unlink', 'Anchor', 'BulletedList', 'NumberedList', 'Blockquote', 'Justify', 'Undo', 'Redo', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
     styles: [
       { name: 'Montserrat', element: 'p', attributes: {class: 'fontLight'} },
@@ -16,8 +26,9 @@
   }) }}
 {% endmacro %}
 
-{% macro getImageSection(context, name, limit) %}
+{% macro getImageSection(context, name, limit, label) %}
   {{ apos.singleton(context, name, 'apostrophe-images', {
+      addLabel: label,
       size: 'full',
       noHeight: true,
       focalPoint: true,

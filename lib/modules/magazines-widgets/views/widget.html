@@ -2,13 +2,14 @@
 
 <section class="profileSection gridWrapper columns">
   <div class="innerSection gridCol col1 ld-50">
-    <div class="titleDecoWrapper gridWrapperMiddle gridJustifySpaceEvenly">
+    <div class="titleDecoWrapper gridWrapperMiddle gridJustifyCenter">
       <span class="titleDeco deco decoLeft"></span>
       <span class="sectionName">{{ data.options.sectionName }}</span>
       <span class="titleDeco deco decoRight"></span>
     </div>
     
-    <div class="blockCenter ld-50">{{ apos.singleton(data.widget, 'name', 'apostrophe-rich-text', {
+    <div class="blockCenter ld-50">
+    {{ apos.singleton(data.widget, 'name', 'apostrophe-rich-text', {
       toolbar: ['Styles'],
       defaultElement: 'h3',
       addLabel: 'Name',
@@ -20,12 +21,16 @@
       }
     }) }}
     </div>
-    <span class="titleDeco deco decoBottom"></span>
-    <div class="publicationName blockCenter ld-50 center">{{ singletons.getMinimalTextBlock(data.widget, 'publication', 'Publication name') }}</div>
-    <div class="sectionContent contentBlock blockCenter ld-50">{{ singletons.getTextBlock(data.widget, 'contentArea', 'Bio') }}</div>
+    <span class="deco decoBottom"></span>
+    
+    <div class="sectionContent contentBlock blockCenter ld-50">
+    {{ singletons.getTextBlock(data.widget, 'contentArea', 'Content') }}
+    </div>
   </div>
 
   <div class="innerSection gridCol fixedCol col2 ld-50">
-    <div class="contentBackground">{{ singletons.getImageSection(data.widget, 'profileImg', 1, 'Profile picture') }}</div>
+    <div class="contentBackground">
+    {{ singletons.getImageSection(data.widget, 'profileImg', 1, 'Profile picture') }}
+    </div>
   </div>
 </section>

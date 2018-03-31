@@ -1,5 +1,23 @@
-.grid-col {
-  display: inline-block;
+.gridWrapper {
+  display: flex;
+  align-items: flex-start;
+}
+
+.gridWrapperMiddle {
+  display: flex;
+  align-items: center;
+}
+
+.gridJustifyCenter {
+  justify-content: center;
+}
+
+.gridJustifySpaceBetween {
+  justify-content: space-between;
+}
+
+.gridJustifySpaceEvenly {
+  justify-content: space-evenly;
 }
 
 /*==============================
@@ -7,13 +25,10 @@
 ==============================*/
 @media (max-width: 767px) {
   .m-100 {
-    .grid-col;
-    padding-right: 0;
     width: 100%;
   }
 
   .m-50 {
-    .grid-col;
     width: 50%;
   }
 }
@@ -25,23 +40,18 @@
 ==============================*/
 @media (min-width: 768px) and (max-width: 1029px) {
   .t-100 {
-    .grid-col;
-    padding-right: 0;
     width: 100%;
   }
 
   .t-80 {
-    .grid-col;
     width: 80%;
   }
 
   .t-50 {
-    .grid-col;
     width: 50%;
   }
 
   .t-20 {
-    .grid-col;
     width: 20%;
   }
 }
@@ -53,43 +63,34 @@
 ===============================*/
 @media (min-width: 1030px) and (max-width: 1239px) {
   .d-100 {
-    .grid-col;
-    padding-right: 0;
     width: 100%;
   }
 
   .d-80 {
-    .grid-col;
     width: 80%;
   }
 
   .d-70 {
-    .grid-col;
     width: 70%;
   }
 
   .d-60 {
-    .grid-col;
     width: 60%;
   }
 
   .d-50 {
-    .grid-col;
     width: 50%;
   }
 
   .d-40 {
-    .grid-col;
     width: 40%;
   }
 
   .d-30 {
-    .grid-col;
     width: 30%;
   }
 
   .d-20 {
-    .grid-col;
     width: 20%;
   }
 }
@@ -101,53 +102,42 @@
 =====================================*/
 @media (min-width: 1240px) {
   .ld-100 {
-    .grid-col;
-    padding-right: 0;
     width: 100%;
   }
 
   .ld-90 {
-    .grid-col;
     width: 90%;
   }
 
   .ld-80 {
-    .grid-col;
     width: 80%;
   }
 
   .ld-70 {
-    .grid-col;
     width: 70%;
   }
 
   .ld-60 {
-    .grid-col;
     width: 60%;
   }
 
   .ld-50 {
-    .grid-col;
     width: 50%;
   }
 
   .ld-40 {
-    .grid-col;
     width: 40%;
   }
 
   .ld-30 {
-    .grid-col;
     width: 30%;
   }
 
   .ld-20 {
-    .grid-col;
     width: 20%;
   }
 
   .ld-10 {
-    .grid-col;
     width: 10%;
   }
 }

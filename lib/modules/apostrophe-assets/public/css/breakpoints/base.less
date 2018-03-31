@@ -45,10 +45,6 @@ a, a:visited {
   margin: 0 auto;
 }
 
-.resetFontSize {
-  font-size: 16px;
-}
-
 .contentBlock {
   line-height: 1.5;
   hyphens: auto;
@@ -59,10 +55,6 @@ a, a:visited {
   min-height: 100vh;
 }
 
-.gridCol {
-  display: inline-block;
-}
-
 article {
   padding-bottom: 20em;
 }
@@ -71,7 +63,6 @@ section {
   width: 100%;
   min-height:100vh;
   position: relative;
-  font-size: 0;
   background-color: white;
 }
 
@@ -84,9 +75,13 @@ section {
   -ms-filter: 'FlipH';
 }
 
+.mirrorVertical {
+  .rotate(180deg);
+}
+
 .contentBackground {
   position: absolute;
-  z-index: 1;
+  z-index: -2;
   top: 0;
   left: 0;
   width: 100%;
@@ -111,11 +106,6 @@ ol {
 }
 
 .contentWrapper {
-  .innerSection {
-    .resetFontSize;
-    vertical-align: top;
-  }
-
   .pageTitleBlock {
     text-align: center;
 
@@ -137,6 +127,13 @@ ol {
   .apos-slideshow-item {
     background-size: contain;
     height: 100vh;
+
+    img {
+      height: 100%;
+      width: auto;
+      margin: 0 auto;
+      display: block;
+    }
   }
 }
 
@@ -198,7 +195,6 @@ ol {
 
 #siteMenuIcon {
   background-image: url(../uploads/ui/menuOrnament.svg);
-  background-color: @siteBlue;
   background-repeat: no-repeat;
   background-size: 60%;
   background-position: center;
@@ -211,11 +207,9 @@ ol {
   z-index: 9999;
   cursor: pointer;
   .transition();
-  //.rotate(0deg);
 
   &:hover {
-    background-color: pink;
-    //.rotate(180deg);
+    background-color: black;
   }
 }
 
@@ -227,11 +221,9 @@ ol {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.85);
   z-index: 9999;
-  opacity: 100%;
   .transition();
 
   &.hidden {
-    //z-index: 0;
     width: 0px;
     opacity: 0;
     pointer-events: none;
@@ -239,55 +231,112 @@ ol {
 }
 /********************* End Menu *********************/
 
-.bgColorColSection {
-  .innerSection {
-    background-color: rgba(61, 191, 224, 0.95);
-    min-height: 100vh;
-    margin-left: 10%;
+
+/************************************************
+|           Home                                |
+************************************************/
+.mpHome {
+  #homeIcon {
+    background-image: url(../uploads/ui/ornamentos/Home_icon.svg);
+    height: 150px;
+    width: 150px;
+    z-index: 3;
+  }
+
+  .contentBackground {
+    height: 100vh;
+    overflow: hidden;
+    z-index: 1;
+  }
+
+  .homeMenuWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
     z-index: 2;
 
-    .titleDeco {
-      background-image: url(../uploads/ui/calle/Calle_ornamento_hueco.svg);
-      height: 60px;
-      margin: 20em 0 2em 0;
-    }
+    & > a {
+      height: 50vh;
 
-    .sectionContent {
-      padding: 4em;
-      color: white;
+      &:nth-child(1) {
+        background-color: @siteBlue;
+      }
+
+      &:nth-child(2) {
+        background-color: @sitePurple;
+      }
+
+      &:nth-child(3) {
+        background-color: @siteMustard;
+      }
+
+      &:nth-child(4) {
+        background-color: @siteRed;
+      }
+
+      &:hover {
+        opacity: 0.5;
+      }
     }
   }
 }
-/************************************************
-|           Calle                               |
-************************************************/
-.sectionCalle {
+/********************* End Home *********************/
+
+.themeSection {
+  .imageSection{
+    line-height: 0;
+  }
+
+  .bgColorBlock::before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0.9;
+  }
+
+  .bgColorColSection {
+    .innerSection {
+      margin-left: 10%;
+      padding-top: 20em;
+
+      .titleDeco {
+        height: 60px;
+      }
+
+      .sectionContent {
+        padding: 4em;
+        color: white;
+      }
+    }
+  }
+
   .pageTitleBlock {
-    top: 55%;
-    .resetFontSize;
+    .sectionName {
+      margin-top: 3em;
+      letter-spacing: 1px;
+      font-size: 0.8em;
+    }
 
     .decoTop {
-      background-image: url(../uploads/ui/calle/Calle_ornamento_titulo_superior.svg);
       margin-bottom: 3em;
       height: 20px;
     }
 
     .decoBottom {
-      background-image: url(../uploads/ui/calle/Calle_ornamento_titulo_inferior.svg);
       margin-top: 3em;
       height: 20px;
     }
 
     .decoEnd {
-      background-image: url(../uploads/ui/calle/Calle_ornamento_titulo_centro.svg);
       margin-top: 1.5em;
       height: 30px;
-    }
-
-    .sectionName {
-      margin-top: 3em;
-      letter-spacing: 1px;
-      font-size: 0.8em;
     }
   }
 
@@ -303,31 +352,20 @@ ol {
       }
 
       .titleDeco {
-        background-image: url(../uploads/ui/calle/Calle_ornamento_curva.svg);
         height: 20vh;
-      }
-
-      .decoBottom {
-        transform: rotate(180deg);
       }
     }
 
     .col2 {
       .sectionTitle {
         font-size: 2em;
-        color: @siteBlue;
         margin: 0 auto;
         padding: 3em 0 1em;
       }
 
       .indexDeco {
-        background-image: url(../uploads/ui/calle/Calle_ornamento_Barra.svg);
         height: 20px;
         background-size: 90%;
-      }
-
-      .decoBottom {
-        transform: rotate(180deg);
       }
 
       .indexWrapper {
@@ -339,26 +377,18 @@ ol {
       }
 
       .sectionIndex {
-        margin: 0 auto;
         font-size: 1.3em;
-        padding-bottom: 3em;
+        padding: 0 2em 3em 2em;
       }
     }
   }
 
   .pageIntro {
     .titleDeco {
-      background-image: url(../uploads/ui/calle/Calle_ornamento_linea.svg);
       height: 5px;
     }
 
-    .titleDecoSide, .sectionTitle {
-      display: inline-block;
-      vertical-align: middle;
-    }
-
     .titleDecoSide {
-      background-image: url(../uploads/ui/calle/Calle_ornamento_mano.svg);
       height: 30px;
       width: 100px;
     }
@@ -382,13 +412,11 @@ ol {
       margin-top: 3em;
 
       .separator {
-        background-image: url(../uploads/ui/calle/Calle_ornamento_linea.svg);
         height: 20px;
         margin: 2em 0;
       }
 
       .endDeco {
-        background-image: url(../uploads/ui/calle/Calle_ornamento_matera.svg);
         height: 50px;
         margin: 2em 0;
       }
@@ -396,30 +424,19 @@ ol {
 
     .col2 {
       .deco {
-        background-image: url(../uploads/ui/calle/Calle_ornamento_Barras_inserto.svg);
         height: 3em;
-      }
-
-      .decoBottom {
-        transform: rotate(180deg);
       }
 
       .sectionQuote {
         font-size: 2em;
-        margin: 2em 0;
+        padding: 2em 0;
       }
     }
   }
 
   .pageContent1 {
     .innerSection {
-      // using float breaks the height of the container so using this margin hack instead.
-      // breakpoints need to consider this.
       margin-left: 60%;
-
-      // .titleDeco {
-      //   background-image: url(../uploads/ui/calle/Calle_ornamento_hueco.svg);
-      // }
     }
   }
 
@@ -427,33 +444,15 @@ ol {
     .col1 {
       padding: 20em 0 5em 0;
     }
-
-    .col2 .fullViewImage {
-      padding: 5% 0 5% 0;
-      height: 100vh;
-      width: 100%;
-
-      .apos-slideshow-item {
-        height: 90vh;
-      }
-    }
   }
 
-  // .pageContent3 {
-  //   .titleDeco {
-  //     background-image: url(../uploads/ui/calle/Calle_ornamento_estrella.svg)
-  //   }
-  // }
-
   .pageQuote {
-    .innerSection {
-      background-image: url(../uploads/ui/calle/Calle_ornamento_barraLateral1.svg);
+    .col1 {
       background-position: 20px;
       background-size: contain;
       background-repeat: no-repeat;
     }
     .titleDeco {
-      background-image: url(../uploads/ui/calle/Calle_ornamento_barra2.svg);
       height: 30px;
     }
 
@@ -461,6 +460,99 @@ ol {
       font-size: 2em;
       line-height: 1.2;
       margin: 2em 0;
+    }
+  }
+
+  .pageContentEnd {    
+    .col1 {
+      background-size: 90%;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .col2 {
+      .titleDeco {
+        height: 25px;
+        margin: 10em 0 5em 0;
+      }
+    }
+  }
+
+  .divider {
+    background-repeat: no-repeat;
+    background-size: 90%;
+    background-position: center;
+    padding: 10em;
+  }
+}
+
+/************************************************
+|           Calle                               |
+************************************************/
+.section-calle {
+  .pageTitleBlock {
+    .decoTop {
+      background-image: url(../uploads/ui/calle/Calle_ornamento_titulo_superior.svg);
+    }
+
+    .decoBottom {
+      background-image: url(../uploads/ui/calle/Calle_ornamento_titulo_inferior.svg);
+    }
+
+    .decoEnd {
+      background-image: url(../uploads/ui/calle/Calle_ornamento_titulo_centro.svg);
+    }
+  }
+
+  .pageIndex {
+    .titleDeco {
+      background-image: url(../uploads/ui/calle/Calle_ornamento_curva.svg);
+    }
+
+    .indexDeco {
+      background-image: url(../uploads/ui/calle/Calle_ornamento_Barra.svg);
+    }
+  }
+
+  .pageIntro {
+    .titleDeco {
+      background-image: url(../uploads/ui/calle/Calle_ornamento_linea.svg);
+    }
+
+    .titleDecoSide {
+      background-image: url(../uploads/ui/calle/Calle_ornamento_mano.svg);
+    }
+
+    .col1 {
+      .separator {
+        background-image: url(../uploads/ui/calle/Calle_ornamento_linea.svg);
+      }
+
+      .endDeco {
+        background-image: url(../uploads/ui/calle/Calle_ornamento_matera.svg);
+      }
+    }
+
+    .col2 {
+      .deco {
+        background-image: url(../uploads/ui/calle/Calle_ornamento_Barras_inserto.svg);
+      }
+    }
+  }
+
+  .pageContent1 {
+    .titleDeco {
+      background-image: url(../uploads/ui/calle/Calle_ornamento_hueco.svg);
+    }
+  }
+
+  .pageQuote {
+    .col1 {
+      background-image: url(../uploads/ui/calle/Calle_ornamento_barraLateral1.svg);
+    }
+
+    .titleDeco {
+      background-image: url(../uploads/ui/calle/Calle_ornamento_barra2.svg);
     }
   }
 
@@ -473,28 +565,17 @@ ol {
   .pageContentEnd {    
     .col1 {
       background-image: url(../uploads/ui/calle/Calle_ornamento_marco2.svg);
-      background-size: 90%;
-      background-position: center;
-      background-repeat: no-repeat;
     }
 
     .col2 {
       .titleDeco {
         background-image: url(../uploads/ui/calle/Calle_ornamento_fin.svg);
-        height: 25px;
-        margin: 10em 0 5em 0;
       }
-      
-      transform: translateX(100%);
     }
   }
 
   .divider {
     background-image: url(../uploads/ui/calle/Calle_ornamento_Barrasfin.svg);
-    background-repeat: no-repeat;
-    background-size: 90%;
-    background-position: center;
-    padding: 10em;
   }
 }
 /********************* End Calle *********************/
@@ -502,7 +583,7 @@ ol {
 /************************************************
 |           Acerca de                           |
 ************************************************/
-.acerca {
+#pageAcerca {
   .pageDeco {
     background-image: url(../uploads/ui/acerca/Acerca_deco.svg);
     height: 50px;
@@ -517,9 +598,11 @@ ol {
   }
 
   .decoBottom {
-    background-image: url(../uploads/ui/acerca/Acerca_deco2-80.jpg);
-    width: 279px;
-    height: 122px;
+    .apos-slideshow-item, .apos-slideshow-item img {
+      width: initial;
+      line-height: 0;
+    }
+    max-width: 30%;
     margin-top: 5em;
   }
 }
@@ -602,7 +685,94 @@ ol {
 
 /********************* Reseñas Ilustradas *********************/
 
-.sectionTras, .sectionRevistas {
+/************************************************
+|           Revistas                            |
+************************************************/
+#pageRevistas {
+  .sectionContent {
+    padding: 3em 0 15em 0;
+  }
+
+  .pageIntro {
+    .col1 {
+      padding-top: 10em;
+    }
+
+    .title {
+      background-image: url(../uploads/ui/ornamentos/Revistas_titulo.svg);
+      height: 150px;
+      padding-top: 1em;
+      font-size: 1.8em;
+      font-weight: 700;
+      color: @siteOrange;
+    }
+  }
+
+  .apos-area-widget-wrapper {
+    &:nth-child(odd) {
+      .col1 {
+        order: 1;
+      }
+    }
+  }
+
+  .profileSection {
+    .col1 {
+      padding-top: 5em;
+    }
+  
+    .sectionName {
+      .fontThin;
+      font-weight: 400;
+      letter-spacing: 1px;
+    }
+
+    .profileTitle {
+      .fontThin;
+      color: @siteOrange;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 2em;
+      margin: 2em 0 1em 0;
+    }
+
+    .decoBottom {
+      background-image: url(../uploads/ui/ornamentos/Revistas_deco_subtitulo.svg);
+      height: 50px;
+      margin-bottom: 1em;
+    }
+
+    .titleDeco {
+      background-image: url(../uploads/ui/ornamentos/Revistas_titleDeco.svg);
+      height: 10px;
+      width: 33%;
+
+      &.decoRight {
+        .horiozontalFlip;
+      }
+    }
+  }
+}
+
+/********************* Reseñas Revistas *********************/
+
+/************************************************
+|           Tras las Revistas                   |
+************************************************/
+#pageTrasRevistas {
+  .sectionContent {
+    padding: 3em 0 15em 0;
+  }
+
+  .apos-area-widget-wrapper {
+    &:nth-child(odd) {
+      .col1 {
+        order: 1;
+      }
+    }
+  }
+
   .pageIntro {
     .pageTitle {
       .fontMain;
@@ -627,10 +797,6 @@ ol {
         margin: 8em 0 2em 0;
       }
     }
-    
-    .sectionContent {
-      margin-top: 4em;
-    }
 
     .col2 {
       .contentBackground {
@@ -643,8 +809,6 @@ ol {
   }
 
   .profileSection {
-    margin: 100px 0;
-
     .titleDeco {
       background-image: url(../uploads/ui/tras/TrasRevistas_Titulo_deco1.svg);
       height: 40px;
@@ -695,6 +859,8 @@ ol {
     }
 
     .col1 {
+      padding-top: 5em;
+
       .sectionContent {
         margin-top: 2em;
       }
@@ -702,9 +868,4 @@ ol {
   }
 }
 
-// Parallax
-.columns {
-  .fixedCol {
-    position: absolute;
-  }
-}
+/********************* Reseñas Tras las Revistas *********************/

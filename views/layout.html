@@ -2,6 +2,14 @@
 {% extends data.outerLayout %}
 {% set context = data.piece or data.page %}
 
+{% block startHead %} {% if data.global.defaultColor %}
+<style>
+  .themeColor {color: {{data.global.defaultColor}}}
+  .themeBgColor {background-color: {{data.global.defaultColor}}}
+  .bgColorBlock::before {background-color: {{data.global.defaultColor}}}
+</style>
+{% endif %} {% endblock %}
+
 {% if context %}
   {% set ogImageDefault = apos.images.first(data.global.ogImage, 'ogImage') or apos.images.first(context.body, 'body') %}
   {% set ogImage = apos.images.first(context.ogImage, 'ogImage') %}
@@ -68,7 +76,7 @@
       }}</div>
       </div>
     </nav>
-    <span id="siteMenuIcon"></span>
+    <span id="siteMenuIcon" class="themeBgColor"></span>
   {% endblock %}
 
   {% block main %}

@@ -1,12 +1,17 @@
+{% import "macros/singletons.html" as singletons %}
 {% extends "layout.html" %}
-
+{% block bodyClass%}mpHome{% endblock %}
 {% block main %}
-  <article class="contentWrapper">
-    <h3>Hello world!
-      {% if not data.user %}
-        <a class="login-link" href="/login">Login</a>
-      {% endif %}
-    </h3>
-    <p>This is a very bare bones Apostrophe project. Now, get to work and make a real website!</p>
-  </article>
+<main>
+  <span id="homeIcon" class="deco absoluteCenter"></span>
+  <div class="homeMenuWrapper">
+    <a class="homeLink ld-50"></a>
+    <a class="homeLink ld-50"></a>
+    <a class="homeLink ld-50"></a>
+    <a class="homeLink ld-50"></a>
+  </div>
+  <div class="contentBackground">
+    {{ singletons.getImageSection(data.page, 'homeBg', 1, 'Background Image') }}
+  </div>
+</main>
 {% endblock %}

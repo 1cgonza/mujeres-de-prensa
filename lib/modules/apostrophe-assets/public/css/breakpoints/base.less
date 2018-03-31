@@ -147,7 +147,7 @@ ol {
   display: block;
   height: 100%;
   background-color: white;
-  z-index: 9999;
+  z-index: 449;
   .transition(all, 0.25s);
 
   &.active {
@@ -157,36 +157,129 @@ ol {
 
   #siteMenuLinks {
     position: absolute;
-    width: 60%;
-    right: 3em;
-    top: 3em;
+    width: 100%;
+    top: 10%;
+    left: 0;
 
-    .linkEle {
-      margin: 1em 0;
-      padding: 0.5em;
+    #primaryNav {
+      margin-left: 35%;
+      .linkEle {
+        margin: 2em 0;
 
-      a.pageLink, a.pageLink:active {
-        color: black;
-        border: 2px solid @siteBlue;
-        padding: 0.5em;
+        a.pageLink, a.pageLink:active {
+          color: black;
+          border: 3px solid @siteBlack;
+          padding: 0.75em;
 
-        &:hover, &:focus {
-          border: 2px dotted;
+          &:hover, &:focus, &.current {
+            border: 3px dotted;
+          }
+        }
+
+        &:nth-child(7n+1) {
+          .fontLight;
+          text-transform: uppercase;
+        }
+
+        &:nth-child(7n+2) {
+          .fontLight;
+          font-weight: 900;
+          letter-spacing: 0.8px;
+          margin-left: 40px;
+        }
+
+        &:nth-child(7n+3) {
+          .fontLight;
+          font-weight: 900;
+          letter-spacing: 0.8px;
+          text-transform: uppercase;
+          margin-left: -60px;
+        }
+
+        &:nth-child(7n+4) {
+          .fontLight;
+          text-transform: uppercase;
+          font-weight: 100;
+          font-style: italic;
+          margin-left: 10px;
+        }
+
+        &:nth-child(7n+5) {
+          .fontLight;
+          font-weight: 900;
+          margin-left: -140px;
+        }
+
+        &:nth-child(7n+6) {
+          .fontLight;
+          font-weight: 100;
+          font-style: italic;
+          margin-left: 40px;
+        }
+
+        &:nth-child(7n+7) {
+          .fontIndex;
+          font-style: italic;
         }
       }
-
-      &:nth-child(even) {
-        margin-left: 20px;
-      }
-      
     }
 
     #secondaryNav {
-      text-align: right;
+      text-align: center;
+      margin-left: 40%;
+      position: relative;
+      margin-top: 5em;
+
+      &::before, &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 3px;
+        background-color: @siteBlack;
+      }
+
+      &::before {
+        top: -12px;
+      }
+
+      &::after {
+        bottom: -12px;
+      }
 
       .linkEle {
-        &:nth-child(even) {
-          margin-right: 20px;
+        margin: 9px 0;
+
+        a.pageLink, a.pageLink:active {
+          color: black;
+          padding: .5em 0;
+          width: 100%;
+          display: block;
+          border-top: 3px solid;
+          border-bottom: 3px solid;
+
+          &:hover, &:focus, &.current {
+            border-top: 3px dotted;
+            border-bottom: 3px dotted;
+          }
+        }
+
+        &:nth-child(4n+1) {
+          .fontIndex;
+        }
+
+        &:nth-child(4n+2) {
+          .fontIndex;
+          text-transform: uppercase;
+        }
+
+        &:nth-child(4n+3) {
+          .fontLight;
+          text-transform: uppercase;
+        }
+
+        &:nth-child(4n+4) {
+          .fontIndex;
         }
       }
     }
@@ -204,7 +297,7 @@ ol {
   line-height: 0;
   width: 50px;
   height: 50px;
-  z-index: 9999;
+  z-index: 449;
   cursor: pointer;
   .transition();
 
@@ -220,7 +313,7 @@ ol {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.85);
-  z-index: 9999;
+  z-index: 448;
   .transition();
 
   &.hidden {

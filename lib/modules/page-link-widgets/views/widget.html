@@ -1,1 +1,6 @@
-<a class="pageLink" href="{{ data.widget._page._url }}">{{ data.widget._page.title }}</a>
+{% set color = data.widget._page.themeColor or data.global.defaultColor or 'black' %}
+{% set current = '' %}
+{% if (data.page._id == data.widget._page._id) %}
+  {% set current = ' current' %}
+{% endif %}
+<a class="pageLink{{current}}" href="{{ data.widget._page._url }}" data-color={{color}}>{{ data.widget._page.title }}</a>

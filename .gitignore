@@ -1,5 +1,6 @@
 # Archivos locales
 _ARCHIVOS
+*.log
 
 #General
 .DS_Store

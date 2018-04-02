@@ -32,7 +32,11 @@ export default class Temas extends Base {
         }
       }
 
-      return Object.assign(ref, ret);
+      Object.assign(ret, ref);
+
+      this.getTitleAndPages(ret);
+
+      return ret;
     });
     console.log(cleanedData, this.vols, this.categories);
   }

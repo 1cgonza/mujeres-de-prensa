@@ -13,11 +13,16 @@ export default class Base {
   }
 
   init(data, meta, sheetName) {
+    this.errors = false;
+    this.errorData = [];
+    document.getElementById('errors').innerText = '';
     this.data = data;
     this.sheetName = sheetName;
     this.totalRows = this.getFinalRow();
     this.meta = this.cleanMeta(meta);
     this.clean();
+    this.printErrors();
+    console.log('FINISHED');
   }
 
   cleanMeta(data) {
@@ -94,6 +99,97 @@ export default class Base {
     }
   }
 
+  getTitleAndPages(data) {
+    // Check if title has '(p.' or '(P.'
+    let regex = /(\(p.|\(P.)/;
+    let str = data.value.trim();
+    let match = regex.exec(str);
+    let ret = {};
+
+    if (!match) {
+      ret.title = str;
+
+      if (str.indexOf('(') > 0) {
+        this.setError({
+          expand: true,
+          error: {
+            error: `If the following title has page number(s), it is missing the page indicator. i.e (p.1`,
+            title: str,
+            cell: data.key
+          }
+        });
+      }
+    } else {
+      if (str.indexOf(')') < 0) {
+        this.setError({
+          expand: true,
+          error: {
+            error: `The title appears to have page numbers but no closing parenthesis`,
+            title: match.input,
+            cell: data.key
+          }
+        });
+      } else {
+        ret.title = str.slice(0, match.index).trim();
+        ret.pages = this.validatePages(str.slice(match.index + 3, str.length - 1));
+        console.log(str.slice(match.index + 3, str.length - 1));
+      }
+      //console.log(this.validatePages(str.slice(i1 + 1, i2)));
+    }
+
+    let arr = data.value.trim().split('(p.');
+    arr[0] = arr[0].trim();
+    console.log(ret);
+    //console.log(arr, data.key, regex, regex.exec(data.value));
+    // if (arr.length === 1) {
+    //   return arr[0]
+    // }
+    // let pgs = arr[1].trim();
+    // if (pgs.indexOf'(p.' < 0)) {
+    //   this.setError({
+    //     error: {
+    //       error: `Review page `
+    //     }
+    //   })
+    // }
+
+    return ret;
+  }
+
+  validatePages(str) {
+    let arr = [];
+
+    if (str.indexOf('-')) {
+      let range = str.split('-');
+
+      if (range.length === 2 && range.every(el => !isNaN(el))) {
+        let start = +range[0];
+        let end = +range[1];
+        let rangeLength = end - start;
+
+        for (let n = start; n <= end; n++) {
+          arr.push(n);
+        }
+      }
+    } else {
+      arr.push(this.validateNumber(str));
+    }
+
+    return arr;
+  }
+
+  validateNumber(str) {
+    if (!isNaN(str)) {
+      return +str;
+    } else {
+      return str;
+    }
+  }
+
+  cleanNumbers(str) {
+
+  }
+
   getColRow(key, i) {
     i = i || 0;
 
@@ -128,7 +224,6 @@ export default class Base {
   printErrors() {
     if (this.errors) {
       let wrapper = document.getElementById('errors');
-      wrapper.innerText = '';
 
       this.errorData.forEach((err, i) => {
         let view = new JSONView(`Error ${i}`, err.data);

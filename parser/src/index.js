@@ -20,7 +20,6 @@ tables.forEach(name => {
       req(urls[key]).then(data => {
         let parser = new Parser(data, meta.Sheets, key);
         parser.init();
-        parser.manager.printErrors();
       });
     });
   };

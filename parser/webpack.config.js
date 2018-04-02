@@ -7,9 +7,7 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, 'public'),
   },
-  entry: {
-    app: './src/index.js'
-  },
+  entry: ['./src/index.js', './src/scss/main.scss'],
   output: {
     path: path.resolve(__dirname, 'public'),
     filename: 'js/bundle.js'
@@ -26,6 +24,14 @@ module.exports = {
             presets: ['@babel/preset-env']
           }
         }
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
       }
     ]
   },

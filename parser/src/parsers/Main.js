@@ -5,10 +5,11 @@ import Lugares from './Lugares';
 import Generos from './Generos';
 
 export default class Parser {
-  constructor(rawData, tableName) {
+  constructor(rawData, meta, tableName) {
     this.rawData = rawData;
     this.tableName = tableName;
-    this.parser;
+    this.manager;
+    this.meta = meta;
   }
 
   displaySheets(sheets) {
@@ -31,28 +32,28 @@ export default class Parser {
           data.limit = limits[this.tableName][key];
         }
 
-        this.parser.init(data, key);
+        this.manager.init(data, this.meta[key], key);
       };
       ul.appendChild(li);
     });
   }
 
-  init(key) {
+  init() {
     let sheetNames = this.rawData.SheetNames;
 
-    switch (key) {
+    switch (this.tableName) {
       case 'temas':
         sheetNames = this.rawData.SheetNames.filter(el => el.indexOf('temas') < 0);
-        this.parser = new Temas(this.tableName);
+        this.manager = new Temas(this.tableName);
         break;
       case 'palabras':
-        this.parser = new Palabras(this.tableName);
+        this.manager = new Palabras(this.tableName);
         break;
       case 'lugares':
-        this.parser = new Lugares(this.tableName);
+        this.manager = new Lugares(this.tableName);
         break;
       case 'generos':
-        this.parser = new Generos(this.tableName);
+        this.manager = new Generos(this.tableName);
         break;
     }
 

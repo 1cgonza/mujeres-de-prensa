@@ -4,7 +4,8 @@ export const urls = {
   generos: `${base}Generos.xlsx`,
   lugares: `${base}Lugares.xlsx`,
   palabras: `${base}PalabrasRecurrentes.xlsx`,
-  temas: `${base}TitulosYTemasSegunCatagorias.xlsx`
+  temas: `${base}TitulosYTemasSegunCatagorias.xlsx`,
+  meta: `${base}MetaEdiciones.xlsx`
 };
 
 export const limits = {

@@ -1,4 +1,5 @@
 import Base from './Base';
+import { isArray } from 'util';
 
 export default class Temas extends Base {
   constructor(tableName) {
@@ -12,12 +13,17 @@ export default class Temas extends Base {
     let cleanedData = this.sortAndFilter(this.getBaseArray(this.data.raw));
     this.getVols();
 
-    cleanedData.map(ref => {
+    cleanedData = cleanedData.map(ref => {
       let cell = this.data.raw[ref.key];
+      let titlePages = this.getTitleAndPages(cell.v, ref.key);
       let ret = {
-        value: cell.v,
+        title: titlePages.title,
         category: this.categories[ref.col]
       };
+
+      if (titlePages.hasOwnProperty('pages')) {
+        ret.pages = titlePages.pages;
+      }
 
       if (cell.s.hasOwnProperty('fgColor')) {
         let theme = this.themes.find(el => el.color === cell.s.fgColor.rgb);
@@ -32,9 +38,18 @@ export default class Temas extends Base {
         }
       }
 
-      Object.assign(ret, ref);
+      let meta = this.vols.find(obj => ref.row >= obj.rows[0] && ref.row <= obj.rows[1]);
+      if (!meta) {
+        this.setError({
+          stop: true,
+          error: {
+            error: `Can't match edition number of cell ${ref.key} to anything`
+          }
+        });
+      }
 
-      this.getTitleAndPages(ret);
+      Object.assign(ret, meta);
+      // Object.assign(ret, ref);
 
       return ret;
     });
@@ -51,8 +66,10 @@ export default class Temas extends Base {
         return false;
       } else if (obj.col === 'A') {
         if (obj.row !== 1) {
+          let v = this.data.raw[obj.key].v;
+          let ed = !isNaN(v) ? +v : this.validatePages(v);
           this.vols.push(Object.assign(obj, {
-            value: this.data.raw[obj.key].v
+            ed: ed
           }));
         }
         return false;
@@ -80,7 +97,11 @@ export default class Temas extends Base {
 
   getVols() {
     this.vols.forEach((obj, i) => {
-      let meta = this.meta.find(d => d.ed == obj.value);
+      let meta = this.meta.find(d => {
+        let edMeta = isArray(d.ed) ? d.ed[0] : d.ed;
+        let edVols = isArray(obj.ed) ? obj.ed[0] : obj.ed;
+        return edMeta === edVols;
+      });
       let newObj = {
         rows: [obj.row]
       };
@@ -92,7 +113,7 @@ export default class Temas extends Base {
           newObj.rows[1] = this.vols[i + 1].row - 1;
         }
       } else {
-        newObj.end = this.totalRows;
+        newObj.rows[1] = this.totalRows;
       }
 
       if (meta) {

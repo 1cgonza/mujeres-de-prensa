@@ -1,12 +1,18 @@
 const base = './data/';
 
 export const urls = {
-  generos: `${base}Generos.xlsx`,
   lugares: `${base}Lugares.xlsx`,
-  palabras: `${base}PalabrasRecurrentes.xlsx`,
-  temas: `${base}TitulosYTemasSegunCatagorias.xlsx`,
-  meta: `${base}MetaEdiciones.xlsx`
+  temas: `${base}TitulosYTemasSegunCatagorias.xlsx`
 };
+
+export const secondaryUrls = {
+  generos: `${base}Generos.xlsx`,
+  palabras: `${base}PalabrasRecurrentes.xlsx`,
+};
+
+export const metaUrls = {
+  ediciones: `${base}MetaEdiciones.xlsx`
+}
 
 export const limits = {
   temas: {

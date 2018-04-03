@@ -218,10 +218,6 @@ export default class Base {
     }
   }
 
-  cleanNumbers(str) {
-
-  }
-
   getColRow(key, i) {
     i = i || 0;
 

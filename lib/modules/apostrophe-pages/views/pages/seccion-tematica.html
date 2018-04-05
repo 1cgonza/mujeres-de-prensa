@@ -1,5 +1,4 @@
 {% import 'macros/singletons.html' as singletons %}
-{% import 'macros/areas.html' as areas %}
 {% extends 'layout.html' %}
 {% set slug = data.page.themeType or 'default' %}
 {% set color = data.page.themeColor or data.global.defaultColor %}
@@ -34,7 +33,7 @@
       <div class="innerSection gridCol col1 ld-50">
         <span class="titleDeco deco decoTop"></span>
         <div class="pageTitle center">{{ singletons.getTextBlock(data.page, 'pageTwoTitle') }}</div>
-        <span class="titleDeco deco decoBottom"></span>
+        <span class="titleDeco deco decoBottom mirrorVertical"></span>
       </div>
       <div class="innerSection gridCol col2 ld-50">
         <span class="indexDeco deco decoTop"></span>

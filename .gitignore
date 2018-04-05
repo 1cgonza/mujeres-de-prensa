@@ -11,6 +11,7 @@ svgPacker
 locales
 npm-debug.log
 data
+!parser/public/data
 public/uploads
 public/apos-minified
 temp/uploadfs

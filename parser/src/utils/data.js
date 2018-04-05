@@ -12,7 +12,7 @@ export const secondaryUrls = {
 
 export const metaUrls = {
   ediciones: `${base}MetaEdiciones.xlsx`
-}
+};
 
 export const limits = {
   temas: {

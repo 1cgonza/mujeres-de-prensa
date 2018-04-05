@@ -1,5 +1,6 @@
 import Base from './Base';
 import { isArray } from 'util';
+import { urls } from '../utils/data';
 
 export default class Temas extends Base {
   constructor(tableName) {

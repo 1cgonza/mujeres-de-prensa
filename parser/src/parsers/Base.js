@@ -18,7 +18,7 @@ export default class Base {
     document.getElementById('errors').innerText = '';
     this.data = data;
     this.sheetName = sheetName;
-    this.totalRows = this.getFinalRow();
+    this.totalRows = data.hasOwnProperty('raw') ? this.getFinalRow(data.raw) : this.getFinalRow(data);
     this.meta = this.cleanMeta(meta);
     this.clean();
     this.printErrors();
@@ -55,8 +55,8 @@ export default class Base {
             }
           }
         } else if (obj.col === 'B') {
-          if (val.charAt('y')) {
-            let arr = val.split('y');
+          if (val.charAt(' y ')) {
+            let arr = val.split(' y ');
             arr.forEach((m, i) => {
               arr[i] = m.trim();
             });
@@ -101,16 +101,16 @@ export default class Base {
     });
   }
 
-  getFinalRow() {
-    if (this.data && this.data.hasOwnProperty('raw') && this.data.raw.hasOwnProperty('!ref')) {
-      let row = this.getColRow(this.data.raw['!ref'].split(':')[1]).row;
+  getFinalRow(data) {
+    if (data.hasOwnProperty('!ref')) {
+      let row = this.getColRow(data['!ref'].split(':')[1]).row;
       if (!isNaN(row)) {
         return row;
       } else {
         this.setError({
           stop: true,
           error: {
-            error: `Final row is not a number, attempted from: ${this.data.raw['!ref'].split(':')[1]}`
+            error: `Final row is not a number, attempted from: ${data['!ref'].split(':')[1]}`
           }
         });
       }

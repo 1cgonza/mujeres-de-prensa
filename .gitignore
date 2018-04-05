@@ -2,6 +2,10 @@
 _ARCHIVOS
 *.log
 
+# don't track JS output of webpack
+lib/modules/apostrophe-assets/public/js/site.js
+svgPacker
+
 #General
 .DS_Store
 locales

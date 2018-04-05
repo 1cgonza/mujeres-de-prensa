@@ -4,7 +4,7 @@ export default class Menu {
     this.menuBtn = document.getElementById('siteMenuIcon');
     this.blackout = document.getElementById('blackout');
     this.links = document.querySelectorAll('.pageLink');
-
+    this.init();
     this.menuBtn.addEventListener('click', this.onMenuClick, false);
   }
 

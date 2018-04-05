@@ -1,6 +1,7 @@
 import Base from './Base';
 import { isArray } from 'util';
-import { urls } from '../utils/data';
+import { secondaryUrls } from '../utils/data';
+import req from '../utils/req';
 
 export default class Temas extends Base {
   constructor(tableName) {
@@ -12,7 +13,7 @@ export default class Temas extends Base {
   clean() {
     this.getThemes();
     let cleanedData = this.sortAndFilter(this.getBaseArray(this.data.raw));
-    this.getVols();
+    this.getVols(this.vols, this.totalRows);
 
     cleanedData = cleanedData.map(ref => {
       let cell = this.data.raw[ref.key];
@@ -40,6 +41,7 @@ export default class Temas extends Base {
       }
 
       let meta = this.vols.find(obj => ref.row >= obj.rows[0] && ref.row <= obj.rows[1]);
+
       if (!meta) {
         this.setError({
           stop: true,
@@ -54,7 +56,51 @@ export default class Temas extends Base {
 
       return ret;
     });
-    console.log(cleanedData, this.vols, this.categories);
+
+    req(secondaryUrls.generos).then(d => {
+      if (d.hasOwnProperty('Sheets') && d.Sheets.hasOwnProperty(this.sheetName)) {
+        let generosData = d.Sheets[this.sheetName];
+        let finalRow = this.getFinalRow(generosData);
+        let baseArr = this.getBaseArray(generosData);
+        let vols = [];
+        let generos = [];
+
+        let cleaned = this.sortCells(baseArr).filter(obj => {
+          if (obj.col === 'A') {
+            if (obj.row !== 1) {
+              let v = generosData[obj.key].v;
+              let ed = !isNaN(v) ? +v : this.validatePages(v);
+              vols.push(Object.assign(obj, {
+                ed: ed
+              }));
+            }
+            return false;
+          } else if (obj.row === 1) {
+            generos[obj.col] = generosData[obj.key].v;
+            return false;
+          }
+          return true;
+        });
+
+        this.getVols(vols, finalRow);
+
+        cleaned = cleaned.map(ref => {
+          let cell = generosData[ref.key];
+          console.log(cell, ref);
+          let titlePages = this.getTitleAndPages(cell.v, ref.key);
+          let ret = {
+            title: titlePages.title,
+          };
+          
+
+        });
+
+        console.log(cleaned, vols, generos);
+        // console.log(cleanedData, this.vols, this.categories);
+
+      }
+    });
+
   }
 
   sortAndFilter(colsRowsArr) {
@@ -96,25 +142,26 @@ export default class Temas extends Base {
     }
   }
 
-  getVols() {
-    this.vols.forEach((obj, i) => {
+  getVols(base, totalRows) {
+    base.forEach((obj, i) => {
       let meta = this.meta.find(d => {
         let edMeta = isArray(d.ed) ? d.ed[0] : d.ed;
         let edVols = isArray(obj.ed) ? obj.ed[0] : obj.ed;
+
         return edMeta === edVols;
       });
       let newObj = {
         rows: [obj.row]
       };
 
-      if (obj.row < this.totalRows && i < this.vols.length - 1) {
-        if (obj.row === this.vols[i + 1].row - 1) {
+      if (obj.row < totalRows && i < base.length - 1) {
+        if (obj.row === base[i + 1].row - 1) {
           newObj.rows[1] = obj.row;
         } else {
-          newObj.rows[1] = this.vols[i + 1].row - 1;
+          newObj.rows[1] = base[i + 1].row - 1;
         }
       } else {
-        newObj.rows[1] = this.totalRows;
+        newObj.rows[1] = totalRows;
       }
 
       if (meta) {
@@ -126,7 +173,9 @@ export default class Temas extends Base {
           stop: true
         });
       }
-      this.vols[i] = newObj;
+      base[i] = newObj;
     });
+
+    return base;
   }
 }

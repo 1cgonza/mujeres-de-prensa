@@ -1,18 +1,29 @@
 {
-  "name": "pasadoimpreso",
-  "version": "2.0.0",
-  "description": "Minimal Apostrophe Boilerplate",
-  "main": "app.js",
+  "name": "mujeres-de-prensa",
+  "version": "1.0.0",
+  "description": "Mujeres de Prensa",
+  "main": "src/index.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "concurrently --kill-others \"webpack --watch --mode development --progress --colors\" \"node app\" ",
+    "prod": "node app.js"
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://gitlab.com/1cgonza/mujeres-de-prensa.git"
   },
-  "author": "P'unk Avenue",
+  "author": "Juan Camilo González <info@juancgonzalez.com>",
   "license": "MIT",
   "dependencies": {
     "apostrophe": "^2.47.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.0.0-beta.44",
+    "@babel/preset-env": "^7.0.0-beta.44",
+    "babel-loader": "^8.0.0-beta",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "concurrently": "^3.5.1",
+    "webpack": "^4.5.0",
+    "webpack-cli": "^2.0.13",
+    "webpack-dev-server": "^3.1.1"
   }
 }

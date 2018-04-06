@@ -20,8 +20,10 @@ export default class Base {
     this.sheetName = sheetName;
     this.totalRows = data.hasOwnProperty('raw') ? this.getFinalRow(data.raw) : this.getFinalRow(data);
     this.meta = this.cleanMeta(meta);
-    this.clean();
-    this.printErrors();
+    this.clean().then(() => {
+      this.printErrors();
+    });
+
     console.log('FINISHED');
   }
 
@@ -138,7 +140,7 @@ export default class Base {
         this.setError({
           expand: true,
           error: {
-            error: `If the following title has page number(s), it is missing the page indicator. i.e (p.1`,
+            warning: `If the following title has page number(s), it is missing the page indicator. i.e (p.1`,
             title: str,
             cell: key
           }

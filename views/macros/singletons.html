@@ -1,24 +1,27 @@
-{% macro getMinimalTextBlock(context, name, label) %}
+{% macro getMinimalTextBlock(context, name, addLabel) %}
   {{ apos.singleton(context, name, 'apostrophe-rich-text', {
-    addLabel: label,
+    addLabel: addLabel,
     controls: {
       movable: false
     }
   }) }}
 {% endmacro %}
 
-{% macro getTextBlock(context, name, label) %}
+{% macro getTextBlock(context, name, addLabel, editLabel) %}
   {{ apos.singleton(context, name, 'apostrophe-rich-text', {
-    addLabel: label,
-    toolbar: ['Styles', 'Bold', 'Italic', 'Link', 'Unlink', 'Anchor', 'BulletedList', 'NumberedList', 'Blockquote', 'Justify', 'Undo', 'Redo', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+    addLabel: addLabel,
+    editLabel: editLabel,
+    toolbar: [ 'Font', '/',
+              'Styles', 'Bold', 'Italic', 'Blockquote', '-', 
+              'Link', 'Unlink', 'Anchor', '-',
+              'BulletedList', 'NumberedList',  '-',
+              'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock',  '-',
+              'Undo', 'Redo', '-',
+              'Sourcedialog'
+              ],
     styles: [
-      { name: 'Montserrat', element: 'p', attributes: {class: 'fontLight'} },
-      { name: 'Playfair Display', element: 'p', attributes: {class: 'fontMain'} },
-      { name: 'EB Garamond', element: 'p', attributes: {class: 'fontSub'} },
-      { name: 'Abril Fatface', element: 'p', attributes: {class: 'fontFat'} },
-      { name: 'Lora', element: 'p', attributes: {class: 'fontIndex'} },
-      { name: 'Pacifico', element: 'p', attributes: {class: 'fontQuote'} },
-      { name: 'Lato', element: 'p', attributes: {class: 'fontThin'} }
+      { name: 'Title', element: 'h1', attributes: {class: 'styleTitle'} },
+      { name: 'Subtitle', element: 'h2', attributes: {class: 'styleSubtitle'} }
     ],
     controls: {
       movable: false
@@ -26,9 +29,10 @@
   }) }}
 {% endmacro %}
 
-{% macro getImageSection(context, name, limit, label) %}
+{% macro getImageSection(context, name, limit, addLabel, editLabel) %}
   {{ apos.singleton(context, name, 'apostrophe-images', {
-      addLabel: label,
+      addLabel: addLabel,
+      editLabel: editLabel,
       size: 'full',
       noHeight: true,
       focalPoint: true,

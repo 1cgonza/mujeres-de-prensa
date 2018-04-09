@@ -22,9 +22,9 @@
       <div class="pageTitleBlock absoluteCenter ld-60">
         <span class="titleDeco deco decoTop"></span>
         <h1 class="pageTitle">{{data.page.title}}</h1>
-        <div class="pageSubtitle">{{ singletons.getTextBlock(data.page, 'subtitle') }}</div>
+        <div class="pageSubtitle">{{ singletons.getMinimalTextBlock(data.page, 'subtitle', 'Subtitle') }}</div>
         <span class="titleDeco deco decoBottom mirrorVertical"></span>
-        <div class="sectionName">{{ singletons.getTextBlock(data.page, 'sectionName') }}</div>
+        <div class="sectionName">{{ singletons.getMinimalTextBlock(data.page, 'sectionName', 'Quote') }}</div>
         <span class="titleDeco deco decoEnd"></span>
       </div>
     </section>
@@ -32,14 +32,14 @@
     <section class="pageIndex gridWrapper">
       <div class="innerSection gridCol col1 ld-50">
         <span class="titleDeco deco decoTop"></span>
-        <div class="pageTitle center">{{ singletons.getTextBlock(data.page, 'pageTwoTitle') }}</div>
+        <div class="pageTitle center">{{ singletons.getTextBlock(data.page, 'pageTwoTitle', 'Title') }}</div>
         <span class="titleDeco deco decoBottom mirrorVertical"></span>
       </div>
       <div class="innerSection gridCol col2 ld-50">
         <span class="indexDeco deco decoTop"></span>
         <div class="indexWrapper blockCenter ld-90">
-          <div class="sectionTitle themeColor">{{ singletons.getTextBlock(data.page, 'pageTwoTitle2') }}</div>
-          <div class="sectionIndex">{{ singletons.getTextBlock(data.page, 'pageTwoIndex') }}</div>
+          <div class="sectionTitle themeColor">{{ singletons.getTextBlock(data.page, 'pageTwoTitle2', 'Index Title') }}</div>
+          <div class="sectionIndex">{{ singletons.getTextBlock(data.page, 'pageTwoIndex', 'Index') }}</div>
         </div>
         <span class="indexDeco deco decoBottom mirrorVertical"></span>
       </div>
@@ -51,7 +51,7 @@
           <span class="titleDeco deco decoTop ld-50 center"></span>
           <div class="gridWrapperMiddle gridJustifySpaceBetween">
             <span class="titleDecoSide deco decoLeft"></span>
-            <div class="sectionTitle">{{ singletons.getTextBlock(data.page, 'pageIntroTitle') }}</div>
+            <div class="sectionTitle">{{ singletons.getTextBlock(data.page, 'pageIntroTitle', 'Title') }}</div>
             <span class="titleDecoSide deco decoRight"></span>
           </div>
           <span class="titleDeco deco decoBottom ld-50 center"></span>
@@ -59,7 +59,7 @@
 
         <div class="ld-50 blockCenter">
           <span class="separator deco"></span>
-          <div class="sectionContent contentBlock">{{ singletons.getTextBlock(data.page, 'pageIntroContent') }}</div>
+          <div class="sectionContent contentBlock">{{ singletons.getTextBlock(data.page, 'pageIntroContent', 'Introduction') }}</div>
           <span class="endDeco deco"></span>
         </div>
       </div>
@@ -67,64 +67,64 @@
       <div class="innerSection gridCol fixedCol col2 ld-50">
         <div class="absoluteCenter ld-100">
           <span class="titleDeco deco decoTop center"></span>
-          <div class="sectionQuote ld-90 blockCenter">{{ singletons.getTextBlock(data.page, 'pageIntroQuote') }}</div>
+          <div class="sectionQuote ld-90 blockCenter">{{ singletons.getTextBlock(data.page, 'pageIntroQuote', 'Quote') }}</div>
           <span class="titleDeco deco decoBottom mirrorVertical center"></span>
         </div>
       </div>
     </section>
 
     <section class="imageSection">
-      {{ singletons.getImageSection(data.page, 'imageSection1', 1) }}
+      {{ singletons.getImageSection(data.page, 'imageSection1', 1, 'Add Image', 'Edit Image') }}
     </section>
 
     <section class="pageContent1 columns bgColorColSection">
       <div class="innerSection ld-30 bgColorBlock">
         <span class="titleDeco deco decoTop center"></span>
-        <div class="sectionContent contentBlock">{{ singletons.getTextBlock(data.page, 'pageContent1') }}</div>
+        <div class="sectionContent contentBlock">{{ singletons.getTextBlock(data.page, 'pageContent1', 'Section 1 Content', 'Edit Section 1 Content') }}</div>
       </div>
-      <div class="contentBackground fixedCol">{{ singletons.getImageSection(data.page, 'pageContent1Img', 1) }}</div>
+      <div class="contentBackground fixedCol">{{ singletons.getImageSection(data.page, 'pageContent1Img', 1, 'Add Image', 'Edit Image') }}</div>
     </section>
 
     <section class="pageContent2 gridWrapper columns">
       <div class="innerSection gridCol col1 ld-50">
         <div class="ld-50 blockCenter">
-          <div class="sectionContent contentBlock">{{ singletons.getTextBlock(data.page, 'pageContent2') }}</div>
+          <div class="sectionContent contentBlock">{{ singletons.getTextBlock(data.page, 'pageContent2', 'Section 2 Content', 'Edit Section 2 Content') }}</div>
         </div>
       </div>
 
       <div class="innerSection gridCol fixedCol col2 ld-50">
-        <div class="fullViewImage absoluteCenter">{{ singletons.getImageSection(data.page, 'pageContent2Img', 1) }}</div>
+        <div class="fullViewImage absoluteCenter">{{ singletons.getImageSection(data.page, 'pageContent2Img', 1, 'Add Image', 'Edit Image') }}</div>
       </div>
     </section>
 
     <section class="pageContent3 columns bgColorColSection">
       <div class="innerSection ld-30 bgColorBlock">
         <span class="titleDeco deco decoTop center"></span>
-        <div class="sectionContent contentBlock">{{ singletons.getTextBlock(data.page, 'pageContent3') }}</div>
+        <div class="sectionContent contentBlock">{{ singletons.getTextBlock(data.page, 'pageContent3', 'Section 3 Content', 'Edit Section 3 Content') }}</div>
       </div>
-      <div class="contentBackground fixedCol">{{ singletons.getImageSection(data.page, 'pageContent3Img', 1) }}</div>
+      <div class="contentBackground fixedCol">{{ singletons.getImageSection(data.page, 'pageContent3Img', 1, 'Add Image', 'Edit Image') }}</div>
     </section>
 
     <section class="pageQuote gridWrapper columns">
       <div class="innerSection gridCol col1 ld-50">
         <div class="titleBlock absoluteCenter ld-60">
           <span class="titleDeco deco decoTop"></span>
-          <div class="sectionTitle">{{ singletons.getTextBlock(data.page, 'pageQuoteContent') }}</div>
+          <div class="sectionTitle">{{ singletons.getTextBlock(data.page, 'pageQuoteContent', 'Quote', 'Edit Quote') }}</div>
           <span class="titleDeco deco decoBottom mirrorVertical"></span>
         </div>
       </div>
 
       <div class="innerSection fixedCol gridCol col2 ld-50">
-        <div class="contentBackground">{{ singletons.getImageSection(data.page, 'pageQuoteImage') }}</div>
+        <div class="contentBackground">{{ singletons.getImageSection(data.page, 'pageQuoteImage', 1, 'Add Image', 'Edit Image') }}</div>
       </div>
     </section>
 
     <section class="pageContent4 columns bgColorColSection">
       <div class="innerSection ld-30 bgColorBlock">
         <span class="titleDeco deco decoTop center"></span>
-        <div class="sectionContent contentBlock">{{ singletons.getTextBlock(data.page, 'pageContent4') }}</div>
+        <div class="sectionContent contentBlock">{{ singletons.getTextBlock(data.page, 'pageContent4', 'Section 4 Content', 'Edit Section 4 Content') }}</div>
       </div>
-      <div class="contentBackground fixedCol">{{ singletons.getImageSection(data.page, 'pageContent4Img', 1) }}</div>
+      <div class="contentBackground fixedCol">{{ singletons.getImageSection(data.page, 'pageContent4Img', 1, 'Add Image', 'Edit Image') }}</div>
     </section>
 
     <section class="pageContentEnd gridWrapper columns">
@@ -132,7 +132,7 @@
         <div class="titleBlock absoluteCenter">
           <span class="titleDeco deco decoTop ld-20 center"></span>
           <span class="titleDecoSide deco decoLeft"></span>
-          <div class="sectionTitle">{{ singletons.getTextBlock(data.page, 'pageContentEndQuote') }}</div>
+          <div class="sectionTitle">{{ singletons.getTextBlock(data.page, 'pageContentEndQuote', 'Quote', 'Edit Quote') }}</div>
           <span class="titleDecoSide deco decoRight"></span>
           <span class="titleDeco deco decoBottom ld-20 center"></span>
         </div>
@@ -141,7 +141,7 @@
       <div class="innerSection gridCol col2 ld-50">
         <div class="ld-60 blockCenter">
           <span class="titleDeco deco decoTop"></span>
-          <div class="sectionQuote contentBlock">{{ singletons.getTextBlock(data.page, 'pageContentEnd') }}</div>
+          <div class="sectionQuote contentBlock">{{ singletons.getTextBlock(data.page, 'pageContentEnd', 'Section 5 Content', 'Edit Section 5 Content') }}</div>
         </div>
       </div>
     </section>
@@ -149,15 +149,15 @@
     <div class="divider"></div>
 
     <section class="imageSection">
-      {{ singletons.getImageSection(data.page, 'imageSection2', 1) }}
+      {{ singletons.getImageSection(data.page, 'imageSection2', 1, 'Add Image', 'Edit Image') }}
     </section>
 
     <section class="imageSection">
-      {{ singletons.getImageSection(data.page, 'imageSection3', 1) }}
+      {{ singletons.getImageSection(data.page, 'imageSection3', 1, 'Add Image', 'Edit Image') }}
     </section>
 
     <section class="imageSection">
-      {{ singletons.getImageSection(data.page, 'imageSection4', 1) }}
+      {{ singletons.getImageSection(data.page, 'imageSection4', 1, 'Add Image', 'Edit Image') }}
     </section>
 
   </article>

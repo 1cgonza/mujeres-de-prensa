@@ -2,6 +2,97 @@ body {
   .fontMain;
 }
 
+h1 {
+  font-size: 1.8em;
+}
+
+h2 {
+  font-size: 1.5em;
+}
+
+textarea {
+  white-space: normal!important;
+}
+
+.cke_button__sourcedialog {
+  &::before {
+    content: '\f1c9';
+  }
+
+  .cke_button__sourcedialog_label {
+    display: none;
+  }
+}
+
+.cke_toolbar_separator {
+  height: 30px !important;
+}
+
+// HACK!!!
+// The toolbar CSS that apostrophe loads by default will only style the dropdown of .cke_combo__styles 
+// so for now I copied the styles from:
+// https://github.com/apostrophecms/apostrophe/blob/6eeb5290342fd9d8f57ba51bd8aa5d6f273943d1/lib/modules/apostrophe-rich-text-widgets/public/css/components/ckeditor-controls.less
+
+.cke_combo__font {
+  .cke_combo_button {
+    margin: 0;
+    border: none;
+    box-shadow: none !important;
+
+    border-right: 1px solid transparent;
+    border-top-right-radius:  0px;
+    border-bottom-right-radius: 0px;
+    background: transparent;
+
+    &:active {
+      border: none;
+      border-right: 1px solid @apos-mid;
+    }
+
+    &:hover {
+      background: @apos-light;
+    }
+
+    .apos-transition(background);
+
+    .cke_combo_text {
+      position: relative;
+      padding-left: 36px;
+      min-width: 96px;
+
+      line-height: 40px;
+      font-size: 1.35em;
+
+      cursor: pointer;
+
+      &:before {
+        position: absolute;
+        left: 16px;
+        top: 18px;
+
+        .fa;
+        content: '\f0d7';
+        font-size: 0.8em;
+      }
+      &:after {
+        position: absolute;
+        left: 16px;
+        top: 9px;
+
+        .fa;
+        content: '\f0d8';
+        font-size: 0.8em;
+      }
+    }
+
+    .cke_combo_arrow {
+      display: none;
+    }
+  }
+}
+
+// END Hack
+
 .selection {
   background-color: rgba(249, 232, 83, 0.85);
   color: black;
@@ -412,26 +503,33 @@ ol {
     }
   }
 
-  .pageTitleBlock {
-    .sectionName {
-      margin-top: 3em;
-      letter-spacing: 1px;
-      font-size: 0.8em;
-    }
+  .landingSection {
+    .pageTitleBlock {
+      .decoTop {
+        margin-bottom: 3em;
+        height: 20px;
+      }
 
-    .decoTop {
-      margin-bottom: 3em;
-      height: 20px;
-    }
+      .pageSubtitle {
+        .fontSub;
+      }
 
-    .decoBottom {
-      margin-top: 3em;
-      height: 20px;
-    }
+      .decoBottom {
+        margin-top: 3em;
+        height: 20px;
+      }
 
-    .decoEnd {
-      margin-top: 1.5em;
-      height: 30px;
+      .sectionName {
+        .fontFat;
+        margin-top: 3em;
+        letter-spacing: 1px;
+        font-size: 0.8em;
+      }
+
+      .decoEnd {
+        margin-top: 1.5em;
+        height: 30px;
+      }
     }
   }
 

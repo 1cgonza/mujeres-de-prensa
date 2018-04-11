@@ -23,7 +23,7 @@ export default class Temas extends Base {
         let titlePages = this.getTitleAndPages(cell.v, ref.key);
         let ret = {
           title: titlePages.title,
-          category: this.categories[ref.col]
+          category: [this.categories[ref.col]]
         };
 
         if (titlePages.hasOwnProperty('pages')) {
@@ -55,16 +55,16 @@ export default class Temas extends Base {
         }
 
         Object.assign(ret, ref, meta);
-        // Object.assign(ret, ref);
+
         if (!this.editions.hasOwnProperty(`ed${ret.ed}`)) {
           this.editions[`ed${ret.ed}`] = [ret];
         } else {
           let matchArticle = this.editions[`ed${ret.ed}`].find((article, i) => {
             if (article.ed === ret.ed && fuzz.ratio(article.title, ret.title) > 95) {
               if (isArray(article.category)) {
-                this.editions[`ed${ret.ed}`].category.push(ret.category);
+                this.editions[`ed${ret.ed}`][i].category.push(ret.category);
               } else {
-                this.editions[`ed${ret.ed}`].category = [article.category, ret.category];
+                this.editions[`ed${ret.ed}`][i].category = [article.category, ret.category];
               }
               console.log('repeated title', article, ret);
             }

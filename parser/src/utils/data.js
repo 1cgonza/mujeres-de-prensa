@@ -22,5 +22,13 @@ export const limits = {
     Verdad: 'J',
     Contrastes: 'J',
     Mujer: 'J'
+  },
+  generos: {
+    Mireya: 'I',
+    AF: 'I',
+    MF: 'I',
+    Verdad: 'I',
+    Contrastes: 'I',
+    Mujer: 'I'
   }
 };

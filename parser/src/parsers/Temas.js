@@ -1,6 +1,6 @@
 import Base from './Base';
 import { isArray } from 'util';
-import { secondaryUrls } from '../utils/data';
+import { secondaryUrls, limits } from '../utils/data';
 import req from '../utils/req';
 import fuzz from 'fuzzball';
 
@@ -21,10 +21,20 @@ export default class Temas extends Base {
       cleanedData = cleanedData.map(ref => {
         let cell = this.data.raw[ref.key];
         let titlePages = this.getTitleAndPages(cell.v, ref.key);
+        let meta = this.vols.find(obj => ref.row >= obj.rows[0] && ref.row <= obj.rows[1]);
         let ret = {
           title: titlePages.title,
           category: [this.categories[ref.col]]
         };
+
+        if (!meta) {
+          this.setError({
+            stop: true,
+            error: {
+              error: `Can't match edition number of cell ${ref.key} to anything`
+            }
+          });
+        }
 
         if (titlePages.hasOwnProperty('pages')) {
           ret.pages = titlePages.pages;
@@ -41,17 +51,6 @@ export default class Temas extends Base {
               colorDataFound: cell.s
             });
           }
-        }
-
-        let meta = this.vols.find(obj => ref.row >= obj.rows[0] && ref.row <= obj.rows[1]);
-
-        if (!meta) {
-          this.setError({
-            stop: true,
-            error: {
-              error: `Can't match edition number of cell ${ref.key} to anything`
-            }
-          });
         }
 
         Object.assign(ret, ref, meta);
@@ -75,14 +74,8 @@ export default class Temas extends Base {
           this.editions[`ed${ret.ed}`].push(ret);
         }
 
-        
-        // if (this.editions[`ed${ret.ed}`].title === ret.title) {
-        //   
-        // }
-
         return ret;
       });
-      console.log(this.editions);
 
       req(secondaryUrls.generos).then(d => {
         if (d.hasOwnProperty('Sheets') && d.Sheets.hasOwnProperty(this.sheetName)) {
@@ -92,8 +85,14 @@ export default class Temas extends Base {
           let vols = [];
           let genres = [];
           let titles = {};
+          let limit = limits.generos[this.sheetName];
 
           let cleaned = this.sortCells(baseArr).filter(obj => {
+            if (obj.col > limit) {
+              return false;
+            }
+
+            // Extract editions.
             if (obj.col === 'A') {
               if (obj.row !== 1) {
                 let v = generosData[obj.key].v;
@@ -104,30 +103,31 @@ export default class Temas extends Base {
               }
               return false;
             } else if (obj.col === 'B') {
+              // Extract Titles
               if (obj.row !== 1) {
                 titles[`row${obj.row}`] = this.getTitleAndPages(generosData[obj.key].v, obj.key);
               }
               return false;
             } else if (obj.row === 1) {
-              genres[obj.col] = generosData[obj.key].v;
+              // Extract genres names
+              genres[obj.col] = generosData[obj.key].v.trim();
               return false;
-            } else if (generosData[obj.key].v === 0) {
+            } else if (!generosData[obj.key].v) {
+              // Skip if the the value is 0 since it means the title does not belong to genre.
               return false;
             }
 
+            // this will return true only if it is a cell with number and is equal to 1
             return true;
           });
 
           this.getVols(vols, finalRow);
 
-          cleaned = cleaned.map(ref => {
+          // Match genres to each title
+          cleaned = cleaned.forEach(ref => {
             let cell = generosData[ref.key];
-            let ret = {
-              genre: genres[ref.col],
-              title: titles[`row${ref.row}`].title
-            };
-
             let meta = vols.find(obj => ref.row >= obj.rows[0] && ref.row <= obj.rows[1]);
+            let article = titles[`row${ref.row}`];
 
             if (!meta) {
               this.setError({
@@ -138,39 +138,58 @@ export default class Temas extends Base {
               });
             }
 
-            Object.assign(ret, ref, meta);
+            if (!article.hasOwnProperty('genres')) {
+              article.genres = [];
+            }
 
-            return ret;
+            article.genres.push(genres[ref.col]);
+
+            Object.assign(article, meta);
           });
 
-          console.log(cleaned);
+          // Remove empty articles
+          for (let articleKey in titles) {
+            if (!titles[articleKey].hasOwnProperty('genres')) {
+              delete titles[articleKey];
+            }
+          }
 
-          cleanedData.forEach(d => {
-            let match = cleaned.find(genre => {
-              let ratio = fuzz.ratio(genre.title, d.title);
+          for (let articleKey in titles) {
+            let article = titles[articleKey];
+
+            let match = cleanedData.find(article2 => {
+              if (article.ed !== article2.ed) {
+                return false;
+              }
+
+              let ratio = fuzz.ratio(article2.title, article.title);
 
               if (ratio === 100) {
+                article2.genres = article.genres;
                 return true;
               } else if (ratio > 80) {
                 this.setError({
                   error: {
                     warning: `These titles seem to match`,
-                    Generos: `${genre.title}" - ${genre.key}`,
-                    Titulos: `${d.title}" - ${d.key}`
+                    Generos: `${article.title}" - ${articleKey}`,
+                    Titulos: `${article2.title}" - ${article2.key}`
                   }
                 });
-                //console.log(genre.title, d.title);
+
+                return false;
               }
 
               return false;
             });
 
-            // if (!match) {
-            //   console.log(d);
-            // }
-          });
+            // TODO: what to do with articles that have genre,
+            // but are excluded from the main titles, themes and categories table?
+            if (!match) {
+              //console.log(article);
+            }
+          }
 
-          resolve();
+          resolve(cleanedData);
         }
       });
     });

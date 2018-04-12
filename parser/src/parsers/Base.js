@@ -20,11 +20,11 @@ export default class Base {
     this.sheetName = sheetName;
     this.totalRows = data.hasOwnProperty('raw') ? this.getFinalRow(data.raw) : this.getFinalRow(data);
     this.meta = this.cleanMeta(meta);
-    this.clean().then(() => {
+    this.clean().then(cleanedData => {
+      console.log(this.tableName, this.sheetName, cleanedData);
+      this.createFile(cleanedData, `${this.sheetName}-${this.tableName}`);
       this.printErrors();
     });
-
-    console.log('FINISHED');
   }
 
   cleanMeta(data) {
@@ -261,5 +261,20 @@ export default class Base {
         wrapper.appendChild(view.dom);
       });
     }
+  }
+
+  createFile(data, name) {
+    let container = document.getElementById('download');
+    let blob = new Blob([JSON.stringify(data)], {type: 'text/json'});
+    let url = window.URL.createObjectURL(blob);
+    let a = document.createElement('a');
+
+    container.innerText = '';
+    name = name + '.json';
+
+    a.innerText = name;
+    a.href = url;
+    a.download = name;
+    container.appendChild(a);
   }
 }

@@ -1,6 +1,8 @@
 # Archivos locales
 _ARCHIVOS
 *.log
+# ignore xlsx temps
+~$*.xlsx
 
 # don't track JS output of webpack
 lib/modules/apostrophe-assets/public/js/site.js

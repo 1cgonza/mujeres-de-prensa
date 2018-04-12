@@ -11,6 +11,19 @@ var apos = require('apostrophe')({
     'link-widgets': {},
     'page-link-widgets': {},
     'illustrations-widgets': {},
+    'cartographies-widgets': {},
+    'cartography-pages': {
+      extend: 'apostrophe-custom-pages',
+      name: 'cartography',
+      arrangeFields: [
+        // {
+        //   name: 'cartographyConfiguration',
+        //   label: 'Cartography configuration',
+        //   fields: ['data', 'themeType']
+        // }
+      ],
+      addFields: []
+    },
     'theme-pages': {
       extend: 'apostrophe-custom-pages',
       name: 'seccion-tematica',

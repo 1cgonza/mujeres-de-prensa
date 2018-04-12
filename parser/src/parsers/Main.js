@@ -2,7 +2,6 @@ import { limits } from '../utils/data';
 import Temas from './Temas';
 import Palabras from './Palabras';
 import Lugares from './Lugares';
-import Generos from './Generos';
 
 export default class Parser {
   constructor(rawData, meta, tableName) {
@@ -51,9 +50,6 @@ export default class Parser {
         break;
       case 'lugares':
         this.manager = new Lugares(this.tableName);
-        break;
-      case 'generos':
-        this.manager = new Generos(this.tableName);
         break;
     }
 

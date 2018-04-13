@@ -6,6 +6,11 @@ var apos = require('apostrophe')({
     'apostrophe-templates': {
       viewsFolderFallback: path.join(__dirname, 'views')
     },
+    'apostrophe-express': {
+      session: {
+        secret: 'p@s@d0'
+      }
+    },
     'profiles-widgets': {},
     'magazines-widgets': {},
     'link-widgets': {},

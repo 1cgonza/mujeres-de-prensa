@@ -1,0 +1,43 @@
+#siteMenu {
+
+  #siteMenuLinks {
+    #primaryNav {
+      margin-left: 35%;
+
+      .linkEle {
+        &:nth-child(7n+2) {
+          margin-left: 40px;
+        }
+
+        &:nth-child(7n+3) {
+          margin-left: -60px;
+        }
+
+        &:nth-child(7n+4) {
+          margin-left: 10px;
+        }
+
+        &:nth-child(7n+5) {
+          margin-left: -140px;
+        }
+
+        &:nth-child(7n+6) {
+          margin-left: 40px;
+        }
+      }
+    }
+
+    #secondaryNav {
+      &::before, &::after {
+        margin-left: 25%;
+        width: 70%;
+      }
+
+      .linkEle {
+        a.pageLink, a.pageLink:active {
+          margin-left: 25%;
+        }
+      }
+    }
+  }
+}

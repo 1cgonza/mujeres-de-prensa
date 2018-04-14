@@ -1,6 +1,9 @@
 export default class Menu {
-  constructor() {
-    this.menu = document.getElementById('siteMenu');
+  constructor(ele) {
+    if (!ele) {
+      return;
+    }
+    this.menu = ele;
     this.menuBtn = document.getElementById('siteMenuIcon');
     this.blackout = document.getElementById('blackout');
     this.links = document.querySelectorAll('.pageLink');

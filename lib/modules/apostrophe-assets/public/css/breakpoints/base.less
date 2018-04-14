@@ -146,10 +146,6 @@ a, a:visited {
   min-height: 100vh;
 }
 
-article {
-  padding-bottom: 20em;
-}
-
 section {
   width: 100%;
   min-height:100vh;
@@ -647,6 +643,7 @@ ol {
       background-size: contain;
       background-repeat: no-repeat;
     }
+
     .titleDeco {
       height: 30px;
     }
@@ -673,9 +670,19 @@ ol {
     }
   }
 
+  .finalImage {
+    .endDeco {
+      position: absolute;
+      bottom: 3em;
+      right: 2em;
+      height: 45px;
+      width: 45px;
+    }
+  }
+
   .divider {
     background-repeat: no-repeat;
-    background-size: 90%;
+    background-size: 95%;
     background-position: center;
     padding: 10em;
   }
@@ -733,6 +740,7 @@ ol {
   }
 
   .illustrationSection {
+    margin-bottom: 6em;
     .col1 {
       margin-top: 5em;
 
@@ -800,9 +808,22 @@ ol {
       padding-top: 10em;
     }
 
+    .decoTop, .decoBottom {
+      background-image: url(../assets/ui/ornamentos/RevistasTituloBarra.svg);
+      height: 14px;
+    }
+
+    .decoTop {
+      margin-bottom: 3em;
+    }
+
+    .decoBottom {
+      margin: 3em 0;
+    }
+
     .title {
-      background-image: url(../assets/ui/ornamentos/Revistas_titulo.svg);
-      height: 150px;
+      background-image: url(../assets/ui/ornamentos/RevistasTituloMarco.svg);
+      height: 91px;
       padding-top: 1em;
       font-size: 1.8em;
       font-weight: 700;
@@ -841,7 +862,7 @@ ol {
 
     .decoBottom {
       background-image: url(../assets/ui/ornamentos/Revistas_deco_subtitulo.svg);
-      height: 50px;
+      height: 35px;
       margin-bottom: 1em;
     }
 

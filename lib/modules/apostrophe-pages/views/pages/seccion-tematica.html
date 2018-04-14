@@ -48,13 +48,13 @@
     <section class="pageIntro gridWrapper columns">
       <div class="innerSection gridCol col1 ld-50">
         <div class="titleBlock ld-50 blockCenter">
-          <span class="titleDeco deco decoTop ld-50 center"></span>
+          <span class="titleDeco deco decoTop center"></span>
           <div class="gridWrapperMiddle gridJustifySpaceBetween">
             <span class="titleDecoSide deco decoLeft"></span>
             <div class="sectionTitle">{{ singletons.getTextBlock(data.page, 'pageIntroTitle', 'Title') }}</div>
             <span class="titleDecoSide deco decoRight"></span>
           </div>
-          <span class="titleDeco deco decoBottom ld-50 center"></span>
+          <span class="titleDeco deco decoBottom center"></span>
         </div>
 
         <div class="ld-50 blockCenter">
@@ -110,7 +110,7 @@
         <div class="titleBlock absoluteCenter ld-60">
           <span class="titleDeco deco decoTop"></span>
           <div class="sectionTitle">{{ singletons.getTextBlock(data.page, 'pageQuoteContent', 'Quote', 'Edit Quote') }}</div>
-          <span class="titleDeco deco decoBottom mirrorVertical"></span>
+          <span class="titleDeco deco decoBottom"></span>
         </div>
       </div>
 
@@ -156,8 +156,9 @@
       {{ singletons.getImageSection(data.page, 'imageSection3', 1, 'Add Image', 'Edit Image') }}
     </section>
 
-    <section class="imageSection">
+    <section class="finalImage imageSection">
       {{ singletons.getImageSection(data.page, 'imageSection4', 1, 'Add Image', 'Edit Image') }}
+      <span class="deco endDeco"></span>
     </section>
 
   </article>

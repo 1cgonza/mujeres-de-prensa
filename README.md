@@ -9,3 +9,17 @@ https://github.com/punkave/stagecoach
 sc-deploy production
 ```
 
+## Shell commands in server from dev
+
+**Interactive**
+
+``` bash
+sc-shell production
+```
+
+**Single command and exit**
+
+``` bash
+sc-shell production ls
+```
+

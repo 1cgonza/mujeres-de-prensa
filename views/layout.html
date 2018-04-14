@@ -57,7 +57,7 @@
 
   {% block beforeMain %}
     <div id="blackout" class="hidden"></div>
-    <nav id="siteMenu" class="ld-50">
+    <nav id="siteMenu" class="m-100 t-80 d-70 ld-50">
       <div id="siteMenuLinks">
       <div id="primaryNav">{{ apos.area(data.global, 'navigation', {
           widgets: {
@@ -65,22 +65,20 @@
               controls: {
                 position: 'bottom-right'
               }
-            },
-            link: {}
+            }
           }
         })
       }}</div>
 
-      <div id="secondaryNav" class="ld-50 d-50 blockCenter">{{ apos.area(data.global, 'navigation2', {
+      <div id="secondaryNav" class="blockCenter">{{ apos.area(data.global, 'navigation2', {
           widgets: {
             'page-link': {
+              grid: 'm-90 t-70 d-60 ld-50',
               controls: {
-                position: 'bottom-right'
+                position: 'bottom-left'
               }
-            },
-            link: {}
+            }
           }
-          
         })
       }}</div>
       </div>

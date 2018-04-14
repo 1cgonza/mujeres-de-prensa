@@ -13,7 +13,6 @@ var apos = require('apostrophe')({
     },
     'profiles-widgets': {},
     'magazines-widgets': {},
-    'link-widgets': {},
     'page-link-widgets': {},
     'illustrations-widgets': {},
     'cartographies-widgets': {},

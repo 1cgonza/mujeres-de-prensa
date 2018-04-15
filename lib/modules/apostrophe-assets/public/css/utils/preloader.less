@@ -1,0 +1,443 @@
+#preloaderWrapper {
+  transition: .45s ease-in-out;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+
+  &.hidden {
+    opacity: 0;
+    z-index: -1;
+  }
+
+  @pixW: 6px;
+  @pixWHalf: @pixW / 2;
+  @numCols: 9;
+  @gap: @pixW / 4;
+  @colSize: @pixW + @gap;
+  @totalSize: (@colSize * @numCols) - @gap;
+
+  .blackout {
+    width: 100%;
+    height: 100%;
+    z-index: 99999;
+    background-color: rgba(36, 36, 36, 1);
+  }
+
+  .loader {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: @totalSize;
+    height: @totalSize;
+    transform: translate(-50%, -50%);
+    display: flex;
+    z-index: 999999;
+
+    .col {  
+      span {
+        height: @pixW;
+        width: @pixW;
+        background: rgb(255, 255, 255);
+        display: block;
+        position: absolute;
+        animation: linearCircles .5s alternate infinite;
+      }
+    }
+
+  // .generate-columns(4);
+
+  // .generate-columns(@n, @i: 1) when (@i =< @n) {
+  //   #column@{i} {
+  //     .generate-spans(8);
+  //   }
+  //   .generate-columns(@n, (@i + 1));
+  // }
+
+  // .generate-spans(@n, @i: 0) when (@i =< @n) {
+  //   span {
+  //     left: (@i * 20 / @n)px;
+  //   }
+  //   .generate-spans(@n, (@i + 1));
+  // }
+
+    @keyframes linearCircles {
+      0% {
+        width: @pixWHalf;
+        height: @pixWHalf;
+        transform: translate(@gap, @gap);
+        border-radius: 50%;
+      }
+    }
+
+    @keyframes fadeOut {
+      0% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0;
+        z-index: -1;
+      }
+    }
+
+    #col1 {
+      span {
+        &:nth-child(1) {
+          top: 0;
+          animation-delay: 0.5s;
+        }
+        
+        &:nth-child(2) {
+          top: @colSize;
+          animation-delay: 0.4s;
+        }
+        
+        &:nth-child(3) {
+          top: @colSize * 2;
+          animation-delay: 0.3s;
+        }
+        
+        &:nth-child(4) {
+          top: @colSize * 3;
+          animation-delay: 0.2s;
+        }
+        
+        &:nth-child(5) {
+          top: @colSize * 4;
+          animation-delay: 0.1s;
+        }
+      }
+    }
+
+    #col2 {
+      span {
+        left: @colSize;
+        
+        &:nth-child(1) {
+          top: 0;
+          animation-delay: 0.6s;
+        }
+        
+        &:nth-child(2) {
+          top: @colSize;
+          animation-delay: 0.5s;
+        }
+        
+        &:nth-child(3) {
+          top: @colSize * 2;
+          animation-delay: 0.4s;
+        }
+        
+        &:nth-child(4) {
+          top: @colSize * 3;
+          animation-delay: 0.3s;
+        }
+        
+        &:nth-child(5) {
+          top: @colSize * 4;
+          animation-delay: 0.2s;
+        }
+        
+        &:nth-child(6) {
+          top: @colSize * 5;
+          animation-delay: 0.1s;
+        }
+      }
+    }
+
+    #col3 {
+      span {
+        left: @colSize * 2;
+        
+        &:nth-child(1) {
+          top: 0;
+          animation-delay: 0.7s;
+        }
+        
+        &:nth-child(2) {
+          top: @colSize;
+          animation-delay: 0.6s;
+        }
+        
+        &:nth-child(3) {
+          top: @colSize * 2;
+          animation-delay: 0.5s;
+        }
+        
+        &:nth-child(4) {
+          top: @colSize * 3;
+          animation-delay: 0.4s;
+        }
+        
+        &:nth-child(5) {
+          top: @colSize * 4;
+          animation-delay: 0.3s;
+        }
+        
+        &:nth-child(6) {
+          top: @colSize * 5;
+          animation-delay: 0.2s;
+        }
+        
+        &:nth-child(7) {
+          top: @colSize * 6;
+          animation-delay: 0.1s;
+        }
+      }
+    }
+
+    #col4 {
+      span {
+        left: @colSize * 3;
+        
+        &:nth-child(1) {
+          top: 0;
+          animation-delay: 0.8s;
+        }
+        
+        &:nth-child(2) {
+          top: @colSize;
+          animation-delay: 0.7s;
+        }
+        
+        &:nth-child(3) {
+          top: @colSize * 2;
+          animation-delay: 0.6s;
+        }
+        
+        &:nth-child(4) {
+          top: @colSize * 3;
+          animation-delay: 0.5s;
+        }
+        
+        &:nth-child(5) {
+          top: @colSize * 4;
+          animation-delay: 0.4s;
+        }
+        
+        &:nth-child(6) {
+          top: @colSize * 5;
+          animation-delay: 0.3s;
+        }
+        
+        &:nth-child(7) {
+          top: @colSize * 6;
+          animation-delay: 0.2s;
+        }
+        
+        &:nth-child(8) {
+          top: @colSize * 7;
+          animation-delay: 0.1s;
+        }
+      }
+    }
+
+    #col5 {
+      span {
+        left: @colSize * 4;
+        
+        &:nth-child(1) {
+          top: 0;
+          animation-delay: 0.9s;
+        }
+        
+        &:nth-child(2) {
+          top: @colSize;
+          animation-delay: 0.8s;
+        }
+        
+        &:nth-child(3) {
+          top: @colSize * 2;
+          animation-delay: 0.7s;
+        }
+        
+        &:nth-child(4) {
+          top: @colSize * 3;
+          animation-delay: 0.6s;
+        }
+        
+        &:nth-child(5) {
+          top: @colSize * 4;
+          animation-delay: 0.5s;
+        }
+        
+        &:nth-child(6) {
+          top: @colSize * 5;
+          animation-delay: 0.4s;
+        }
+        
+        &:nth-child(7) {
+          top: @colSize * 6;
+          animation-delay: 0.3s;
+        }
+        
+        &:nth-child(8) {
+          top: @colSize * 7;
+          animation-delay: 0.2s;
+        }
+        
+        &:nth-child(9) {
+          top: @colSize * 8;
+          animation-delay: 0.1s;
+        }
+      }
+    }
+
+    #col6 {
+      span {
+        left: @colSize * 5;
+        
+        &:nth-child(1) {
+          top: @colSize;
+          animation-delay: 0.8s;
+        }
+        
+        &:nth-child(2) {
+          top: @colSize * 2;
+          animation-delay: 0.7s;
+        }
+        
+        &:nth-child(3) {
+          top: @colSize * 3;
+          animation-delay: 0.6s;
+        }
+        
+        &:nth-child(4) {
+          top: @colSize * 4;
+          animation-delay: 0.5s;
+        }
+        
+        &:nth-child(5) {
+          top: @colSize * 5;
+          animation-delay: 0.4s;
+        }
+        
+        &:nth-child(6) {
+          top: @colSize * 6;
+          animation-delay: 0.3s;
+        }
+        
+        &:nth-child(7) {
+          top: @colSize * 7;
+          animation-delay: 0.2s;
+        }
+        
+        &:nth-child(8) {
+          top: @colSize * 8;
+          animation-delay: 0.1s;
+        }
+      }
+    }
+
+    #col7 {
+      span {
+        left: @colSize * 6;
+        
+        &:nth-child(1) {
+          top: @colSize * 2;
+          animation-delay: 0.7s;
+        }
+        
+        &:nth-child(2) {
+          top: @colSize * 3;
+          animation-delay: 0.6s;
+        }
+        
+        &:nth-child(3) {
+          top: @colSize * 4;
+          animation-delay: 0.5s;
+        }
+        
+        &:nth-child(4) {
+          top: @colSize * 5;
+          animation-delay: 0.4s;
+        }
+        
+        &:nth-child(5) {
+          top: @colSize * 6;
+          animation-delay: 0.3s;
+        }
+        
+        &:nth-child(6) {
+          top: @colSize * 7;
+          animation-delay: 0.2s;
+        }
+        
+        &:nth-child(7) {
+          top: @colSize * 8;
+          animation-delay: 0.1s;
+        }
+      }
+    }
+
+    #col8 {
+      span {
+        left: @colSize * 7;
+        
+        &:nth-child(1) {
+          top: @colSize * 3;
+          animation-delay: 0.6s;
+        }
+        
+        &:nth-child(2) {
+          top: @colSize * 4;
+          animation-delay: 0.5s;
+        }
+        
+        &:nth-child(3) {
+          top: @colSize * 5;
+          animation-delay: 0.4s;
+        }
+        
+        &:nth-child(4) {
+          top: @colSize * 6;
+          animation-delay: 0.3s;
+        }
+        
+        &:nth-child(5) {
+          top: @colSize * 7;
+          animation-delay: 0.2s;
+        }
+        
+        &:nth-child(6) {
+          top: @colSize * 8;
+          animation-delay: 0.1s;
+        }
+      }
+    }
+
+    #col9 {
+      span {
+        left: @colSize * 8;
+        
+        &:nth-child(1) {
+          top: @colSize * 4;
+          animation-delay: 0.5s;
+        }
+        
+        &:nth-child(2) {
+          top: @colSize * 5;
+          animation-delay: 0.4s;
+        }
+        
+        &:nth-child(3) {
+          top: @colSize * 6;
+          animation-delay: 0.3s;
+        }
+        
+        &:nth-child(4) {
+          top: @colSize * 7;
+          animation-delay: 0.2s;
+        }
+        
+        &:nth-child(5) {
+          top: @colSize * 8;
+          animation-delay: 0.1s;
+        }
+      }
+    }
+  }
+}

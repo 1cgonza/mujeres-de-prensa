@@ -1,0 +1,9 @@
+{% if item.city and item.country %}
+  <p>{{ item.city }}, <span style="font-style:italic">{{item.country}}</span></p>
+{% elif item.city and not item.country %}
+  <p>{{ item.city }}</p>
+{% elif item.country and not item.city %}
+  <p><span style="font-style:italic">{{item.country}}</span></p>
+{% else %}
+  <p>Nuevo lugar</p>
+{% endif %}

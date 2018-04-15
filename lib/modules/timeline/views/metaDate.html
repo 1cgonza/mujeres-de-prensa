@@ -1,0 +1,12 @@
+{% if item.decade and item.year %}
+  {% set value = item.year | string %}
+  <p>{{ value.slice(2) | string }}'s</p>
+{% elif item.month and not item.year and item.month != 'empty' %}
+  <p>{{ item.month | title }}</p>
+{% elif item.year and not item.month or item.month == 'empty' and item.year %}
+  <p>{{ item.year }}</p>
+{% elif item.year > 0 and item.month %}
+  <p>{{ item.month }}, {{item.year}}</p>
+{% else %}
+  <p>Nueva fecha</p>
+{% endif %}

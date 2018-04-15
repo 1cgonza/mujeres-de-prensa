@@ -16,6 +16,7 @@ var apos = require('apostrophe')({
     'page-link-widgets': {},
     'illustrations-widgets': {},
     'cartographies-widgets': {},
+    'timeline': {},
     'cartography-pages': {
       extend: 'apostrophe-custom-pages',
       name: 'cartography',

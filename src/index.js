@@ -3,20 +3,18 @@ import Menu from './components/Menu';
 import Parallax from './components/Parallax';
 import req from './utils/req';
 
-function init() {
-  let menu = new Menu(document.getElementById('siteMenu'));
-  let parallax = new Parallax(document.querySelector('.parallax'));
-  let resizeTimer;
+let resizeTimer;
+let menu = new Menu(document.getElementById('siteMenu'));
+let parallax = new Parallax(document.querySelector('.parallax'));
 
-  if (document.body.classList.contains('ic')) {
-    let stage = document.getElementById('stage');
+if (document.body.classList.contains('ic')) {
+  let stage = document.getElementById('stage');
 
-    req('/assets/data/Mireya-temas.json').then(data => {
-      console.log(data);
-    }).catch(err => {
-      throw new Error(err);
-    });
-  }
+  req('/assets/data/Mireya-temas.json').then(data => {
+    console.log(data);
+  }).catch(err => {
+    throw new Error(err);
+  });
 }
 
 function onResize(event) {
@@ -41,5 +39,3 @@ window.addEventListener('resize', onResize, false);
 jQuery(document).ajaxComplete(function() {
   hidePreloader();
 });
-
-init();

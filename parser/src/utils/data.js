@@ -18,7 +18,7 @@ export const limits = {
   temas: {
     Mireya: 'H',
     AF: 'J',
-    MF: 'K',
+    MF: 'J',
     Verdad: 'J',
     Contrastes: 'J',
     Mujer: 'J'

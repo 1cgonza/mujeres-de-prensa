@@ -17,10 +17,8 @@ export default class Parallax {
 
     this.initStyles();
     this.getInnerGridsData();
-    this.setup();
 
     window.addEventListener('scroll', this.onScroll, false);
-    window.addEventListener('resize', this.setup, false);
   }
 
   onScroll = () => {
@@ -28,8 +26,14 @@ export default class Parallax {
     this.requestTick();
   };
 
-  setup() {
-    console.log('setup');
+  reset() {
+    if (this.container) {
+      this.innerGrids.fixedCols.forEach(fixed => {
+        fixed.style[transformProp] = 'translateY(0px)';
+      });
+      this.getInnerGridsData();
+      this.onScroll();
+    }
   }
 
   initStyles() {
@@ -97,7 +101,7 @@ export default class Parallax {
     });
 
     this.ticking = false;
-  }
+  };
 
   requestTick() {
     if (!this.ticking) {

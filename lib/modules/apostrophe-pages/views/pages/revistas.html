@@ -2,22 +2,21 @@
 {% extends "layout.html" %}
 
 {% block bodyClass %}{{'page-revistas'}}{% endblock %}
-{% set gridOuter = 'col1 m-100 t-50 d-50 ld-50' %}
 
 {% block main %}
 <main id="pageRevistas">
   <article class="contentWrapper parallax">
     <section class="pageIntro gridWrapper columns">
-      <div class="innerSection gridCol col1 m-100 t-60 d-50 ld-50">
+      <div class="innerSection gridCol col1 m-100 t-100 d-50 ld-50">
         <span class="deco decoTop"></span>
         <h1 class="title deco pageTitle center">{{data.page.title}}</h1>
         <span class="deco decoBottom"></span>
-        <div class="sectionContent contentBlock blockCenter m-80 t-70 d-70 ld-50">
+        <div class="sectionContent contentBlock blockCenter m-70 t-50 d-60 ld-50">
           {{ singletons.getTextBlock(data.page, 'pageIntroContent', 'Introduction') }}
         </div>
       </div>
 
-      <div class="innerSection gridCol fixedCol col1 m-100 t-40 d-50 ld-50">
+      <div class="innerSection gridCol gridColFixed fixedCol col2 m-100 t-100 d-50 ld-50">
         <div class="contentBackground">{{ singletons.getImageSection(data.page, 'introImg', 1, 'Add Image') }}</div>
       </div>
     </section>

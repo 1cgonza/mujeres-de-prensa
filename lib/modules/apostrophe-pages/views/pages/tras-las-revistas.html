@@ -5,16 +5,16 @@
 
 {% block main %}
 <main id="pageTrasRevistas">
-  <article class="contentWrapper sectionTras parallax">
+  <article class="contentWrapper parallax">
     <section class="pageIntro gridWrapper columns">
-      <div class="innerSection gridCol col1 ld-50">
+      <div class="innerSection gridCol col1 m-100 t-100 d-50 ld-50">
         <span class="titleDeco deco decoTop"></span>
         <h1 class="pageTitle center">{{data.page.title}}</h1>
         <span class="titleDeco deco decoBottom"></span>
-        <div class="sectionContent contentBlock blockCenter ld-50">{{ singletons.getTextBlock(data.page, 'pageIntroContent', 'Introduction') }}</div>
+        <div class="sectionContent contentBlock blockCenter m-70 t-50 d-60 ld-50">{{ singletons.getTextBlock(data.page, 'pageIntroContent', 'Introduction') }}</div>
       </div>
 
-      <div class="innerSection gridCol fixedCol col2 ld-50">
+      <div class="innerSection gridCol gridColFixed fixedCol col2 m-100 t-100 d-50 ld-50">
         <div class="contentBackground">{{ singletons.getImageSection(data.page, 'introImg', 1, 'Add Image') }}</div>
       </div>
     </section>

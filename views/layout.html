@@ -55,12 +55,19 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:200i,300,900|Playfair+Display:400,400i,700,700i|EB+Garamond:400,400i,700|Abril+Fatface|Pacifico" rel="stylesheet">
   {% endblock %}
 
+  {% set currentMpHome = '' %}
+  {% if (data.page.type == 'home') %}{% set currentMpHome = ' current' %}{% endif %}
+
   {% block beforeMain %}
     {% include "preloader.html" %}
     <div id="blackout" class="hidden"></div>
     <nav id="siteMenu" class="m-100 t-80 d-70 ld-50">
       <div id="siteMenuLinks">
-      <div id="primaryNav">{{ apos.area(data.global, 'navigation', {
+      <div id="primaryNav">
+      <a class="mpMenuWrapper pageLink{{currentMpHome}}" href="/mujeres-de-prensa">
+        <span class="mpMenuIcon deco"></span>
+      </a>
+      {{ apos.area(data.global, 'navigation', {
           widgets: {
             'page-link': {
               controls: {
@@ -69,7 +76,12 @@
             }
           }
         })
-      }}</div>
+      }}
+      <a class="piMenuWrapper pageLink" href="/">
+        <span class="piMenuIcon deco"></span>
+      </a>
+      
+      </div>
 
       <div id="secondaryNav" class="blockCenter">{{ apos.area(data.global, 'navigation2', {
           widgets: {
@@ -87,6 +99,8 @@
     <span id="siteMenuIcon" class="themeBgColor"></span>
   {% endblock %}
 
+  {% block mainAnchor %}{% endblock %}
+  
   {% block main %}
     {#
       Usually, your page templates in the apostrophe-pages module will override

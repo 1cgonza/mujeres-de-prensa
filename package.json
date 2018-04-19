@@ -15,7 +15,9 @@
   "author": "Juan Camilo González <info@juancgonzalez.com>",
   "license": "MIT",
   "dependencies": {
-    "apostrophe": "^2.47.0"
+    "apostrophe": "^2.47.0",
+    "slugg": "^1.2.1",
+    "svg.js": "^2.6.4"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.44",

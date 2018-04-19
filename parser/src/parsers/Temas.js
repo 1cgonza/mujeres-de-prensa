@@ -55,15 +55,17 @@ export default class Temas extends Base {
 
         Object.assign(ret, ref, meta);
 
-        if (!this.editions.hasOwnProperty(`ed${ret.ed}`)) {
-          this.editions[`ed${ret.ed}`] = [ret];
+        let edKey = Array.isArray(ret.ed) ? `ed${ret.ed.join('&')}` : `ed${ret.ed}`;
+
+        if (!this.editions.hasOwnProperty(edKey)) {
+          this.editions[edKey] = [ret];
         } else {
-          let matchArticle = this.editions[`ed${ret.ed}`].find((article, i) => {
+          let matchArticle = this.editions[edKey].find((article, i) => {
             if (article.ed === ret.ed && fuzz.ratio(article.title, ret.title) > 95) {
               if (isArray(article.category)) {
-                this.editions[`ed${ret.ed}`][i].category.push(ret.category);
+                this.editions[edKey][i].category.push(ret.category);
               } else {
-                this.editions[`ed${ret.ed}`][i].category = [article.category, ret.category];
+                this.editions[edKey][i].category = [article.category, ret.category];
               }
               console.log('repeated title', article, ret);
             }
@@ -71,7 +73,7 @@ export default class Temas extends Base {
             return false;
           });
 
-          this.editions[`ed${ret.ed}`].push(ret);
+          this.editions[edKey].push(ret);
         }
 
         return ret;
@@ -154,42 +156,68 @@ export default class Temas extends Base {
             }
           }
 
+          let missingEdHack = [];
+          let missingEdKey;
+
           for (let articleKey in titles) {
             let article = titles[articleKey];
+            let edKey = Array.isArray(article.ed) ? `ed${article.ed.join('&')}` : `ed${article.ed}`;
 
-            let match = cleanedData.find(article2 => {
-              if (article.ed !== article2.ed) {
+            // start new array with missing edition
+            if (!this.editions.hasOwnProperty(edKey)) {
+              console.error('Missing edition in titles database', edKey);
+              missingEdKey = edKey;
+              missingEdHack.push(article);
+            } else {
+              let match = this.editions[edKey].find(article2 => {
+                let ratio = fuzz.ratio(article2.title, article.title);
+
+                if (ratio === 100) {
+                  article2.genres = article.genres;
+                  return true;
+                } else if (ratio > 80) {
+                  this.setError({
+                    error: {
+                      warning: `These titles seem to match`,
+                      Generos: `${article.title}" - ${articleKey}`,
+                      Titulos: `${article2.title}" - ${article2.key}`
+                    }
+                  });
+
+                  return false;
+                }
+
                 return false;
-              }
+              });
 
-              let ratio = fuzz.ratio(article2.title, article.title);
-
-              if (ratio === 100) {
-                article2.genres = article.genres;
-                return true;
-              } else if (ratio > 80) {
+              // TODO: what to do with articles that have genre,
+              // but are excluded from the main titles, themes and categories table?
+              if (!match) {
                 this.setError({
                   error: {
-                    warning: `These titles seem to match`,
-                    Generos: `${article.title}" - ${articleKey}`,
-                    Titulos: `${article2.title}" - ${article2.key}`
+                    warning: `Orphan article from Genres in - ${articleKey}`,
+                    title: article.title
                   }
                 });
-
-                return false;
+                //console.log(article);
               }
-
-              return false;
-            });
-
-            // TODO: what to do with articles that have genre,
-            // but are excluded from the main titles, themes and categories table?
-            if (!match) {
-              //console.log(article);
             }
           }
 
-          resolve(cleanedData);
+          if (missingEdHack.length && missingEdKey) {
+            this.editions[missingEdKey] = missingEdHack;
+          }
+
+          for (let ed in this.editions) {
+            this.editions[ed].sort((a, b) => {
+              let pgA = a.hasOwnProperty('pages') ? a.pages[0] : 99999;
+              let pgB = b.hasOwnProperty('pages') ? b.pages[0] : 99999;
+
+              return pgA - pgB;
+            });
+          }
+
+          resolve(this.editions);
         }
       });
     });

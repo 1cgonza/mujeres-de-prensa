@@ -1,0 +1,10 @@
+{% import "macros/singletons.html" as singletons %}
+
+{% set img = apos.images.first(data.widget.pageImg) %}
+
+<a class="pageLink" href="{{ data.widget._page._url }}">
+  <span class="pageName absoluteCenter">{{ data.widget._page.title }}</span>
+</a>
+<div class="contentBackground">
+  {{ singletons.getImageSection(data.widget, 'pageImg', 1, 'Add page image', 'Edit page image') }}
+</div>

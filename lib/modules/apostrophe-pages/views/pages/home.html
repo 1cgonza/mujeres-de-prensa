@@ -6,10 +6,13 @@
 <main>
   <span id="homeIcon" class="deco absoluteCenter"></span>
   <div class="homeMenuWrapper">
-    <a class="homeLink ld-50"></a>
-    <a class="homeLink ld-50"></a>
-    <a class="homeLink ld-50"></a>
-    <a class="homeLink ld-50"></a>
+    {{
+      apos.area(data.page, 'pages', {
+        widgets: {
+          'home-menu': {}
+        }
+      })
+    }}
   </div>
   <div class="contentBackground">
     {{ singletons.getImageSection(data.page, 'homeBg', 1, 'Background Image') }}

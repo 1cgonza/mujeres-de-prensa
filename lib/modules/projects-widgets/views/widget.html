@@ -1,0 +1,15 @@
+{% import "macros/singletons.html" as singletons %}
+
+{% set img = apos.images.first(data.widget.projectImg) %}
+{% set target = 'target=_self' %}
+{% if data.widget.linkOut %}{% set target = 'target=_blank' %}{% endif %}
+
+{% if data.widget.link %}
+  <a class="projectsItem" {{target}} href="{{data.widget.link}}">
+    <img src="/uploads/attachments/{{img._id}}-{{img.name}}.full.{{img.extension}}" />
+  </a>
+{% else %}
+  <span class="projectsItem">
+    <img src="/uploads/attachments/{{img._id}}-{{img.name}}.full.{{img.extension}}" />
+  </span>
+{% endif %}

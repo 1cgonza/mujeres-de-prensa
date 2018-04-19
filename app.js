@@ -11,7 +11,10 @@ var apos = require('apostrophe')({
         secret: 'p@s@d0'
       }
     },
+    'home-menu-widgets': {},
     'profiles-widgets': {},
+    'credits-widgets': {},
+    'projects-widgets': {},
     'magazines-widgets': {},
     'page-link-widgets': {},
     'illustrations-widgets': {},

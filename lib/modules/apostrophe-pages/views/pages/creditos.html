@@ -1,0 +1,40 @@
+{% import "macros/singletons.html" as singletons %}
+
+{% extends "layout.html" %}
+
+{% block bodyClass%}creditos{% endblock %}
+
+{% block main %}
+<main>
+  <article class="contentWrapper">
+    <section class="creditsContent blockCenter m-90 t-80 d-70 ld-70">
+      <h1 class="pageTitle">{{data.page.title}}</h1>
+      {{
+        apos.area(data.page, 'credits', {
+          widgets: {
+            'credits': {}
+          }
+        })
+      }}
+    </section>
+
+    <section class="creditsContact">
+      {{ singletons.getTextBlock(data.page, 'contact', 'Contacto') }}
+
+      <div class="creditsLogos">
+        {{
+          apos.area(data.page, 'logos', {
+            widgets: {
+              'projects': {}
+            }
+          })
+        }}
+      </div>
+    </section>
+
+    <section class="creditsFooter">
+    {{ singletons.getMinimalTextBlock(data.page, 'legal', 'Créditos legales') }}
+    </section>
+  </article>
+</main>
+{% endblock %}

@@ -1,0 +1,54 @@
+{% import "macros/singletons.html" as singletons %}
+
+<div class="creditItem">
+  <div class="creditName">
+  {{ apos.singleton(data.widget, 'name', 'apostrophe-rich-text', {
+      addLabel: 'Name',
+      editLabel: 'Edit name',
+      toolbar: [ 'Bold', 'Italic', '-', 
+              'Link', 'Unlink', 'Anchor', '-',
+              'BulletedList', 'NumberedList',  '-',
+              'Undo', 'Redo', '-',
+              'Sourcedialog'
+              ],
+      controls: {
+        movable: false
+      }
+    })
+  }}
+  </div>
+  <div class="creditRole">
+  {{ apos.singleton(data.widget, 'role', 'apostrophe-rich-text', {
+      addLabel: 'Role',
+      editLabel: 'Edit role',
+      toolbar: [ 'Bold', 'Italic', '-', 
+              'Link', 'Unlink', 'Anchor', '-',
+              'BulletedList', 'NumberedList',  '-',
+              'Undo', 'Redo', '-',
+              'Sourcedialog'
+              ],
+      controls: {
+        position: 'bottom-right',
+        movable: false
+      }
+    })
+  }}
+  </div>
+  <div class="creditDescription">
+  {{ apos.singleton(data.widget, 'description', 'apostrophe-rich-text', {
+      addLabel: 'Description',
+      editLabel: 'Edit description',
+      toolbar: [ 'Bold', 'Italic', '-', 
+              'Link', 'Unlink', 'Anchor', '-',
+              'BulletedList', 'NumberedList',  '-',
+              'Undo', 'Redo', '-',
+              'Sourcedialog'
+              ],
+      controls: {
+        position: 'top-right',
+        movable: false
+      }
+    })
+  }}
+  </div>
+</div>

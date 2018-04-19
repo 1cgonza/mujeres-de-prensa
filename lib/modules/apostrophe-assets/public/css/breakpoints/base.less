@@ -218,7 +218,7 @@ ol {
 .fullViewImage {
   .apos-slideshow-item {
     background-size: contain;
-    height: 100vh;
+    height: 85vh;
 
     img {
       height: 100%;
@@ -227,6 +227,10 @@ ol {
       display: block;
     }
   }
+}
+
+a.projectsItem, a.projectsItem:visited {
+  border: none;
 }
 
 /************************************************
@@ -256,58 +260,83 @@ ol {
     #primaryNav {
       margin-left: 15%;
 
+      a.pageLink, a.pageLink:active {
+        color: black;
+        border: 3px solid @siteBlack;
+        padding: 0.75em;
+
+        &:hover, &:focus, &.current {
+          border: 3px dotted;
+        }
+      }
+
+      .mpMenuWrapper, .piMenuWrapper {
+        display: block;
+        width: 55px;
+        height: 55px;
+        padding: .3em !important;
+        margin-left: 30px;
+      }
+
+      .mpMenuIcon {
+        background-image: url(../assets/ui/ornamentos/IconoHomeMujeres.svg);
+        width: 40px;
+        height: 40px;
+      }
+
+      .piMenuIcon {
+        background-image: url(../assets/ui/ornamentos/IconoHomePasado.svg);
+        width: 40px;
+        height: 40px;
+      }
+
       .linkEle {
         padding: 1em 0;
 
-        a.pageLink, a.pageLink:active {
-          color: black;
-          border: 3px solid @siteBlack;
-          padding: 0.75em;
-
-          &:hover, &:focus, &.current {
-            border: 3px dotted;
-          }
-        }
-
-        &:nth-child(7n+1) {
+        &:nth-child(8n+1) {
           .fontLight;
           text-transform: uppercase;
         }
 
-        &:nth-child(7n+2) {
+        &:nth-child(8n+2) {
           .fontLight;
           font-weight: 900;
           letter-spacing: 0.8px;
         }
 
-        &:nth-child(7n+3) {
+        &:nth-child(8n+3) {
           .fontLight;
           font-weight: 900;
           letter-spacing: 0.8px;
           text-transform: uppercase;
         }
 
-        &:nth-child(7n+4) {
+        &:nth-child(8n+4) {
           .fontLight;
           text-transform: uppercase;
           font-weight: 100;
           font-style: italic;
         }
 
-        &:nth-child(7n+5) {
+        &:nth-child(8n+5) {
           .fontLight;
           font-weight: 900;
         }
 
-        &:nth-child(7n+6) {
+        &:nth-child(8n+6) {
           .fontLight;
           font-weight: 100;
           font-style: italic;
         }
 
-        &:nth-child(7n+7) {
+        &:nth-child(8n+7) {
           .fontIndex;
           font-style: italic;
+        }
+
+        &:nth-child(8n+8) {
+          .fontLight;
+          font-weight: 900;
         }
       }
     }
@@ -414,6 +443,55 @@ ol {
 /********************* End Menu *********************/
 
 /************************************************
+|           Pre Home                            |
+************************************************/
+.piHome {
+  #siteMenuIcon, #siteMenu {
+    display: none;
+  }
+
+  #projectLogo {
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 8em;
+  }
+
+  .siteDescription {
+    color: whitesmoke;
+    background-color: #231f20;
+    -webkit-order: 0;
+    -ms-flex-order: 0;
+    order: 0;
+
+    .sectionContent {
+      padding: 5em 0;
+      line-height: 2;
+    }
+  }
+
+  .projects {
+    -webkit-order: 1; 
+    -ms-flex-order: 1; 
+    order: 1;
+    background-color: #231f20;
+    background-image: url("data:image/svg+xml,%3Csvg width='30' height='30' viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 10h10v10H0V10zM10 0h10v10H10V0z' fill='%23ffffff' fill-opacity='1' fill-rule='evenodd'/%3E%3C/svg%3E");
+    
+    .projectsItem {
+      width: 100%;
+      display: block;
+      line-height: 0;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  
+  }
+}
+/********************* End Pre Home *********************/
+
+/************************************************
 |           Home                                |
 ************************************************/
 .mpHome {
@@ -427,39 +505,55 @@ ol {
   .contentBackground {
     height: 100vh;
     overflow: hidden;
-    z-index: 1;
+    z-index: -1;
   }
 
   .homeMenuWrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
     z-index: 2;
+    font-size: 0;
 
-    & > a {
+    .linkEle {
+      .transition(opacity, 0.4s, ease-in-out);
+      display: inline-block;
+      opacity: 0;
+      width: 50%;
       height: 50vh;
-
-      &:nth-child(1) {
-        background-color: @siteBlue;
-      }
-
-      &:nth-child(2) {
-        background-color: @sitePurple;
-      }
-
-      &:nth-child(3) {
-        background-color: @siteMustard;
-      }
-
-      &:nth-child(4) {
-        background-color: @siteRed;
-      }
+      z-index: 3;
 
       &:hover {
-        opacity: 0.5;
+        opacity: 1;
       }
+    }
+
+    .pageLink {
+      .fontLight;
+      text-transform: uppercase;
+      position: absolute;
+      z-index: 4;
+      height: 50vh;
+      width: 100%;
+      font-size: 0;
+    }
+
+    a.pageLink, a.pageLink:visited {
+      border: 0;
+
+      &:hover, &:focus {
+        font-size: 16px;
+      }
+    }
+
+    .contentBackground {
+      width: 100%;
+      height: 50vh;
+      z-index: 2;
+    }
+
+    .pageName {
+      text-align: center;
+      line-height: 1.2;
+      width: 80%;
+      color: white !important;
     }
   }
 }
@@ -481,6 +575,7 @@ ol {
     z-index: 0;
   }
 }
+
 .themeSection {
   .imageSection{
     line-height: 0;
@@ -641,6 +736,7 @@ ol {
       .sectionQuote {
         font-size: 2em;
         padding: 2em 0;
+        line-height: 1.5;
       }
     }
   }
@@ -703,6 +799,95 @@ ol {
 }
 
 /********************* End Theme Section *********************/
+
+/************************************************
+|          Creditos                             |
+************************************************/
+.creditos {
+  section {
+    min-height: auto;
+  }
+  .contentWrapper {
+    background-image: url(../assets/ui/ornamentos/creditos_deco.svg);
+    min-height: 100vh;
+    background-repeat: no-repeat;
+    background-position: 4em 1em;
+    background-size: 25px;
+  }
+
+  .creditsContent {
+    text-align: right;
+    background-color: rgba(255,255,255,0.8);
+    padding-bottom: 5em;
+
+    .pageTitle {
+      .fontFat;
+      padding-top: 5em;
+    }
+
+    .creditItem {
+      margin: 2.5em 0;
+
+      .creditName {
+        line-height: 1.5;
+        margin-bottom: .5em;
+      }
+
+      .creditRole {
+        .fontSub;
+        font-weight: 700;
+        font-variant: small-caps;
+        font-size: 1.2em;
+        margin-bottom: .5em;
+      }
+
+      .creditDescription {
+        font-style: italic;
+        font-size: 0.9em;
+        line-height: 1.5;
+        color: rgb(145, 145, 145);
+      }
+    }
+  }
+
+  .creditsContact {
+    color: white;
+    background-color: #000;
+    padding: 4em;
+    font-weight: 100;
+    font-size: 0.9em;
+    line-height: 1.3;
+
+    .creditsLogos {
+      margin-top: 2em;
+
+      .apos-area-widget-wrapper {
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 2em;
+
+        .projectsItem {
+          line-height: 0;
+
+          img {
+            width: auto;
+            height: 60px;
+          }
+        }
+      }
+    }
+  }
+
+  .creditsFooter {
+    .fontThin;
+    color: white;
+    background-color: rgb(77, 77, 77);
+    padding: 4em;
+    font-size: .8em;
+    line-height: 1.5;
+  }
+}
+/********************* End creditos *********************/
 
 /************************************************
 |           Acerca de                           |
@@ -1035,6 +1220,14 @@ ol {
       padding: 7em 0;
     }
   }
+}
+
+#stage {
+ svg {
+   .absoluteCenter;
+    display: inline-block;
+    vertical-align: top;
+ }
 }
 
 /********************* End Cartografías *********************/

@@ -166,6 +166,6 @@ export default class Timeline extends Base {
     };
     ele.onmouseleave = (event) => {
       extra.style.height = 0;
-    }
+    };
   }
 }

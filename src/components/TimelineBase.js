@@ -91,7 +91,7 @@ export default class {
       return directors.join(', ');
     }
 
-    return [];
+    return '';
   }
 
   parsePlace(arr) {

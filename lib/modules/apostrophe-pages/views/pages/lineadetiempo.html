@@ -1,6 +1,17 @@
 {% extends 'layout.html' %}
+
+{% block bodyClass%}pageTimeline{% endblock %}
+
 {% block main %}
-<main>
-Linea de tiempo
+<main id="timelineContainer">
+  <div class="headerWrapper gridWrapperMiddle">
+    <span class="deco decoTitle decoTop"></span>
+    <h1 class="pageTitle">{{data.page.title}}</h1>
+    <span class="deco decoTitle decoBottom"></span>
+  </div>
+  <div id="timelineYears"></div>
+  <div id="timelineEvents"></div>
+  {{ apos.singleton(data.page, 'timeline', 'timeline') }}
+
 </main>
 {% endblock %}

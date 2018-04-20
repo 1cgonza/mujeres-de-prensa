@@ -1,6 +1,7 @@
 import { shims, loop, transformProp } from './utils/shims';
 import Menu from './components/Menu';
 import Parallax from './components/Parallax';
+import Timeline from './components/Timeline';
 import req from './utils/req';
 import {months} from './utils/months';
 import svg from 'svg.js';
@@ -9,8 +10,13 @@ import slug from 'slugg';
 let resizeTimer;
 let menu = new Menu(document.getElementById('siteMenu'));
 let parallax = new Parallax(document.querySelector('.parallax'));
+let bodyClasses = document.body.classList;
 
-if (document.body.classList.contains('ic')) {
+if (bodyClasses.contains('pageTimeline')) {
+  new Timeline(document.getElementById('timelineContainer'));
+}
+
+if (bodyClasses.contains('ic')) {
   let stage = document.getElementById('stage');
   let pad = 140;
   let stageW = window.innerWidth - pad;
@@ -27,7 +33,6 @@ if (document.body.classList.contains('ic')) {
   let nodeSize = 5;
 
   req('/assets/data/Mireya-temas.json').then(data => {
-    console.log(data);
     let db = Object.keys(data).sort((a, b) => {
       let edA = Array.isArray(data[a][0].ed) ? data[a][0].ed[0] : data[a][0].ed;
       let edB = Array.isArray(data[b][0].ed) ? data[b][0].ed[0] : data[b][0].ed;
@@ -202,3 +207,4 @@ window.addEventListener('resize', onResize, false);
 jQuery(document).ajaxComplete(function() {
   hidePreloader();
 });
+

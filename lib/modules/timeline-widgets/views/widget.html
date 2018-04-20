@@ -1,0 +1,15 @@
+{% for piece in data.widget._pieces %}
+  <span class="timelineEvent {{piece.eventType}}"
+    data-title="{{piece.title}}"
+    {% if piece.eventType != "empty" %}data-event-type="{{piece.eventType}}"{% endif %}
+    {% if piece.dateInit.length %}data-date-init="{{piece.dateInit | dump}}"{% endif %}
+    {% if piece.dateEnd.length %}data-date-end="{{piece.dateEnd | dump}}"{% endif %}
+    {% if piece.periodicity %}data-periodicity="{{piece.periodicity}}"{% endif %}
+    {% if piece.distribution %}data-distribution="{{piece.distribution}}"{% endif %}
+    {% if piece.director.length %}data-director="{{piece.director | dump}}"{% endif %}
+    {% if piece.place.length %}data-place="{{piece.place | dump}}"{% endif %}
+    {% if piece.filiation %}data-filiation="{{piece.filiation}}"{% endif %}
+    {% if piece.filiation %}data-audience="{{piece.audience}}"{% endif %}
+  >
+  </span>
+{% endfor %}

@@ -1,0 +1,24 @@
+{% import "macros/singletons.html" as singletons %}
+
+{% extends "layout.html" %}
+
+{% block bodyClass%}contactos{% endblock %}
+
+{% block main %}
+<main>
+  <article class="contentWrapper">
+    <section class="contactsContent blockCenter m-90 t-80 d-70 ld-70">
+      <h1 class="pageTitle">{{data.page.title}}</h1>
+      <div class="contactsIntro contentBlock blockCenter m-100 t-100 d-50 ld-50">{{ singletons.getTextBlock(data.page, 'contactIntro', 'Introduction') }}
+    </section>
+
+    <section class="contactsContact">
+      {{ singletons.getTextBlock(data.page, 'contact', 'Contact') }}
+    </section>
+
+    <section class="contactsFooter">
+    {{ singletons.getMinimalTextBlock(data.page, 'legal', 'Legal Credits') }}
+    </section>
+  </article>
+</main>
+{% endblock %}

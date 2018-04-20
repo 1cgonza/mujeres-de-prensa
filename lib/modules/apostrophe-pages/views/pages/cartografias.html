@@ -29,6 +29,24 @@
       })
     }}
 
+    <section id="infographics">
+      <div class="gridWrapperMiddle gridJustifySpaceBetween topWrapper">
+        <span class="deco topDeco topDecoLeft"></span>
+        <span class="sectionTopTitle">{{ singletons.getMinimalTextBlock(data.page, 'sectionTitle2', 'Section Title') }}</span>
+        <span class="deco topDeco topDecoRight"></span>
+      </div>
+      <div class="sectionTitle">{{ singletons.getTextBlock(data.page, 'infographicsTitle', 'Title') }}</div>
+      <div class="sectionAuthor">{{ singletons.getTextBlock(data.page, 'infographicsAuthor', 'Author') }}</div>      
+      <span class="deco bottomDeco"></span>
+      <div class="galleryWrapper">{{
+        apos.area(data.page, 'infographics', {
+          widgets: {
+            'gallery': {}
+          }
+        })
+      }}</div>
+    </section>
+
   </article>
 </main>
 {% endblock %}

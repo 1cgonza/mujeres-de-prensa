@@ -112,6 +112,17 @@ a, a:visited {
   border: 1px transparent;
   transition: all 0.25s ease-in-out;
 
+  &[name] {
+    color: initial;
+    border: 0;
+    cursor: default;
+
+    &:hover, &:focus {
+      border: 0;
+      color: initial;
+    }
+  }
+
   &:hover, &:focus {
     color: lighten(@linkColor, 20%);
     border-top: 1px solid;
@@ -122,6 +133,17 @@ a, a:visited {
 .bgColorBlock, .sectionIndex {
   a, a:visited {
     color: @siteBlack;
+
+    &[name] {
+      color: white;
+      border: 0;
+      cursor: default;
+
+      &:hover, &:focus {
+        border: 0;
+        color: white;
+      }
+    }
 
     &:hover, &:focus {
       color: @siteBlack;
@@ -289,13 +311,13 @@ a.projectsItem, a.projectsItem:visited {
       }
 
       .mpMenuIcon {
-        background-image: url(../assets/ui/ornamentos/IconoHomeMujeres.svg);
+        background-image: url('@{ornamentsUrl}IconoHomeMujeres.svg');
         width: 40px;
         height: 40px;
       }
 
       .piMenuIcon {
-        background-image: url(../assets/ui/ornamentos/IconoHomePasado.svg);
+        background-image: url('@{ornamentsUrl}IconoHomePasado.svg');
         width: 40px;
         height: 40px;
       }
@@ -415,7 +437,7 @@ a.projectsItem, a.projectsItem:visited {
 }
 
 #siteMenuIcon {
-  background-image: url(../assets/ui/menuOrnament.svg);
+  background-image: url('@{ornamentsUrl}menuOrnament.svg');
   background-repeat: no-repeat;
   background-size: 80%;
   background-position: center;
@@ -506,7 +528,7 @@ a.projectsItem, a.projectsItem:visited {
 ************************************************/
 .mpHome {
   #homeIcon {
-    background-image: url(../assets/ui/ornamentos/Home_icon.svg);
+    background-image: url('@{ornamentsUrl}Home_icon.svg');
     height: 150px;
     width: 150px;
     z-index: 3;
@@ -685,7 +707,7 @@ a.projectsItem, a.projectsItem:visited {
       }
 
       .indexWrapper {
-        background-image: url(../assets/ui/calle/Calle_fondo_marco.svg);
+        background-image: url('@{ornamentsUrl}Calle_fondo_marco.svg');
         background-repeat: no-repeat;
         background-size: 100% 100%;
         min-height: 40vh;
@@ -818,7 +840,7 @@ a.projectsItem, a.projectsItem:visited {
     min-height: auto;
   }
   .contentWrapper {
-    background-image: url(../assets/ui/ornamentos/creditos_deco.svg);
+    background-image: url('@{ornamentsUrl}creditos_deco.svg');
     min-height: 100vh;
     background-repeat: no-repeat;
     background-position: 4em 1em;
@@ -908,7 +930,7 @@ a.projectsItem, a.projectsItem:visited {
   }
 
   .contentWrapper {
-    background-image: url(../assets/ui/ornamentos/Contacto_linea.svg);
+    background-image: url('@{ornamentsUrl}Contacto_linea.svg');
     min-height: 100vh;
     background-repeat: no-repeat;
     background-position: 4em 1em;
@@ -926,7 +948,7 @@ a.projectsItem, a.projectsItem:visited {
     }
 
     .contactsIntro {
-      background-image: url(../assets/ui/ornamentos/Contacto_marco.svg);
+      background-image: url('@{ornamentsUrl}Contacto_marco.svg');
       min-height: 40vh;
       padding: 3em;
       margin: 3em 0;
@@ -958,7 +980,7 @@ a.projectsItem, a.projectsItem:visited {
 ************************************************/
 #pageAcerca {
   .pageDeco {
-    background-image: url(../assets/ui/acerca/Acerca_deco.svg);
+    background-image: url('@{ornamentsUrl}Acerca_deco.svg');
     height: 50px;
     margin-top: 6em;
   }
@@ -989,7 +1011,7 @@ a.projectsItem, a.projectsItem:visited {
     .pageTitleBlock {
       width: 40vh;
       height: 40vh;
-      background-image: url(../assets/ui/ornamentos/Reseñas_marcoTitulo.svg);
+      background-image: url('@{ornamentsUrl}Reseñas_marcoTitulo.svg');
       background-repeat: no-repeat;
       background-size: cover;
     }
@@ -1017,7 +1039,7 @@ a.projectsItem, a.projectsItem:visited {
       }
 
       .titleDeco {
-        background-image: url(../assets/ui/ornamentos/Reseñas_ornamentoTitulo.svg);
+        background-image: url('@{ornamentsUrl}Reseñas_ornamentoTitulo.svg');
         height: 15px;
         margin: 1em 0;
       }
@@ -1073,7 +1095,7 @@ a.projectsItem, a.projectsItem:visited {
     }
 
     .decoTop, .decoBottom {
-      background-image: url(../assets/ui/ornamentos/RevistasTituloBarra.svg);
+      background-image: url('@{ornamentsUrl}RevistasTituloBarra.svg');
       height: 14px;
     }
 
@@ -1086,7 +1108,7 @@ a.projectsItem, a.projectsItem:visited {
     }
 
     .title {
-      background-image: url(../assets/ui/ornamentos/RevistasTituloMarco.svg);
+      background-image: url('@{ornamentsUrl}RevistasTituloMarco.svg');
       height: 91px;
       padding-top: 1em;
       font-size: 1.8em;
@@ -1125,13 +1147,13 @@ a.projectsItem, a.projectsItem:visited {
     }
 
     .decoBottom {
-      background-image: url(../assets/ui/ornamentos/Revistas_deco_subtitulo.svg);
+      background-image: url('@{ornamentsUrl}Revistas_deco_subtitulo.svg');
       height: 35px;
       margin-bottom: 1em;
     }
 
     .titleDeco {
-      background-image: url(../assets/ui/ornamentos/Revistas_titleDeco.svg);
+      background-image: url('@{ornamentsUrl}Revistas_titleDeco.svg');
       height: 10px;
       width: 33%;
 
@@ -1171,7 +1193,7 @@ a.projectsItem, a.projectsItem:visited {
     }
 
     .titleDeco {
-      background-image: url(../assets/ui/tras/Tras_deco_titulo.svg);
+      background-image: url('@{ornamentsUrl}Tras_deco_titulo.svg');
       height: 50px;
 
       &.decoBottom {
@@ -1197,7 +1219,7 @@ a.projectsItem, a.projectsItem:visited {
 
   .profileSection {
     .titleDeco {
-      background-image: url(../assets/ui/tras/TrasRevistas_Titulo_deco1.svg);
+      background-image: url('@{ornamentsUrl}TrasRevistas_Titulo_deco1.svg');
       height: 40px;
     }
 
@@ -1235,7 +1257,7 @@ a.projectsItem, a.projectsItem:visited {
     }
 
     .decoBottom {
-      background-image: url(../assets/ui/tras/TrasRevistas_Titulo_deco2.svg);
+      background-image: url('@{ornamentsUrl}TrasRevistas_Titulo_deco2.svg');
       height: 20px;
     }
 
@@ -1264,12 +1286,12 @@ a.projectsItem, a.projectsItem:visited {
     padding-top: 10em;
 
     .decoTop {
-      background-image: url(../assets/ui/ornamentos/Carto_title_deco1.svg);
+      background-image: url('@{ornamentsUrl}Carto_title_deco1.svg');
       height: 125px;
     }
 
     .decoBottom {
-      background-image: url(../assets/ui/ornamentos/Carto_title_deco2.svg);
+      background-image: url('@{ornamentsUrl}Carto_title_deco2.svg');
       height: 125px;
     }
 
@@ -1296,7 +1318,7 @@ a.projectsItem, a.projectsItem:visited {
   }
 
   .topDeco {
-    background-image: url(../assets/ui/ornamentos/Carto_header.svg);
+    background-image: url('@{ornamentsUrl}Carto_header.svg');
     height: 30px;
     width: 40%;
   }
@@ -1324,23 +1346,39 @@ a.projectsItem, a.projectsItem:visited {
   }
 
   .bottomDeco {
-    background-image: url(../assets/ui/ornamentos/Carto_title2.svg);
+    background-image: url('@{ornamentsUrl}Carto_title2.svg');
     height: 30px;
   }
-}
 
-#infographics {
   .galleryWrapper {
-    .apos-area-widgets, .apos-area {
-      .gridWrapper;
+    .projectsItem {
+      width: 50%;
+      display: block;
+      margin: 3em auto;
+      border: 5px dotted black;
+      padding: 1em;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
     }
   }
+}
 
-  .galleryEle {
+.gallery {
+  figure {
     border: 6px solid;
     margin: 5%;
+    line-height: 0;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
   }
 }
+
 /********************* End Cartografías *********************/
 
 #stage {
@@ -1363,7 +1401,7 @@ a.projectsItem, a.projectsItem:visited {
     }
 
     .decoTitle {
-      background-image: url(../assets/ui/ornamentos/Timline_title.svg);
+      background-image: url('@{ornamentsUrl}Timline_title.svg');
       height: 30px;
       width: 135px;
     }
@@ -1453,7 +1491,7 @@ a.projectsItem, a.projectsItem:visited {
     .hito {
       &::before {
         content: '';
-        background-image: url(../assets/ui/ornamentos/Timline_hito.svg);
+        background-image: url('@{ornamentsUrl}Timline_hito.svg');
         background-repeat: no-repeat;
         height: 22px;
         margin: 1em 0 .5em;
@@ -1470,13 +1508,13 @@ a.projectsItem, a.projectsItem:visited {
       }
 
       .line {
-        background-image: url(../assets/ui/ornamentos/Timeline_pub.svg);
+        background-image: url('@{ornamentsUrl}Timeline_pub.svg');
         height: 6px;
         margin-right: 6px;
       }
 
       .init {
-        background-image: url(../assets/ui/ornamentos/Timeline_init.svg);
+        background-image: url('@{ornamentsUrl}Timeline_init.svg');
         background-repeat: no-repeat;
         height: 12px;
         width: 12px;
@@ -1484,7 +1522,7 @@ a.projectsItem, a.projectsItem:visited {
       }
 
       .end {
-        background-image: url(../assets/ui/ornamentos/Timeline_end.svg);
+        background-image: url('@{ornamentsUrl}Timeline_end.svg');
         background-repeat: no-repeat;
         height: 12px;
         width: 12px;
@@ -1493,7 +1531,7 @@ a.projectsItem, a.projectsItem:visited {
 
     .periodoHis {
       .line {
-        background-image: url(../assets/ui/ornamentos/Timeline_hist.svg);
+        background-image: url('@{ornamentsUrl}Timeline_hist.svg');
       }
     }
   }

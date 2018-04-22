@@ -1,5 +1,20 @@
 {% import 'macros/singletons.html' as singletons %}
+{% set images = apos.images.all(data.widget) %}
+{% set class = data.options.grid or ''%}
 
-<div class="galleryImg">
-  {{ singletons.getImageSection(data.widget, 'galleryImg', 1, 'Image') }}
-</div>
+{% if images %}
+  <div class="gallery gridWrapper" itemscope itemtype="http://schema.org/ImageGallery">
+  {% for img in images%}
+    <figure class="{{class}}" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+      <a href="{{ apos.attachments.url(img, {size: 'full'}) }}"
+        itemprop="contentUrl"
+        data-size="{{img.width}}x{{img.height}}"
+      >
+        <img src="{{ apos.attachments.url(img, {size: 'one-half'}) }}"
+          itemprop="thumbnail"
+          alt="" />
+      </a>
+    </figure>
+  {% endfor %}
+  </div>
+{% endif %}

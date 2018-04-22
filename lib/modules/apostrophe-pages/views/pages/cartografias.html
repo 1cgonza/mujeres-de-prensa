@@ -6,7 +6,6 @@
 {% block main %}
 <main id="pageCartografias">
   <article class="contentWrapper parallax">
-
     <section class="landingSection">
       <div class="pageTitleBlock">
         <span class="deco decoTop"></span>
@@ -19,15 +18,23 @@
       </div>
     </section>
 
-    {{
-      apos.area(data.page, 'cartographies', {
+    <section id="cartos">
+      <div class="gridWrapperMiddle gridJustifySpaceBetween topWrapper">
+        <span class="deco topDeco topDecoLeft"></span>
+        <span class="sectionTopTitle">{{ singletons.getMinimalTextBlock(data.page, 'sectionTitle1', 'Section Title') }}</span>
+        <span class="deco topDeco topDecoRight"></span>
+      </div>
+      <div class="sectionTitle">{{ singletons.getTextBlock(data.page, 'cartosTitle', 'Title') }}</div>
+      <div class="sectionAuthor">{{ singletons.getTextBlock(data.page, 'cartosAuthor', 'Author') }}</div>      
+      <span class="deco bottomDeco"></span>
+      <div class="galleryWrapper">{{
+      apos.area(data.page, 'carto', {
         widgets: {
-          'cartographies': {
-            sectionName: data.page.title
-          }
+          'projects': {}
         }
       })
-    }}
+    }}</div>
+    </section>
 
     <section id="infographics">
       <div class="gridWrapperMiddle gridJustifySpaceBetween topWrapper">
@@ -41,12 +48,15 @@
       <div class="galleryWrapper">{{
         apos.area(data.page, 'infographics', {
           widgets: {
-            'gallery': {}
+            'gallery': {
+              grid: 'm-90 t-90 d-40 ld-40'
+            }
           }
         })
       }}</div>
     </section>
-
   </article>
+  {# Include gallery HTML skin in pages that use the gallery widget #}
+  {% include 'gallery.html' %}
 </main>
 {% endblock %}

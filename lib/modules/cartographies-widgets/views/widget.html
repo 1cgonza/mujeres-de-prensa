@@ -1,5 +1,11 @@
 {% import "macros/singletons.html" as singletons %}
 
 <section class="cartographiesSection gridWrapper columns">
-  
+  {{
+      apos.area(data.page, 'carto', {
+        widgets: {
+          'projects': {}
+        }
+      })
+    }}
 </section>

@@ -212,6 +212,43 @@ export default class Base {
     return arr;
   }
 
+  getVols(base, totalRows) {
+    base.forEach((obj, i) => {
+      let meta = this.meta.find(d => {
+        let edMeta = isArray(d.ed) ? d.ed[0] : d.ed;
+        let edVols = isArray(obj.ed) ? obj.ed[0] : obj.ed;
+
+        return edMeta === edVols;
+      });
+      let newObj = {
+        rows: [obj.row]
+      };
+
+      if (obj.row < totalRows && i < base.length - 1) {
+        if (obj.row === base[i + 1].row - 1) {
+          newObj.rows[1] = obj.row;
+        } else {
+          newObj.rows[1] = base[i + 1].row - 1;
+        }
+      } else {
+        newObj.rows[1] = totalRows;
+      }
+
+      if (meta) {
+        Object.assign(newObj, meta);
+      } else {
+        this.setError({
+          error: `Can't find meta information for edition: ${obj.value}`,
+          globalMeta: this.meta,
+          stop: true
+        });
+      }
+      base[i] = newObj;
+    });
+
+    return base;
+  }
+
   validateNumber(str) {
     if (!isNaN(str)) {
       return +str;

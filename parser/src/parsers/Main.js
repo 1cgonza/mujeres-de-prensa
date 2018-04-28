@@ -1,6 +1,5 @@
 import { limits } from '../utils/data';
 import Temas from './Temas';
-import Palabras from './Palabras';
 import Lugares from './Lugares';
 
 export default class Parser {
@@ -44,15 +43,11 @@ export default class Parser {
       case 'temas':
         sheetNames = this.rawData.SheetNames.filter(el => el.indexOf('temas') < 0);
         this.manager = new Temas(this.tableName);
-        break;
-      case 'palabras':
-        this.manager = new Palabras(this.tableName);
+        this.displaySheets(sheetNames);
         break;
       case 'lugares':
-        this.manager = new Lugares(this.tableName);
+        this.manager = new Lugares(this.tableName, this.rawData, this.meta);
         break;
     }
-
-    this.displaySheets(sheetNames);
   }
 }

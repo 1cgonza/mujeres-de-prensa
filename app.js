@@ -20,6 +20,8 @@ var apos = require('apostrophe')({
     'gallery-widgets': {},
     'illustrations-widgets': {},
     'cartographies-widgets': {},
+    'contact-form': {},
+    'contact-form-widgets': {},
     'timeline': {},
     'timeline-widgets': {
       extend: 'apostrophe-pieces-widgets',

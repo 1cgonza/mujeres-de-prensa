@@ -21,14 +21,28 @@
     <section class="creditsContact">
       {{ singletons.getTextBlock(data.page, 'contact', 'Contacto') }}
 
-      <div class="creditsLogos">
-        {{
-          apos.area(data.page, 'logos', {
-            widgets: {
-              'projects': {}
-            }
-          })
-        }}
+      <div class="creditsLogos gridWrapper">
+        <div class="creditsBlock">
+          <div class="title">{{ singletons.getMinimalTextBlock(data.page, 'finance', 'Título') }}</div>
+          {{
+            apos.area(data.page, 'logos', {
+              widgets: {
+                'projects': {}
+              }
+            })
+          }}
+        </div>
+
+        <div class="creditsBlock">
+          <div class="title">{{ singletons.getMinimalTextBlock(data.page, 'production', 'Título') }}</div>
+          {{
+            apos.area(data.page, 'logos2', {
+              widgets: {
+                'projects': {}
+              }
+            })
+          }}
+        </div>
       </div>
     </section>
 

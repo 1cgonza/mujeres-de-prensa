@@ -6,10 +6,18 @@
 
 {% block main %}
 <main>
-  <article class="contentWrapper">
-    <section class="contactsContent blockCenter m-90 t-80 d-70 ld-70">
-      <h1 class="pageTitle">{{data.page.title}}</h1>
-      <div class="contactsIntro contentBlock blockCenter m-100 t-100 d-50 ld-50">{{ singletons.getTextBlock(data.page, 'contactIntro', 'Introduction') }}
+  <article class="contentWrapper gridWrapper">
+    <h1 class="pageTitle">{{data.page.title}}</h1>
+    <section class="contactsContent blockCenter m-90 t-80 d-40 ld-30">
+      <div class="contactsIntro contentBlock blockCenter">
+        {{ singletons.getTextBlock(data.page, 'contactIntro', 'Introduction') }}
+      </div>
+    </section>
+
+    <section class="contactsForm blockCenter m-90 t-80 d-40 ld-30">
+      {{
+        apos.singleton(data.page, 'contactForm', 'contact-form', {})
+      }}
     </section>
 
     <section class="contactsContact">

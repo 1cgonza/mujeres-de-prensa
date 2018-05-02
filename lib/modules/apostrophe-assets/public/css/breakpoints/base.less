@@ -1572,3 +1572,33 @@ a.projectsItem, a.projectsItem:visited {
     }
   }
 }
+
+.ic {
+  #stage {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%
+  }
+
+  canvas {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  &.ic_places {
+    .box {
+      .fontLight;
+      font-weight: 500;
+      position: absolute;
+      background-color: white;
+      color: black;
+      padding: .5em;
+      font-size: .8em;
+
+      &.hidden {
+        opacity: 0;
+      }
+    }
+  }
+}

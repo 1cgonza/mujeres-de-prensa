@@ -46,13 +46,29 @@ var apos = require('apostrophe')({
       extend: 'apostrophe-custom-pages',
       name: 'cartography',
       arrangeFields: [
-        // {
-        //   name: 'cartographyConfiguration',
-        //   label: 'Cartography configuration',
-        //   fields: ['data', 'themeType']
-        // }
+        {
+          name: 'cartographyConfiguration',
+          label: 'Cartography configuration',
+          fields: ['cartoType']
+        }
       ],
-      addFields: []
+      addFields: [
+        {
+          type: 'select',
+          name: 'cartoType',
+          label: 'Type',
+          choices: [
+            {
+              label: 'Lugares (mapa)',
+              value: 'places'
+            },
+            {
+              label: 'Temas, generos y palabras (General)',
+              value: 'all'
+            }
+          ]
+        }
+      ]
     },
     'theme-pages': {
       extend: 'apostrophe-custom-pages',

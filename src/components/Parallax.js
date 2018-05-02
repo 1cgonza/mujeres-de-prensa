@@ -74,14 +74,6 @@ export default class Parallax {
   update = () => {
     let newY = this.oldY;
 
-    // sections.forEach(function(section, i) {
-    //   var d = data[i];
-
-    //   if (newY < d.top) {
-    //     section.style[transformProp] = 'translateY(' + (newY - d.top) + 'px)';
-    //   }
-    // });
-
     this.innerGrids.columns.forEach((grid, i) => {
       let fixed = this.innerGrids.fixedCols[i];
       let d = this.innerGrids.data[i];
@@ -97,7 +89,6 @@ export default class Parallax {
           fixed.style[transformProp] = 'translateY(0px)';
         }
       }
-
     });
 
     this.ticking = false;

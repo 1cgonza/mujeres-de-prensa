@@ -107,9 +107,9 @@ export default class Lugares extends Base {
             places[placeI].name = `${places[placeI].name}, ${val.trim()}`;
           }
         } else if (cell.col === 'D') {
-          places[placeI].lat = val;
-        } else if (cell.col === 'E') {
           places[placeI].lng = val;
+        } else if (cell.col === 'E') {
+          places[placeI].lat = val;
         }
       }
     });

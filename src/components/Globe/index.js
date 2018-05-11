@@ -3,8 +3,6 @@ import { PI_TWO, GLOBE_RADIUS, magazines } from './constants';
 import Hammer from 'hammerjs';
 import { clamp } from './utils';
 import Tube from './Tube';
-import Curve from './Curve';
-import Line from './Line';
 import req from '../../utils/req';
 import DataStore from './DataStore';
 import UI from './UI';

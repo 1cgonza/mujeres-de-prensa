@@ -22,8 +22,7 @@
     "redom": "^3.12.3",
     "slugg": "^1.2.1",
     "svg.js": "^2.6.4",
-    "three": "^0.92.0",
-    "three.meshline": "^1.1.0"
+    "three": "^0.92.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.44",

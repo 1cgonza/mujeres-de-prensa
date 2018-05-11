@@ -7131,10 +7131,6 @@ textextensions@2:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/textextensions/-/textextensions-2.2.0.tgz#38ac676151285b658654581987a0ce1a4490d286"
 
-three.meshline@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/three.meshline/-/three.meshline-1.1.0.tgz#cf66be97b239a044d9d80b8bbf63673eb4dc09fc"
-
 three@^0.92.0:
   version "0.92.0"
   resolved "https://registry.yarnpkg.com/three/-/three-0.92.0.tgz#8d3d1f5af890e62da7f4cb45d20c09fa51057dcd"

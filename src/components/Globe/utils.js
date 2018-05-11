@@ -48,24 +48,3 @@ export function getSplineFromCoords(coords, amount) {
     spline: new CubicBezierCurve3(start, mid1, mid2, end)
   };
 }
-
-export function getLineFromCoords(coords) {
-  const startLat = coords[0];
-  const startLng = coords[1];
-
-  // spline vertices
-  const start = coordinateToPosition(startLat, startLng, GLOBE_RADIUS);
-  const altitude = 100;
-  const end = coordinateToPosition(startLat, startLng, GLOBE_RADIUS + altitude);
-  let geometry = new Geometry();
-  geometry.vertices.push(
-    start,
-    end,
-  );
-
-  return {
-    start,
-    end,
-    line: geometry
-  };
-}

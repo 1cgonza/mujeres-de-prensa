@@ -297,6 +297,7 @@ a.projectsItem, a.projectsItem:visited {
   background-color: white;
   z-index: 449;
   .transition(all, 0.25s);
+  font-size: .8em;
 
   &.active {
     right: 0;
@@ -306,7 +307,7 @@ a.projectsItem, a.projectsItem:visited {
   #siteMenuLinks {
     position: absolute;
     width: 100%;
-    top: 10%;
+    top: 2em;
     left: 0;
 
     #primaryNav {
@@ -327,7 +328,7 @@ a.projectsItem, a.projectsItem:visited {
         width: 55px;
         height: 55px;
         padding: .3em !important;
-        margin-left: 30px;
+        margin: 1em 0 1em 20%;
       }
 
       .mpMenuIcon {
@@ -340,6 +341,34 @@ a.projectsItem, a.projectsItem:visited {
         background-image: url('@{ornamentsUrl}IconoHomePasado.svg');
         width: 40px;
         height: 40px;
+      }
+
+      .navTop, .navBottom {
+        margin-left: 20%;
+      }
+
+      .navWrapper {
+        margin: 2em 0;
+
+        .desc, .corchetes, .nav {
+          display: inline-block;
+          vertical-align: middle;
+        }
+
+        .desc {
+          .fontThin;
+          text-align: right;
+          text-transform: uppercase;
+          margin-top: 11px;
+        }
+
+        .corchetes {
+          .fontThin;
+          text-align: right;
+          text-transform: uppercase;
+          font-size: 6em;
+          margin: 0 10px 0 13px;
+        }
       }
 
       .linkEle {
@@ -387,6 +416,43 @@ a.projectsItem, a.projectsItem:visited {
         }
 
         &:nth-child(8n+8) {
+          .fontLight;
+          font-weight: 900;
+        }
+      }
+
+      .navInterp {
+        &:nth-child(1) {
+          .fontLight;
+          text-transform: uppercase;
+          font-weight: 100;
+          font-style: italic;
+        }
+
+        &:nth-child(2) {
+          .fontLight;
+          font-weight: 900;
+        }
+      }
+
+      .navVis {
+        &:nth-child(1) {
+          .fontLight;
+          font-weight: 900;
+        }
+
+        &:nth-child(2) {
+          .fontLight;
+          font-weight: 100;
+          font-style: italic;
+        }
+
+        &:nth-child(3) {
+          .fontIndex;
+          font-style: italic;
+        }
+
+        &:nth-child(4) {
           .fontLight;
           font-weight: 900;
         }

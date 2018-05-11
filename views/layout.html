@@ -63,37 +63,82 @@
     <div id="blackout" class="hidden"></div>
     <nav id="siteMenu" class="m-100 t-80 d-70 ld-50">
       <div id="siteMenuLinks">
-      <div id="primaryNav">
-      <a class="mpMenuWrapper pageLink{{currentMpHome}}" href="/mujeres-de-prensa">
-        <span class="mpMenuIcon deco"></span>
-      </a>
-      {{ apos.area(data.global, 'navigation', {
-          widgets: {
-            'page-link': {
-              controls: {
-                position: 'bottom-right'
+        <div id="primaryNav">
+          <a class="mpMenuWrapper pageLink{{currentMpHome}}" href="/mujeres-de-prensa">
+            <span class="mpMenuIcon deco"></span>
+          </a>
+          <div class="navTop">{{ apos.area(data.global, 'navigationTop', {
+              widgets: {
+                'page-link': {
+                  controls: {
+                    position: 'bottom-right'
+                  }
+                }
               }
-            }
-          }
-        })
-      }}
-      <a class="piMenuWrapper pageLink" href="/">
-        <span class="piMenuIcon deco"></span>
-      </a>
-      
-      </div>
+            })
+          }}</div>
 
-      <div id="secondaryNav" class="blockCenter">{{ apos.area(data.global, 'navigation2', {
-          widgets: {
-            'page-link': {
-              grid: 'm-90 t-70 d-60 ld-50',
-              controls: {
-                position: 'bottom-left'
+          <div class="navWrapper navContext">
+            <span class="desc m-hide t-20 d-20 ld-20">Contexto</span>
+            <span class="corchetes m-hide">{</span>
+            <div class="nav m-90 t-70 d-70 ld-70">{{ apos.area(data.global, 'navigationContext', {
+                widgets: {
+                  'page-link': {
+                    controls: {
+                      position: 'bottom-right'
+                    }
+                  }
+                }
+              })
+            }}</div>
+          </div>
+
+          <div class="navWrapper navInterp">
+            <span class="desc m-hide t-20 d-20 ld-20">Interpretaciones</span>
+            <span class="corchetes m-hide">{</span>
+            <div class="nav m-90 t-70 d-70 ld-70">{{ apos.area(data.global, 'navigationInterp', {
+                widgets: {
+                  'page-link': {
+                    controls: {
+                      position: 'bottom-right'
+                    }
+                  }
+                }
+              })
+            }}</div>
+          </div>
+
+          <div class="navWrapper navVis">
+            <span class="desc m-hide t-20 d-20 ld-20">Visiones</span>
+            <span class="corchetes m-hide">{</span>
+            <div class="nav m-90 t-70 d-70 ld-70">{{ apos.area(data.global, 'navigation2', {
+                widgets: {
+                  'page-link': {
+                    grid: 'm-90 t-70 d-60 ld-50',
+                    controls: {
+                      position: 'bottom-left'
+                    }
+                  }
+                }
+              })
+            }}</div>
+          </div>
+
+          <div class="navBottom">{{ apos.area(data.global, 'navigationBottom', {
+              widgets: {
+                'page-link': {
+                  controls: {
+                    position: 'bottom-right'
+                  }
+                }
               }
-            }
-          }
-        })
-      }}</div>
+            })
+          }}</div>
+
+          <a class="piMenuWrapper pageLink" href="/">
+            <span class="piMenuIcon deco"></span>
+          </a>
+        </div>
       </div>
     </nav>
     <span id="siteMenuIcon" class="themeBgColor"></span>

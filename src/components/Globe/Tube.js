@@ -1,30 +1,28 @@
-import * as THREE from 'three';
+import {
+  MeshBasicMaterial,
+  TubeBufferGeometry,
+  Mesh
+} from 'three';
 import { getSplineFromCoords } from './utils';
-import { CURVE_SEGMENTS } from './constants';
+import { CURVE_SEGMENTS, colors } from './constants';
 
 const TUBE_RADIUS_SEGMENTS = 2;
-const DEFAULT_TUBE_RADIUS = 2;
-const DRAW_RANGE_DELTA = 16;
+const DEFAULT_TUBE_RADIUS = 1;
+const DRAW_RANGE_DELTA = 12;
 const MAX_DRAW_RANGE = DRAW_RANGE_DELTA * CURVE_SEGMENTS;
-
-const colors = [
-  0x38acc6, // Blue
-  0xd79f2e, // Mustard
-  0x7a3b6e, // Purple
-  0xc2401f, // Red
-  0xfa8613, // Orange
-  0x40ad81, // Green
-];
 
 export default class TubeAnim {
   constructor(i, coords, amount) {
-    const material = new THREE.MeshBasicMaterial({
+    const material = new MeshBasicMaterial({
       opacity: 0.9,
       transparent: true,
       color: colors[i]
     });
-    const spline = getSplineFromCoords(coords).spline;
-    const geometry = new THREE.TubeBufferGeometry(
+    const a = 100;
+    const _amount = 1200 * (Math.log(a + amount) - Math.log(a));
+
+    const spline = getSplineFromCoords(coords, _amount).spline;
+    const geometry = new TubeBufferGeometry(
       spline,
       CURVE_SEGMENTS,
       DEFAULT_TUBE_RADIUS,
@@ -32,9 +30,18 @@ export default class TubeAnim {
       false
     );
 
-    geometry.setDrawRange(0, MAX_DRAW_RANGE);
-
-    this.mesh = new THREE.Mesh(geometry, material);
+    this.mesh = new Mesh(geometry, material);
     this.mesh.baseColor = colors[i];
+
+    let tick = 0;
+
+    function loop() {
+      if (tick < MAX_DRAW_RANGE) {
+        geometry.setDrawRange(0, tick);
+        tick += (5 % MAX_DRAW_RANGE);
+        requestAnimationFrame(loop);
+      }
+    }
+    loop();
   }
 }

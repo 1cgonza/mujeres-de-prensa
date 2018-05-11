@@ -1,4 +1,8 @@
-import { CubicBezierCurve3, Vector3 } from 'three';
+import {
+  Vector3,
+  CubicBezierCurve3,
+  Geometry
+} from 'three';
 import { geoInterpolate } from 'd3-geo';
 import { GLOBE_RADIUS, CURVE_MIN_ALTITUDE, CURVE_MAX_ALTITUDE } from './constants';
 
@@ -19,7 +23,7 @@ export function coordinateToPosition(lat, lng, radius) {
   );
 }
 
-export function getSplineFromCoords(coords) {
+export function getSplineFromCoords(coords, amount) {
   const startLat = coords[0];
   const startLng = coords[1];
   const endLat = coords[2];
@@ -28,7 +32,10 @@ export function getSplineFromCoords(coords) {
   // spline vertices
   const start = coordinateToPosition(startLat, startLng, GLOBE_RADIUS);
   const end = coordinateToPosition(endLat, endLng, GLOBE_RADIUS);
-  const altitude = clamp(start.distanceTo(end) * .75, CURVE_MIN_ALTITUDE, CURVE_MAX_ALTITUDE);
+  let altitude = clamp(start.distanceTo(end) * .75, CURVE_MIN_ALTITUDE, CURVE_MAX_ALTITUDE);
+  if (startLat === endLat) {
+    altitude = amount;
+  }
   const interpolate = geoInterpolate([startLng, startLat], [endLng, endLat]);
   const midCoord1 = interpolate(0.25);
   const midCoord2 = interpolate(0.75);
@@ -39,5 +46,26 @@ export function getSplineFromCoords(coords) {
     start,
     end,
     spline: new CubicBezierCurve3(start, mid1, mid2, end)
+  };
+}
+
+export function getLineFromCoords(coords) {
+  const startLat = coords[0];
+  const startLng = coords[1];
+
+  // spline vertices
+  const start = coordinateToPosition(startLat, startLng, GLOBE_RADIUS);
+  const altitude = 100;
+  const end = coordinateToPosition(startLat, startLng, GLOBE_RADIUS + altitude);
+  let geometry = new Geometry();
+  geometry.vertices.push(
+    start,
+    end,
+  );
+
+  return {
+    start,
+    end,
+    line: geometry
   };
 }

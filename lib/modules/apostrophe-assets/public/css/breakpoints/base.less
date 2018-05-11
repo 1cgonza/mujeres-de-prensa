@@ -1587,6 +1587,12 @@ a.projectsItem, a.projectsItem:visited {
   }
 
   &.ic_places {
+    .apos-ui {
+      display: none!important;
+    }
+
+    background-color: #425054;
+
     .box {
       .fontLight;
       font-weight: 500;
@@ -1598,6 +1604,151 @@ a.projectsItem, a.projectsItem:visited {
 
       &.hidden {
         opacity: 0;
+      }
+    }
+  }
+
+  .menuWrapper {
+    .fontIndex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    max-height: 100vh;
+    min-height: 100vh;
+    overflow: auto;
+    background-color: #2f2f2f;
+    color: #e6e6e6;
+    font-size: .8em;
+    padding: 2em;
+
+    .title {
+      .fontSub;
+      text-align: center;
+      padding: 1em;
+
+      &::after {
+        content: '';
+        height: 11px;
+        display: block;
+        margin-top: 15px;
+        background-image: url('@{ornamentsUrl}TrasRevistas_Titulo_deco2W.svg');
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+      }
+    }
+
+    .titleDesc {
+      font-size: 1em;
+      letter-spacing: 1px;
+      text-align: right;
+    }
+
+    .desc {
+      font-style: italic;
+      font-size: .8em;
+      color: #cacaca;
+      text-align: right;
+      margin-bottom: 2em;
+    }
+
+    .separator {
+      border-top: 1px dashed #ccc;
+      width: 100%;
+      margin: 1.3em 0 1em 0;
+      height: 1px;
+      display: block;
+    }
+
+    .label {
+      margin: 1em 0;
+
+      &::before {
+        content: '';
+        width: 20px;
+        height: 20px;
+        display: inline-block;
+        vertical-align: middle;
+        background-repeat: no-repeat;
+        background-size: contain;
+        padding-right: 10px;
+      }
+
+      &.extP::before {
+        background-image: url('@{ornamentsUrl}CuentameTitulo2W.svg');
+      }
+
+      &.extM::before {
+        background-image: url('@{ornamentsUrl}ObraTitulo2W.svg');
+      }
+
+      &.natP::before {
+        background-image: url('@{ornamentsUrl}Carto_orna4W.svg');
+      }
+
+      &.natM::before {
+        background-image: url('@{ornamentsUrl}Carto_orna3W.svg');
+      }
+
+      &.viewAll::before {
+        height: 15px;
+        vertical-align: bottom;
+        background-image: url('@{ornamentsUrl}CuentamePuntoFinalW.svg');
+      }
+
+      &.current {
+        background-color: #e6e6e6;
+        color: #2f2f2f;
+
+        &::before {
+          background-color: #2f2f2f;
+        }
+      }
+    }
+
+    p {
+      cursor: pointer;
+      display: block;
+      margin: .5em 0 .5em 20px;
+      .transition();
+    }
+
+    .child {
+      &::before {
+        content: '';
+        width: 5px;
+        height: 5px;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 10px;
+      }
+
+      &.mireya::before, &.mireya.current {
+        background-color: #38acc6;
+      }
+
+      &.af::before, &.af.current {
+        background-color: #d79f2e;
+      }
+
+      &.mf::before, &.mf.current {
+        background-color: #b74ea3;
+      }
+
+      &.verdad::before, &.verdad.current {
+        background-color: #c2401f;
+      }
+
+      &.contrastes::before, &.contrastes.current {
+        background-color: #fa8613;
+      }
+
+      &.mujer::before, &.mujer.current {
+        background-color: #40ad81;
+      }
+
+      &:hover, &:focus {
+        opacity: .7;
       }
     }
   }

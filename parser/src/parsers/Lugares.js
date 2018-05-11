@@ -55,21 +55,14 @@ export default class Lugares extends Base {
           ed: eds[currentEdI]
         };
 
-        if (this.places[currentPlaceI].name == 'Costa Rica') {
-          console.log(mencionEditorial, procedencia, mencionAleatoria)
-        }
-
-        if (mencionEditorial) {
-          this.addNode(pi, 'mencionEditorial', d);
+        if (mencionEditorial || mencionAleatoria) {
+          this.addNode(pi, 'mencion', d);
         }
 
         if (procedencia) {
           this.addNode(pi, 'procedencia', d);
         }
 
-        if (mencionAleatoria) {
-          this.addNode(pi, 'mencionAleatoria', d);
-        }
         currentEdI++;
       }
     });

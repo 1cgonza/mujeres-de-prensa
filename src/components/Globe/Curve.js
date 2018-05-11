@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import { getSplineFromCoords } from './utils';
 import { CURVE_SEGMENTS } from './constants';
-//import { MeshLine, MeshLineMaterial } from 'three.meshline';
+import { MeshLine, MeshLineMaterial } from './THREE.MeshLine';
 //import { MeshLine, MeshLineMaterial } from './MeshLine';
 
 const colors = [
@@ -35,33 +35,41 @@ export default class Curve {
     // );
 
     // this.mesh = new THREE.Mesh(line.geometry, material);
+    // this.mesh.baseColor = colors[i];
 
-    // let curveGeometry = new THREE.BufferGeometry();
-    // const {spline} = getSplineFromCoords(coords);
-    // const points = new Float32Array(CURVE_SEGMENTS * 3);
-    // const vertices = spline.getPoints(CURVE_SEGMENTS - 1);
+    const material = new THREE.MeshBasicMaterial({
+      opacity: 0.9,
+      transparent: true,
+      color: colors[i],
+    });
 
-    // for (let i = 0, j = 0; i < vertices.length; i++) {
-    //   const vertex = vertices[i];
-    //   points[j++] = vertex.x;
-    //   points[j++] = vertex.y;
-    //   points[j++] = vertex.z;
-    // }
+    let geometry = new THREE.BufferGeometry();
+    const {spline} = getSplineFromCoords(coords);
+    const points = new Float32Array(CURVE_SEGMENTS * 3);
+    const vertices = spline.getPoints(CURVE_SEGMENTS - 1);
 
-    // // You can use setDrawRange to animate the curve
-    // curveGeometry.addAttribute('position', new THREE.Float32BufferAttribute(points, 3));
-    // this.mesh = new THREE.Line(curveGeometry, material);
+    for (let i = 0, j = 0; i < vertices.length; i++) {
+      const vertex = vertices[i];
+      points[j++] = vertex.x;
+      points[j++] = vertex.y;
+      points[j++] = vertex.z;
+    }
 
-    // let tick = CURVE_SEGMENTS;
+    // You can use setDrawRange to animate the curve
+    geometry.addAttribute('position', new THREE.Float32BufferAttribute(points, 3));
+    this.mesh = new THREE.Line(geometry, material);
+    this.mesh.baseColor = colors[i];
 
-    // function loop() {
-    //   if (tick >= 0) {
-    //     curveGeometry.setDrawRange(tick, CURVE_SEGMENTS);
-    //     tick--;
-    //     requestAnimationFrame(loop);
-    //   }
-    // }
-    // loop();
+    let tick = CURVE_SEGMENTS;
+
+    function loop() {
+      if (tick >= 0) {
+        geometry.setDrawRange(tick, CURVE_SEGMENTS);
+        tick--;
+        requestAnimationFrame(loop);
+      }
+    }
+    loop();
   }
 
   materialOptions = (color, amount, resolution, camera) => {

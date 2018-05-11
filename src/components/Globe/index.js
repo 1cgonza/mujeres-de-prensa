@@ -1,15 +1,19 @@
 import * as THREE from 'three';
-import { PI_TWO, GLOBE_RADIUS } from './constants';
+import { PI_TWO, GLOBE_RADIUS, magazines } from './constants';
 import Hammer from 'hammerjs';
 import { clamp } from './utils';
-import Curve from './Curve';
 import Tube from './Tube';
+import Curve from './Curve';
+import Line from './Line';
 import req from '../../utils/req';
+import DataStore from './DataStore';
+import UI from './UI';
 
 const CAMERA_Z_MIN = 500;
 const CAMERA_Z_MAX = 2300;
-const magazines = ['Mireya', 'AF', 'MF', 'Verdad', 'Constrastes', 'Mujer'];
+
 let intersected;
+let animReq;
 
 export default class Globe {
   constructor(container) {
@@ -17,27 +21,26 @@ export default class Globe {
       return false;
     }
     this.container = container;
-    this.data = [];
-    this._rawData = [];
     this.nodes = [];
     this.reset();
-    this.ui();
     this._cameraZ = 1100;
     this.width = window.innerWidth;
     this.height = window.innerHeight;
     this.scene = new THREE.Scene();
+    this.rootMesh = new THREE.Mesh(new THREE.Geometry());
     this.camera = new THREE.PerspectiveCamera(30, this.width / this.height, 1, 10000);
     this.camera.position.z = this._cameraZ;
     this.renderer = new THREE.WebGLRenderer({
       antialias: true,
       alpha: true
     });
+
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setSize(this.width, this.height);
     container.appendChild(this.renderer.domElement);
 
     this.raycaster = new THREE.Raycaster();
-    this.raycaster.linePrecision = 3;
+    this.raycaster.linePrecision = 2;
     this.mouse = new THREE.Vector2();
     this.stageMouse = new THREE.Vector2();
 
@@ -46,45 +49,27 @@ export default class Globe {
     this.initZoomListener();
     this.initResizeListener();
 
+    this.scene.add(this.rootMesh);
+
     req('/assets/db/lugares.json').then(res => {
-      this._rawData = res;
-      this.data = res;
-      let exterior = this.data.filter(place => place.name.indexOf('Colombia') < 0);
-      let exteriorProcedencia = exterior.filter(place => place.hasOwnProperty('procedencia'));
-      exteriorProcedencia = exteriorProcedencia.map(place => {
-        place.procedencia.forEach(node => {
-          if (!place.hasOwnProperty(node.revista)) {
-            place[node.revista] = [];
-          }
-          place[node.revista].push(node);
-        });
-        return place;
-      });
-
-      exteriorProcedencia.forEach(place => {
-        magazines.forEach((key, i) => {
-          if (place.hasOwnProperty(key)) {
-            let curve = new Tube(
-              i,
-              [place.lat, place.lng - (i * .195), 4, -73.25],
-              place[key].length,
-              this.camera
-            );
-
-            curve.mesh.place = place;
-            this.nodes.push(curve.mesh);
-
-            this.rootMesh.add(curve.mesh);
-          }
-        });
-      });
-
+      this.data = new DataStore(res);
+      this.ui = new UI(this.container, this.data, this.reload, this.createLineObjects, this.createCurveObjects, this.renderAll);
+      this.renderAll();
       this.loop();
-      console.log(res);
     });
 
     window.addEventListener('mousemove', this.onMouseMove, false);
   }
+
+  reload = () => {
+    window.cancelAnimationFrame(animReq);
+    this.nodes = [];
+    this.scene = new THREE.Scene();
+    this.rootMesh = new THREE.Mesh(new THREE.Geometry());
+    this.scene.add(this.rootMesh);
+    this.initSphere();
+    this.loop();
+  };
 
   onMouseMove = (event) => {
     event.preventDefault();
@@ -95,7 +80,6 @@ export default class Globe {
   };
 
   initSphere() {
-    this.rootMesh = new THREE.Mesh(new THREE.Geometry());
     let geometry = new THREE.SphereGeometry(GLOBE_RADIUS, 40, 30);
     let loader = new THREE.TextureLoader();
     let material = new THREE.MeshBasicMaterial({
@@ -104,8 +88,6 @@ export default class Globe {
     let mesh = new THREE.Mesh(geometry, material);
     mesh.name = 'globe';
     this.rootMesh.add(mesh);
-
-    this.scene.add(this.rootMesh);
   }
 
   initPanListener() {
@@ -166,16 +148,16 @@ export default class Globe {
         intersected.material.color.set(0xf72ea3);
       }
 
-      this.box.classList.remove('hidden');
-      this.box.style.top = `${this.stageMouse.y - 20}px`;
-      this.box.style.left = `${this.stageMouse.x + 12}px`;
-      this.box.innerText = intersected.place.name;
+      this.ui.box.classList.remove('hidden');
+      this.ui.box.style.top = `${this.stageMouse.y - 20}px`;
+      this.ui.box.style.left = `${this.stageMouse.x + 12}px`;
+      this.ui.box.innerText = `${intersected.place.name}`;
     } else {
       if (intersected) {
         intersected.material.color.set(intersected.baseColor);
       }
       intersected = null;
-      this.box.classList.add('hidden');
+      this.ui.box.classList.add('hidden');
     }
 
     this.rootMesh.rotation.x += Math.atan(this._deltaY / this._cameraZ) * 0.2;
@@ -194,12 +176,49 @@ export default class Globe {
     this.renderer.render(this.scene, this.camera);
 
     // next frame
-    requestAnimationFrame(this.loop);
+    animReq = requestAnimationFrame(this.loop);
   };
 
-  ui() {
-    this.box = document.createElement('div');
-    this.box.className = 'box';
-    this.container.appendChild(this.box);
+  createLineObjects = (d) => {
+    d.forEach(place => {
+      magazines.forEach((obj, i) => {
+        if (place.magazines.hasOwnProperty(obj.key)) {
+          let curve = new Tube(
+            i,
+            [place.lat, place.lng - (i * .195), place.lat, place.lng - (i * .195)],
+            place.magazines[obj.key].length
+          );
+
+          curve.mesh.place = place;
+          this.nodes.push(curve.mesh);
+          this.rootMesh.add(curve.mesh);
+        }
+      });
+    });
+  };
+
+  createCurveObjects = (d) => {
+    d.forEach(place => {
+      magazines.forEach((obj, i) => {
+        if (place.magazines.hasOwnProperty(obj.key)) {
+          let curve = new Tube(
+            i,
+            [place.lat, place.lng - (i * .195), 4, -73.25],
+            place.magazines[obj.key].length
+          );
+
+          curve.mesh.place = place;
+          this.nodes.push(curve.mesh);
+          this.rootMesh.add(curve.mesh);
+        }
+      });
+    });
+  };
+
+  renderAll = () => {
+    this.createCurveObjects(this.data.extProcedencia);
+    this.createLineObjects(this.data.extMencion);
+    this.createLineObjects(this.data.natMencion);
+    this.createLineObjects(this.data.natProcedencia);
   }
 }

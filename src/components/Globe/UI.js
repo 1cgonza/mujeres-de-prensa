@@ -27,8 +27,6 @@ export default class UI {
 
     mount(container, this.box);
     mount(container, menu);
-
-    container.appendChild(menu);
   }
 
   resetCurrent = (ele) => {

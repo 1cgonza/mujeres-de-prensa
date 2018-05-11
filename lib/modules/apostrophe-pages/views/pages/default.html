@@ -1,7 +1,20 @@
+{% import "macros/singletons.html" as singletons %}
 {% extends "layout.html" %}
 
+{% block bodyClass %}{{'page-default'}}{% endblock %}
+
 {% block main %}
-<main id="">
-  <article class="contentWrapper"></article>
+<main>
+  <article class="contentWrapper">
+    <section>
+      <div class="innerSection blockCenter m-70 t-50 d-50 ld-40">
+        <h1 class="pageTitle center">{{data.page.title}}</h1>
+        <span class="pageDeco deco decoBottom"></span>
+
+        <div class="contentBlock">{{ singletons.getTextBlock(data.page, 'pageContent') }}</div>
+
+      </div>
+    </section>
+  </article>
 </main>
 {% endblock %}

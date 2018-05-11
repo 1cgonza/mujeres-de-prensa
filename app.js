@@ -65,6 +65,10 @@ var apos = require('apostrophe')({
             {
               label: 'Temas, generos y palabras (General)',
               value: 'all'
+            },
+            {
+              label: 'Gráfica',
+              value: 'graphics'
             }
           ]
         }

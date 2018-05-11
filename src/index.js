@@ -4,6 +4,7 @@ import Parallax from './components/Parallax';
 import Timeline from './components/Timeline';
 import Gallery from './components/Gallery';
 import Globe from './components/Globe';
+import Graphics from './components/Graphics';
 import Connections from './components/Connections';
 
 let resizeTimer;
@@ -24,6 +25,8 @@ if (bodyClasses.contains('ic_all')) {
   new Connections(document.getElementById('stage'));
 } else if (bodyClasses.contains('ic_places')) {
   new Globe(document.getElementById('stage'));
+} else if (bodyClasses.contains('ic_graphics')) {
+  new Graphics(document.getElementById('stage'));
 }
 
 function onResize(event) {

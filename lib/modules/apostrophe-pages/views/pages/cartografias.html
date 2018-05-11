@@ -27,14 +27,23 @@
       <div class="sectionTitle">{{ singletons.getTextBlock(data.page, 'cartosTitle', 'Title') }}</div>
       <div class="sectionAuthor">{{ singletons.getTextBlock(data.page, 'cartosAuthor', 'Author') }}</div>      
       <span class="deco bottomDeco"></span>
-      <div class="galleryWrapper">{{
-      apos.area(data.page, 'carto', {
+
+      <span class="sectionDownloadsTitle">{{ singletons.getTextBlock(data.page, 'sectionTitle3', 'Section Title') }}</span>
+      <div class="downloadsWrapper">{{ apos.area(data.page, 'download', {
+        widgets: {
+          'apostrophe-files': {}
+        }
+        }) }}
+      </div>
+
+      <div class="galleryWrapper">{{ apos.area(data.page, 'carto', {
         widgets: {
           'projects': {}
         }
-      })
-    }}</div>
+        })}}
+      </div>
     </section>
+
 
     <section id="infographics">
       <div class="gridWrapperMiddle gridJustifySpaceBetween topWrapper">

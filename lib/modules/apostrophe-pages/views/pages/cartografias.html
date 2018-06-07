@@ -28,12 +28,13 @@
       <div class="sectionAuthor">{{ singletons.getTextBlock(data.page, 'cartosAuthor', 'Author') }}</div>      
       <span class="deco bottomDeco"></span>
 
-      <span class="sectionDownloadsTitle">{{ singletons.getTextBlock(data.page, 'sectionTitle3', 'Section Title') }}</span>
-      <div class="downloadsWrapper">{{ apos.area(data.page, 'download', {
-        widgets: {
-          'apostrophe-files': {}
-        }
-        }) }}
+      <div class="sectionDownloadsTitle">{{ singletons.getTextBlock(data.page, 'sectionTitle3', 'Section Title') }}</div>
+      <div class="downloadsWrapper">
+        {{ apos.area(data.page, 'download', {
+          widgets: {
+            'apostrophe-files': {}
+          }
+          }) }}
       </div>
 
       <div class="galleryWrapper">{{ apos.area(data.page, 'carto', {

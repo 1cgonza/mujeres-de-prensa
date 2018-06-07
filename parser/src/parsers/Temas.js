@@ -44,7 +44,7 @@ export default class Temas extends Base {
           let theme = this.themes.find(el => el.color === cell.s.fgColor.rgb);
 
           if (theme) {
-            ret.theme = theme.name;
+            ret.theme = theme.name.trim();
           } else {
             this.setError({
               error: `Background color of cell ${ref.key} does not match any theme`,
@@ -62,18 +62,55 @@ export default class Temas extends Base {
         } else {
           let matchArticle = this.editions[edKey].find((article, i) => {
             if (article.ed === ret.ed && fuzz.ratio(article.title, ret.title) > 95) {
-              if (isArray(article.category)) {
-                this.editions[edKey][i].category.push(ret.category);
-              } else {
-                this.editions[edKey][i].category = [article.category, ret.category];
+              if (ret.hasOwnProperty('category') && Array.isArray(ret.category)) {
+                ret.category.forEach(retCat => {
+                  if (this.editions[edKey][i].category.indexOf(retCat) < 0) {
+                    this.editions[edKey][i].category.push(retCat);
+                  }
+                });
+              }
+
+              if (ret.hasOwnProperty('pages')) {
+                if (this.editions[edKey][i].hasOwnProperty('pages')) {
+                  ret.pages.forEach(pg => {
+                    if (this.editions[edKey][i].pages.indexOf(pg) < 0) {
+                      this.editions[edKey][i].pages.push(pg);
+                    }
+                  });
+                } else {
+                  this.editions[edKey][i].pages = ret.pages;
+                }
+              }
+
+              if (ret.hasOwnProperty('theme')) {
+                if (this.editions[edKey][i].hasOwnProperty('theme')) {
+                  if (Array.isArray(this.editions[edKey][i].theme)) {
+                    // ret themes come as string, so no need to check for array
+                    if (this.editions[edKey][i].theme.indexOf(ret.theme) < 0) {
+                      this.editions[edKey][i].theme.push(ret.theme);
+                    }
+                  } else {
+                    let currTheme = this.editions[edKey][i].theme;
+
+                    if (currTheme !== ret.theme) {
+                      this.editions[edKey][i].theme = [currTheme, ret.theme];
+                    }
+                  }
+                } else {
+                  this.editions[edKey][i].theme = ret.theme;
+                }
               }
               console.log('repeated title', article, ret);
+              return true;
             }
 
             return false;
           });
 
-          this.editions[edKey].push(ret);
+          if (matchArticle) {
+          } else {
+            this.editions[edKey].push(ret);
+          }
         }
 
         return ret;
@@ -192,15 +229,15 @@ export default class Temas extends Base {
 
               // TODO: what to do with articles that have genre,
               // but are excluded from the main titles, themes and categories table?
-              if (!match) {
-                this.setError({
-                  error: {
-                    warning: `Orphan article from Genres in - ${articleKey}`,
-                    title: article.title
-                  }
-                });
-                //console.log(article);
-              }
+              // if (!match) {
+              //   this.setError({
+              //     error: {
+              //       warning: `Orphan article from Genres in - ${articleKey}`,
+              //       title: article.title
+              //     }
+              //   });
+              //   //console.log(article);
+              // }
             }
           }
 

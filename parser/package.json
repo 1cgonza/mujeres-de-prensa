@@ -11,7 +11,7 @@
   "dependencies": {
     "fuzzball": "^1.1.1",
     "json-view": "^0.4.0",
-    "xlsx": "^0.12.7"
+    "xlsx": "^0.13.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-beta.42",
@@ -21,10 +21,10 @@
     "extract-text-webpack-plugin": "^3.0.2",
     "html-webpack-plugin": "^3.1.0",
     "node-sass": "^4.8.3",
-    "sass-loader": "^6.0.7",
-    "style-loader": "^0.20.3",
+    "sass-loader": "^7.0.3",
+    "style-loader": "^0.21.0",
     "webpack": "^4.4.1",
-    "webpack-cli": "^2.0.13",
+    "webpack-cli": "^3.0.3",
     "webpack-dev-server": "^3.1.1"
   }
 }

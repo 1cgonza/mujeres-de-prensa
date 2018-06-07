@@ -137,14 +137,18 @@ export default class Base {
       ret.title = str;
 
       if (str.indexOf('(') > 0) {
-        this.setError({
-          expand: true,
-          error: {
-            warning: `If the following title has page number(s), it is missing the page indicator. i.e (p.1`,
-            title: str,
-            cell: key
-          }
-        });
+        let hasNum = str.slice(str.indexOf('(')).split('').find(char => !isNaN(char));
+
+        if (hasNum) {
+          this.setError({
+            expand: true,
+            error: {
+              warning: `If the following title has page number(s), it is missing the page indicator. i.e (p.1`,
+              title: str,
+              cell: key
+            }
+          });
+        }
       }
     } else {
       if (str.indexOf(')') < 0) {
@@ -215,8 +219,8 @@ export default class Base {
   getVols(base, totalRows) {
     base.forEach((obj, i) => {
       let meta = this.meta.find(d => {
-        let edMeta = isArray(d.ed) ? d.ed[0] : d.ed;
-        let edVols = isArray(obj.ed) ? obj.ed[0] : obj.ed;
+        let edMeta = Array.isArray(d.ed) ? d.ed[0] : d.ed;
+        let edVols = Array.isArray(obj.ed) ? obj.ed[0] : obj.ed;
 
         return edMeta === edVols;
       });

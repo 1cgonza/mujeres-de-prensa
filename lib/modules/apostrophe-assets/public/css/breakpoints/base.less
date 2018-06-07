@@ -1438,8 +1438,18 @@ a.projectsItem, a.projectsItem:visited {
     }
   }
 
+  .sectionDownloadsTitle {
+    padding: 2em 2em 0;
+  }
+
   .downloadsWrapper {
+    text-align: right;
+    padding: 2em;
+
     .apos-area-widget-wrapper {
+      display: inline-block;
+      margin-left: 1em;
+
       a {
         &::before {
           content: '';
@@ -1448,7 +1458,10 @@ a.projectsItem, a.projectsItem:visited {
           background-size: contain;
           height: 29px;
           width: 29px;
-          display: block;
+          display: inline-block;
+          vertical-align: middle;
+          margin-right: 5px;
+          margin-top: -4px;
         }
       }
     }
@@ -1685,6 +1698,9 @@ a.projectsItem, a.projectsItem:visited {
 }
 
 .ic {
+  .apos-ui {
+    display: none!important;
+  }
   #stage {
     margin: 0;
     padding: 0;
@@ -1865,10 +1881,6 @@ a.projectsItem, a.projectsItem:visited {
   }
 
   &.ic_graphics {
-    .apos-ui {
-      display: none!important;
-    }
-
     .title {
       .fontQuote;
       display: inline-block;
@@ -1955,6 +1967,57 @@ a.projectsItem, a.projectsItem:visited {
         .transition();
       }
     }
+  }
+}
 
+.ic_all {
+  #stage {
+    width: 100%;
+    height: 100vh;;
+    background-color: #382e2e;
+    justify-content: space-evenly;
+    padding: 30px;
+  }
+
+  #taxRels {
+    z-index: 9999;
+    pointer-events: none;
+  }
+
+  .book {
+    .fontThin;
+    font-size: 12px;
+    background-color: white;
+    border-radius: 12px;
+    margin: 5em .5%;
+
+    .info {
+      color: white;
+      margin-top: -3em;
+      position: absolute;
+
+      .date {
+        font-size: .75em;
+        margin: .7em 0;
+      }
+    }
+
+    span {
+      background-image: url('@{ornamentsUrl}Carto_orna3.svg');
+      background-repeat: no-repeat;
+      width: 16px;
+      height: 16px;
+      display: block;
+      margin: .7em auto;
+      cursor: crosshair;
+    }
+
+    &.w1 {
+      width: 2%; 
+    }
+
+    &.w2 {
+      width: 4%; 
+    }
   }
 }

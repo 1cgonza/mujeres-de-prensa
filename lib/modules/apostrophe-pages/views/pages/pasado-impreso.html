@@ -1,13 +1,13 @@
 {% import "macros/singletons.html" as singletons %}
 
 {% extends "layout.html" %}
-{% block bodyClass%}piHome{% endblock %}
+{% block bodyClass %}piHome{% endblock %}
 {% block main %}
 <main class="parallax">
   <article class="gridWrapper">
     <section class="siteDescription m-100 t-100 d-50 ld-50">
       <div id="projectLogo">{{ singletons.getImageSection(data.page, 'projectLogo', 1, 'Logo') }}</div>
-      <div class="sectionContent contentBlock blockCenter m-80 t-70 d-60 ld-50">
+      <div class="sectionContent contentBlock blockCenter m-80 t-70 d-70 ld-70">
         {{ singletons.getTextBlock(data.page, 'pageIntroContent', 'Introduction') }}
       </div>
     </section>

@@ -138,7 +138,28 @@ a, a:visited {
   }
 }
 
-.bgColorBlock, .sectionIndex {
+.sectionIndex {
+  a, a:visited {
+    color: lighten(@siteBlack, 10%);
+
+    &[name] {
+      color: white;
+      border: 0;
+      cursor: default;
+
+      &:hover, &:focus {
+        border: 0;
+        color: white;
+      }
+    }
+
+    &:hover, &:focus {
+      color: @siteBlack;
+    }
+  }
+}
+
+.bgColorBlock {
   a, a:visited {
     color: #fff11a;
 
@@ -154,7 +175,7 @@ a, a:visited {
     }
 
     &:hover, &:focus {
-      color: @siteBlack;
+      color: #fff11a;
     }
   }
 }

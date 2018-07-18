@@ -63,19 +63,14 @@ export default class UI {
     this.children.push(label);
 
     magazines.forEach(obj => {
-      let d = this.data.extProcedencia.filter(place => place.magazines.hasOwnProperty(obj.key)).map(place => {
-        let _magD = place.magazines[obj.key];
-        place.magazines = {};
-        place.magazines[obj.key] = _magD;
-        return place;
-      });
+      let d = this.data.extProcedencia.filter(place => place.magazines.hasOwnProperty(obj.key));
 
       if (d.length) {
         let ele = el(`p.child.extP.${obj.slug}`, obj.name);
         ele.onclick = (ev) => {
           this.reloadCB();
           this.resetCurrent(ele);
-          this.createCurveObjectsCB(d);
+          this.createCurveObjectsCB(d, obj.slug);
         };
         this.children.push(ele);
       }
@@ -92,19 +87,14 @@ export default class UI {
     this.children.push(label);
 
     magazines.forEach(obj => {
-      let d = this.data.extMencion.filter(place => place.magazines.hasOwnProperty(obj.key)).map(place => {
-        let _magD = place.magazines[obj.key];
-        place.magazines = {};
-        place.magazines[obj.key] = _magD;
-        return place;
-      });
+      let d = this.data.extMencion.filter(place => place.magazines.hasOwnProperty(obj.key));
 
       if (d.length) {
         let ele = el(`p.child.extM.${obj.slug}`, obj.name);
         ele.onclick = (ev) => {
           this.reloadCB();
           this.resetCurrent(ele);
-          this.createLineObjectsCB(d);
+          this.createLineObjectsCB(d, obj.slug);
         };
         this.children.push(ele);
       }
@@ -121,19 +111,14 @@ export default class UI {
     this.children.push(label);
 
     magazines.forEach(obj => {
-      let d = this.data.natProcedencia.filter(place => place.magazines.hasOwnProperty(obj.key)).map(place => {
-        let _magD = place.magazines[obj.key];
-        place.magazines = {};
-        place.magazines[obj.key] = _magD;
-        return place;
-      });
+      let d = this.data.natProcedencia.filter(place => place.magazines.hasOwnProperty(obj.key));
 
       if (d.length) {
         let ele = el(`p.child.natP.${obj.slug}`, obj.name);
         ele.onclick = (ev) => {
           this.reloadCB();
           this.resetCurrent(ele);
-          this.createLineObjectsCB(d);
+          this.createLineObjectsCB(d, obj.slug);
         };
         this.children.push(ele);
       }
@@ -150,19 +135,14 @@ export default class UI {
     this.children.push(label);
 
     magazines.forEach(obj => {
-      let d = this.data.natMencion.filter(place => place.magazines.hasOwnProperty(obj.key)).map(place => {
-        let _magD = place.magazines[obj.key];
-        place.magazines = {};
-        place.magazines[obj.key] = _magD;
-        return place;
-      });
+      let d = this.data.natMencion.filter(place => place.magazines.hasOwnProperty(obj.key));
 
       if (d.length) {
         let ele = el(`p.child.natP.${obj.slug}`, obj.name);
         ele.onclick = (ev) => {
           this.reloadCB();
           this.resetCurrent(ele);
-          this.createLineObjectsCB(d);
+          this.createLineObjectsCB(d, obj.slug);
         };
         this.children.push(ele);
       }

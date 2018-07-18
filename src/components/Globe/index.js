@@ -177,9 +177,17 @@ export default class Globe {
     animReq = requestAnimationFrame(this.loop);
   };
 
-  createLineObjects = (d) => {
+  createLineObjects = (d, slug) => {
     d.forEach(place => {
-      magazines.forEach((obj, i) => {
+      let mag = magazines;
+
+      if (slug) {
+        mag = mag.filter(obj => obj.slug === slug);
+      }
+
+      mag.forEach(obj => {
+        const i = magazines.findIndex(magObj => magObj.slug === obj.slug);
+
         if (place.magazines.hasOwnProperty(obj.key)) {
           let curve = new Tube(
             i,
@@ -195,9 +203,17 @@ export default class Globe {
     });
   };
 
-  createCurveObjects = (d) => {
+  createCurveObjects = (d, slug) => {
     d.forEach(place => {
-      magazines.forEach((obj, i) => {
+      let mag = magazines;
+
+      if (slug) {
+        mag = mag.filter(obj => obj.slug === slug);
+      }
+
+      mag.forEach(obj => {
+        const i = magazines.findIndex(magObj => magObj.slug === obj.slug);
+
         if (place.magazines.hasOwnProperty(obj.key)) {
           let curve = new Tube(
             i,
@@ -218,5 +234,5 @@ export default class Globe {
     this.createLineObjects(this.data.extMencion);
     this.createLineObjects(this.data.natMencion);
     this.createLineObjects(this.data.natProcedencia);
-  }
+  };
 }

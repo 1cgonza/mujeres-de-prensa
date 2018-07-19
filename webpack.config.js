@@ -1,11 +1,13 @@
-const path = require('path');
-const dist = path.join(__dirname, 'lib/modules/apostrophe-assets/public');
-
 module.exports = {
-  entry: ['./src/index.js'],
+  entry: {
+    'lib/modules/apostrophe-assets/public/js/site': './src/index.js',
+    'public/js/places': './src/places.js',
+    'public/js/graphics': './src/graphics.js',
+    'public/js/all': './src/all.js'
+  },
   output: {
-    path: dist,
-    filename: 'js/site.js'
+    path: __dirname,
+    filename: '[name].js'
   },
   module: {
     rules: [

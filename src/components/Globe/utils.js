@@ -1,8 +1,4 @@
-import {
-  Vector3,
-  CubicBezierCurve3,
-  Geometry
-} from 'three';
+import { Vector3, CubicBezierCurve3 } from 'three';
 import { geoInterpolate } from 'd3-geo';
 import { GLOBE_RADIUS, CURVE_MIN_ALTITUDE, CURVE_MAX_ALTITUDE } from './constants';
 

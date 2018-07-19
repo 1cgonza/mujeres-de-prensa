@@ -1,5 +1,3 @@
-import { magazines } from './constants';
-
 export default class Store {
   constructor(data) {
     this._rawData = data;

@@ -1,11 +1,7 @@
-import { shims, loop, transformProp } from './utils/shims';
 import Menu from './components/Menu';
 import Parallax from './components/Parallax';
 import Timeline from './components/Timeline';
 import Gallery from './components/Gallery';
-import Globe from './components/Globe';
-import Graphics from './components/Graphics';
-import Connections from './components/Connections';
 
 let resizeTimer;
 let menu = new Menu(document.getElementById('siteMenu'));
@@ -19,14 +15,6 @@ if (bodyClasses.contains('pageTimeline')) {
 
 if (galleryContainer) {
   new Gallery('.gallery');
-}
-
-if (bodyClasses.contains('ic_all')) {
-  new Connections(document.getElementById('stage'));
-} else if (bodyClasses.contains('ic_places')) {
-  new Globe(document.getElementById('stage'));
-} else if (bodyClasses.contains('ic_graphics')) {
-  new Graphics(document.getElementById('stage'));
 }
 
 function onResize(event) {

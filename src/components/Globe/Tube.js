@@ -1,8 +1,4 @@
-import {
-  MeshBasicMaterial,
-  TubeBufferGeometry,
-  Mesh
-} from 'three';
+import { MeshBasicMaterial, TubeBufferGeometry, Mesh } from 'three';
 import { getSplineFromCoords } from './utils';
 import { CURVE_SEGMENTS, colors } from './constants';
 

@@ -6,6 +6,7 @@ _ARCHIVOS
 
 # don't track JS output of webpack
 lib/modules/apostrophe-assets/public/js/site.js
+public/js
 
 #General
 .DS_Store

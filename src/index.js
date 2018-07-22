@@ -4,10 +4,11 @@ import Timeline from './components/Timeline';
 import Gallery from './components/Gallery';
 
 let resizeTimer;
-let menu = new Menu(document.getElementById('siteMenu'));
 let parallax = new Parallax(document.querySelector('.parallax'));
 let bodyClasses = document.body.classList;
 let galleryContainer = document.querySelector('.gallery');
+
+new Menu(document.getElementById('siteMenu'));
 
 if (bodyClasses.contains('pageTimeline')) {
   new Timeline(document.getElementById('timelineContainer'));

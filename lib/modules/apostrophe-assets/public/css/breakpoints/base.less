@@ -330,9 +330,10 @@ a.projectsItem, a.projectsItem:visited {
     width: 100%;
     top: 2em;
     left: 0;
+    font-size: 0.8em;
 
     #primaryNav {
-      margin-left: 15%;
+      margin-left: 10%;
 
       a.pageLink, a.pageLink:active {
         color: black;
@@ -1604,20 +1605,33 @@ a.projectsItem, a.projectsItem:visited {
   #timelineYears {
     .fontLight;
     .transition();
-    background-color: @siteOrange;
-    color: white;
+    //background-color: @siteOrange;
+    color: #CCC;
     font-size: .9em;
     height: 32px;
-    position: fixed;
+    position: absolute;
     width: 100%;
-    z-index: 9;
+    height: 80vh;
+    z-index: 1;
     bottom: 0;
+
 
     .yearEle {
       position: absolute;
       left: 0;
-      top: 11px;
-      font-size: .5em;
+      //top: 11px;
+      font-size: .8em;
+      height: 90%;
+
+      &::after {
+        content: '';
+        //position: absolute;
+        width: 1px;
+        height: 100%;
+        margin: 1em auto;
+        display: block;
+        background-color: #d7e7ea;
+      }
     }
   }
 
@@ -1628,7 +1642,7 @@ a.projectsItem, a.projectsItem:visited {
     .eventEle {
       .fontIndex;
       display: block;
-      padding-bottom: 2em;
+      //padding-bottom: 2em;
       cursor: pointer;
 
       &:nth-child(4n + 1) {
@@ -2052,6 +2066,85 @@ a.projectsItem, a.projectsItem:visited {
 
     &.w2 {
       width: 4%; 
+    }
+  }
+}
+
+// .parallax section {
+//   transform: trans
+// }
+
+// .parallax {
+//   perspective: 1px;
+//   height: 100vh;
+//   overflow-x: hidden;
+//   overflow-y: auto;
+
+//   section {
+//     position: absolute;
+//     top: 0;
+//     right: 0;
+//     bottom: 0;
+//     left: 0;
+//     background: none;
+//     justify-content: center;
+//   }
+// }
+
+.apos-ui .apos-schema-group-inner {
+  .apos-rich-text {
+    h1 {
+      font-size: 1.8em;
+    }
+
+    h2 {
+      font-size: 1.5em;
+    }
+
+    .styleQuote {
+      font-size: 0.8em;
+    }
+
+    .styleSmaller {
+      font-size: 0.7em;
+    }
+
+    textarea {
+      white-space: normal!important;
+    }
+
+    p {
+      margin-bottom: 1em;
+    }
+    a, a:visited {
+      color: @linkColor;
+      text-decoration: none;
+      border: 1px transparent;
+      transition: all 0.25s ease-in-out;
+
+      &[name] {
+        color: initial;
+        border: 0;
+        cursor: default;
+
+        &:hover, &:focus {
+          border: 0;
+          color: initial;
+        }
+      }
+
+      &:hover, &:focus {
+        color: lighten(@linkColor, 20%);
+        border-top: 1px solid;
+        border-bottom: 1px solid;
+      }
+    }
+
+    strong, b {
+      font-weight: bold;
+    }
+    i, em {
+      font-style: italic;
     }
   }
 }

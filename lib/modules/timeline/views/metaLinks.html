@@ -1,0 +1,9 @@
+{% if item.name and item.url %}
+  <p>[<span style="font-style:italic">{{item.name}}</span>] {{item.url}}</p>
+{% elif item.name and not item.url %}
+  <p>[<span style="font-style:italic">{{item.name}}</span>]</p>
+{% elif item.url and not item.name %}
+  <p>{{item.url}}</p>
+{% else %}
+  <p>Nuevo link</p>
+{% endif %}

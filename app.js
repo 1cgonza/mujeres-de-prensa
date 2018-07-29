@@ -38,7 +38,9 @@ var apos = require('apostrophe')({
           director: 1,
           place: 1,
           filiation: 1,
-          audience: 1
+          audience: 1,
+          text: 1,
+          links: 1
         }
       }
     },

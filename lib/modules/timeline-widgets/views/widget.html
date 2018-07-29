@@ -1,3 +1,4 @@
+{# Each piece property needs to be also added in app.js inside the projection property of "timeline-widgets" #}
 {% for piece in data.widget._pieces %}
   <span class="timelineEvent {{piece.eventType}}"
     data-title="{{piece.title}}"
@@ -9,7 +10,9 @@
     {% if piece.director.length %}data-director="{{piece.director | dump}}"{% endif %}
     {% if piece.place.length %}data-place="{{piece.place | dump}}"{% endif %}
     {% if piece.filiation %}data-filiation="{{piece.filiation}}"{% endif %}
-    {% if piece.filiation %}data-audience="{{piece.audience}}"{% endif %}
+    {% if piece.audience %}data-audience="{{piece.audience}}"{% endif %}
+    {% if piece.text and piece.text.items.length %}data-text="{{piece.text.items[0].content}}"{% endif %}
+    {% if piece.links.length %}data-links="{{piece.links | dump}}"{% endif %}
   >
   </span>
 {% endfor %}

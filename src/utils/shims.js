@@ -1,11 +1,11 @@
 export const loop = window.requestAnimationFrame ||
-  window.webkitRequestAnimationFrame ||
-  window.mozRequestAnimationFrame ||
-  window.msRequestAnimationFrame ||
-  window.oRequestAnimationFrame ||
-  function(callback) {
-    setTimeout(callback, 1000 / 60);
-  };
+window.webkitRequestAnimationFrame ||
+window.mozRequestAnimationFrame ||
+window.msRequestAnimationFrame ||
+window.oRequestAnimationFrame ||
+function(callback) {
+  setTimeout(callback, 1000 / 60);
+};
 
 export const transformProp = window.transformProp || (() => {
   var testEl = document.createElement('div');

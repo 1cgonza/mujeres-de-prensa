@@ -40,7 +40,7 @@ export default class Menu {
     } else {
       this.blackout.classList.add('hidden');
     }
-  }
+  };
 
   hideOnClickOutside(element) {
     const outsideClickListener = event => {
@@ -55,7 +55,7 @@ export default class Menu {
 
     const removeClickListener = () => {
       document.removeEventListener('click', outsideClickListener);
-    }
+    };
 
     document.addEventListener('click', outsideClickListener);
   }

@@ -1,4 +1,7 @@
 module.exports = {
+  stats: {
+    colors: true
+  },
   entry: {
     'lib/modules/apostrophe-assets/public/js/site': './src/index.js',
     'public/js/places': './src/places.js',

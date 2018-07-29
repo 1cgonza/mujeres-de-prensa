@@ -4,7 +4,7 @@
   "description": "Mujeres de Prensa",
   "main": "src/index.js",
   "scripts": {
-    "start": "concurrently --kill-others \"webpack --watch --mode development --progress --colors\" \"node app\" ",
+    "start": "concurrently --kill-others \"webpack --watch --mode development --progress\" \"nodemon app.js\" ",
     "prod": "webpack --mode production",
     "deploy": "sc-deploy production"
   },
@@ -22,7 +22,6 @@
     "photoswipe": "^4.1.2",
     "redom": "^3.12.3",
     "slugg": "^1.2.1",
-    "svg.js": "^2.6.4",
     "three": "^0.94.0"
   },
   "devDependencies": {
@@ -34,5 +33,20 @@
     "webpack": "^4.5.0",
     "webpack-cli": "^3.0.3",
     "webpack-dev-server": "^3.1.1"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "locales/*.json",
+      "public/modules/**/*.less",
+      "public/modules/**/*.js",
+      "public/uploads",
+      "public/apos-minified/*.js",
+      "lib/modules/apostrophe-assets/public/**/*.js",
+      "src",
+      "public/css",
+      "locales",
+      "data"
+    ],
+    "ext": "json, js, html, less"
   }
 }

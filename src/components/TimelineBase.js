@@ -10,6 +10,8 @@ export default class {
       let dateInit = this.parseDate(d.dateInit, true);
       let dateEnd = this.parseDate(d.dateEnd, true);
       let directors = this.parseDirector(d.director);
+      let text = this.parseText(d.text);
+      let links = this.parseLinks(d.links);
       let place = this.parsePlace(d.place);
       let eventData = {};
 
@@ -48,9 +50,47 @@ export default class {
         filiation: d.filiation,
         audience: d.audience,
         directors: directors,
-        place: place
+        place: place,
+        text: text,
+        links: links
       }));
     });
+  }
+
+  parseText(string) {
+    let ret = '';
+
+    if (string) {
+      let ele = document.createElement('div');
+      ele.className = 'eventText';
+      ele.innerHTML = string;
+      ret = ele;
+    }
+
+    return ret;
+  }
+
+  parseLinks(arr) {
+    if (arr) {
+      arr = JSON.parse(arr);
+      let links = document.createElement('ul');
+      links.className = 'eventLinks';
+
+      arr.forEach(obj => {
+        let li = document.createElement('li');
+        let a = document.createElement('a');
+        a.setAttribute('href', obj.url);
+        a.setAttribute('target', '_balnk');
+        a.innerText = obj.name;
+
+        li.appendChild(a);
+        links.appendChild(li);
+      });
+
+      return links;
+    }
+
+    return;
   }
 
   parseDate(obj, checkDecade) {

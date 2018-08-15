@@ -22,11 +22,11 @@
     "photoswipe": "^4.1.2",
     "redom": "^3.12.3",
     "slugg": "^1.2.1",
-    "three": "^0.94.0"
+    "three": "^0.95.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.44",
-    "@babel/preset-env": "^7.0.0-beta.44",
+    "@babel/core": "^7.0.0-beta.56",
+    "@babel/preset-env": "^7.0.0-beta.56",
     "babel-loader": "^8.0.0-beta",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "concurrently": "^3.5.1",

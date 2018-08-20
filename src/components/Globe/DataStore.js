@@ -14,13 +14,15 @@ export default class Store {
       if (place.name.indexOf('Colombia') < 0) {
         if (place.hasOwnProperty('procedencia')) {
           this.extProcedencia.push(this.cleanPlace(place, 'procedencia'));
-        } else if (place.hasOwnProperty('mencion')) {
+        }
+        if (place.hasOwnProperty('mencion')) {
           this.extMencion.push(this.cleanPlace(place, 'mencion'));
         }
       } else {
         if (place.hasOwnProperty('procedencia')) {
           this.natProcedencia.push(this.cleanPlace(place, 'procedencia'));
-        } else if (place.hasOwnProperty('mencion')) {
+        }
+        if (place.hasOwnProperty('mencion')) {
           this.natMencion.push(this.cleanPlace(place, 'mencion'));
         }
       }

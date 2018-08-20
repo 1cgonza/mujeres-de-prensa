@@ -1587,7 +1587,7 @@ a.projectsItem, a.projectsItem:visited {
 .pageTimeline {
   width: 100%;
   height: 100%;
-  background-color: #484344;
+  background-image: url('/assets/imgs/bgTimeline.png');
   overflow: hidden;
 
   .timelineEvent {
@@ -1599,21 +1599,24 @@ a.projectsItem, a.projectsItem:visited {
     position: absolute;
     display: block;
     font-size: .8em;
-    background-color: #f5f7f7;
+    background-color: #ffffff;
     z-index: 99;
     color: #000;
     width: 200px;
     height: 0;
     padding: 0;
+    border: 0;
+    opacity: .8;
 
     .retrato {
       display: block;
-      margin: 0 auto;
+      margin: 1.5em auto;
     }
 
     &.open {
       height: auto;
       padding: .8em;
+      border: 2px solid;
     }
 
     .eventTitle {
@@ -1623,7 +1626,6 @@ a.projectsItem, a.projectsItem:visited {
     }
 
     .eventDate {
-      //color: @siteOrange;
       font-size: .8em;
       border-top: 1px dotted #cacaca;
     }
@@ -1634,7 +1636,7 @@ a.projectsItem, a.projectsItem:visited {
     }
 
     .eventLinks {
-      padding: 1em 0;
+      padding: 0;
       font-size: .85em;
       line-height: 1.2;
 
@@ -1661,14 +1663,24 @@ a.projectsItem, a.projectsItem:visited {
     }
 
     &.display {
-      width: 400px;
-      top: 50% !important;
-      left: 50% !important;
-      transform: translate(-50%, -50%);
+      width: 30vw;
+      height: 100%;
+      font-size: 1em;
+      line-height: 1.6;
+      padding: 2em;
+      top: 0 !important;
+      left: 0 !important;
+      transform: translate(170%, 0%);
+      background-color: white;
+      overflow: auto;
+      opacity: .9;
 
-      &::before {
-        content: '';
-        
+      .contentBlock {
+        font-size: .8em;
+
+        .contentTitle {
+          font-weight: bold;
+        }
       }
     }
   }
@@ -1685,22 +1697,11 @@ a.projectsItem, a.projectsItem:visited {
     }
   }
 
-  // .headerWrapper {
-  //   margin: 3em;
-  //   align-items: flex-end;
-
-  //   .pageTitle {
-  //     font-weight: 900;
-  //     font-size: 2.5em;
-  //     padding: 0 .5em;
-  //   }
-
-  //   .decoTitle {
-  //     background-image: url('@{ornamentsUrl}Timline_title.svg');
-  //     height: 30px;
-  //     width: 135px;
-  //   }
-  // }
+  @vidaObra: @siteOrange;
+  @pub: @siteBlue;
+  @pPub: @sitePurple;
+  @pHist: rgb(221, 67, 67);
+  @hito: rgb(69, 175, 92);
 
   #timelineContainer {
     position: relative;
@@ -1708,14 +1709,66 @@ a.projectsItem, a.projectsItem:visited {
     height: 90vh;
     margin: 5vh 5%;
     .transition();
+
+    #relatives {
+      z-index: 1;
+      position: absolute;
+    }
+
+    .legend {
+      display: none;
+      font-size: .8em;
+      text-align: center;
+
+      span {
+        margin: 0 1em;
+        border-bottom: 2px solid;
+        position: relative;
+        padding-bottom: .3em;
+        cursor: pointer;
+
+        &::before {
+          content: '';
+          position: absolute;
+          left: 0;
+          bottom: -3px;
+          width: 5px;
+          height: 5px;
+          background-color: #000;
+          border-radius: 50%;
+        }
+
+      }
+
+      .legendEle-vidaObra {
+        border-color: @vidaObra;
+      }
+
+      .legendEle-publicacion {
+        border-color: @pub;
+      }
+
+      .legendEle-periodoPub {
+        border-color: @pPub;
+      }
+
+      .legendEle-hito {
+        border-color: @hito;
+      }
+
+      .legendEle-periodoHis {
+        border-color: @pHist;
+      }
+
+    }
   }
 
   #timelineYears, #timelineEvents {
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 96%;
   }
 
   #timelineYears {
@@ -1727,15 +1780,19 @@ a.projectsItem, a.projectsItem:visited {
     .yearEle {
       position: absolute;
       font-size: .8em;
-      height: 90%;
+      height: 98%;
 
-      &::before {
-        content: '';
+      .line {
         width: 1px;
         height: 100%;
         margin: 1em 2px;
         display: block;
-        background-color: #4d5152;
+        background-color: #d6dcde;
+      }
+
+      .yearName {
+        transform: translateX(-35%);
+        position: absolute;
       }
     }
   }
@@ -1748,8 +1805,8 @@ a.projectsItem, a.projectsItem:visited {
       transform: translateY(2px);
       position: absolute;
       width: 0;
-      height: 1px;
-      background-color: white;
+      height: 2px;
+      background-color: rgb(53, 53, 53);
 
       &:after {
         content: '';
@@ -1765,106 +1822,81 @@ a.projectsItem, a.projectsItem:visited {
       border-radius: 50%;
       cursor: pointer;
       .transition();
+      z-index: 3;
 
       &:hover {
         width: 17px;
         height: 17px;
         transform: translate(-6px, -6px);
+        z-index: 9999;
+      }
+
+      &.hidden {
+        opacity: 0;
       }
     }
 
     .highlight {
-      width: 11px;
-      height: 11px;
-      transform: translateX(-2.5px);
+      width: 10px;
+      height: 10px;
+      .transform(translate(-50%, -50%));
+      z-index: 3;
 
       &:hover {
         width: 25px;
         height: 25px;
-        transform: translate(-10px, -6px);
+        .transform(translate(-50%, -50%));
+        z-index: 9999;
+      }
+
+      .pic {
+        display: none;
+      }
+
+      &.open {
+        width: 64px;
+        height: 64px;
+        .transform(translate(-50%, -50%));
+        z-index: 9999;
+
+        .pic {
+          display: block;
+          width: 60px;
+          height: 60px;
+          overflow: hidden;
+          border-radius: 50%;
+          margin: 2px 2px;
+
+          img {
+            width: 60px;
+            height: auto;
+          }
+        }
       }
     }
 
     .publicacion {
-      background-color: @siteBlue;
+      background-color: @pub;
     }
 
     .vidaObra {
-      width: 11px;
-      height: 11px;
-      background-color: @siteOrange;
+      background-color: @vidaObra;
     }
 
     .hito {
-      background-color: @siteMustard;
+      background-color: @hito;
     }
 
-
-    .eventTitle {
-      margin-top: 10px;
-    }
-
-    .aditional {
-      margin-top: .5em;
-      font-size: .8em;
-      font-style: italic;
-      color: rgb(133, 133, 133);
-      background-color: rgba(255,255,255,0.95);
-      line-height: 1.5;
-      height: 0;
-      overflow: hidden;
-      .transition(all, .25s, ease-in-out);
-      //position: absolute;
-
-      p {
-        border-bottom: 1px dotted;
-
-        &.eventType {
-          color: @siteBlack;
-          border-bottom: 1px solid;
-          font-weight: 700;
-        }
-
-        &:last-child {
-          border-bottom: 0;
-        }
-      }
-    }
-
-    .periodoPub, .periodoHis {
-      // position: relative;
-
-      // .init, .line, .end {
-      //   display: inline-block;
-      //   vertical-align: middle;
-      // }
-
-      // .line {
-      //   background-image: url('@{ornamentsUrl}Timeline_pub.svg');
-      //   height: 6px;
-      //   margin-right: 6px;
-      // }
-
-      // .init {
-      //   background-image: url('@{ornamentsUrl}Timeline_init.svg');
-      //   background-repeat: no-repeat;
-      //   height: 12px;
-      //   width: 12px;
-      //   margin-right: 6px;
-      // }
-
-      // .end {
-      //   background-image: url('@{ornamentsUrl}Timeline_end.svg');
-      //   background-repeat: no-repeat;
-      //   height: 12px;
-      //   width: 12px;
-      // }
+    .periodoPub {
+      background-color: @pPub;
     }
 
     .periodoHis {
-      // .line {
-      //   background-image: url('@{ornamentsUrl}Timeline_hist.svg');
-      // }
+      background-color: @pHist;
+    }
+
+    .eventTitle {
+      margin-top: 10px;
     }
   }
 }
@@ -1890,6 +1922,7 @@ a.projectsItem, a.projectsItem:visited {
       display: none!important;
     }
 
+    background-image: url('/assets/imgs/bgLugares.png');
     background-color: #425054;
 
     .box {

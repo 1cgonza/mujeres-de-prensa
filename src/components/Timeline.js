@@ -134,6 +134,7 @@ export default class Timeline extends Base {
     let timeout;
     let highlights = document.querySelectorAll('.sensitiveSpot');
     let highlightsOpen = true;
+    highlights.forEach(node => node.classList.add('open'));
 
     document.onmousemove = () => {
       clearTimeout(timeout);

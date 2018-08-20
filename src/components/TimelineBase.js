@@ -52,7 +52,8 @@ export default class {
         directors: directors,
         place: place,
         text: text,
-        links: links
+        links: links,
+        img: d.img
       }));
     });
   }

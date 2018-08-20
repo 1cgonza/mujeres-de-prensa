@@ -40,7 +40,8 @@ var apos = require('apostrophe')({
           filiation: 1,
           audience: 1,
           text: 1,
-          links: 1
+          links: 1,
+          img: 1
         }
       }
     },

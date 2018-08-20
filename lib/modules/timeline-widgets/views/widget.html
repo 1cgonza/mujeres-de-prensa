@@ -13,6 +13,7 @@
     {% if piece.audience %}data-audience="{{piece.audience}}"{% endif %}
     {% if piece.text and piece.text.items.length %}data-text="{{piece.text.items[0].content}}"{% endif %}
     {% if piece.links.length %}data-links="{{piece.links | dump}}"{% endif %}
+    {% if piece.img and piece.img.items.length %}data-img="{{ apos.attachments.url(piece.img.items[0]._pieces[0].item.attachment, {size: 'one-sixth'}) }}"{% endif %}
   >
   </span>
 {% endfor %}

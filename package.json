@@ -30,20 +30,16 @@
     "babel-loader": "^8.0.0-beta",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "concurrently": "^3.5.1",
+    "nodemon": "^1.18.3",
     "webpack": "^4.5.0",
     "webpack-cli": "^3.0.3",
     "webpack-dev-server": "^3.1.1"
   },
   "nodemonConfig": {
     "ignore": [
-      "locales/*.json",
-      "public/modules/**/*.less",
-      "public/modules/**/*.js",
-      "public/uploads",
-      "public/apos-minified/*.js",
-      "lib/modules/apostrophe-assets/public/**/*.js",
+      "public",
+      "lib/modules/apostrophe-assets/public/js",
       "src",
-      "public/css",
       "locales",
       "data"
     ],

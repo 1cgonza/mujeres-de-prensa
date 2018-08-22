@@ -18,14 +18,14 @@ if (galleryContainer) {
   new Gallery('.gallery');
 }
 
-function onResize(event) {
+function onResize() {
   clearTimeout(resizeTimer);
   resizeTimer = setTimeout(() => {
     parallax.reset();
   }, 250);
 }
 
-function hidePreloader(event) {
+function hidePreloader() {
   var preloader = document.getElementById('preloaderWrapper');
 
   if (preloader) {

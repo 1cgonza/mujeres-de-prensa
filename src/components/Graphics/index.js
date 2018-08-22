@@ -19,25 +19,12 @@ export default class Graphics {
 
         let imgCont = document.createElement('div');
         imgCont.className = `gridEle ${mRef.id}-${mRef.key} ${tRef.id}-${tRef.key} ${fRef.id}-${fRef.key} ${uRef.id}-${uRef.key}`;
+
         Object.assign(imgCont.style, {
           backgroundImage: `url(/assets/imgs/ornamentos/${obj.name})`,
           width: '200px',
           height: `${obj.h}px`
         });
-        // let img = new Image();
-        // img.className = ;
-        // img.dataset.form = obj.form;
-        // img.dataset.rev = obj.magazine;
-        // img.dataset.oType = obj.oType;
-        // img.dataset.use = obj.use;
-
-        // img.style.width = `${obj.w}px`;
-        // img.style.height = `${obj.h}px`;
-
-        // img.onload = () => {
-        //   img.classList.remove('hidden');
-        // };
-        // img.src = `/assets/imgs/ornamentos/${obj.name}`;
 
         wrapper.appendChild(imgCont);
       });

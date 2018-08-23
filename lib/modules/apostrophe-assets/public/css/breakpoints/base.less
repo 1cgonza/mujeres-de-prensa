@@ -2179,23 +2179,166 @@ a.projectsItem, a.projectsItem:visited {
   #stage {
     width: 100%;
     height: 100vh;;
-    background-color: #382e2e;
+    background-image: url('/assets/imgs/bgAll.png');
     justify-content: space-evenly;
-    //padding: 30px;
   }
 
-  .menu {
+  canvas {
     position: absolute;
     top: 0;
     left: 0;
-    padding: 1em 5em;
-    .category {
-      color: white;
-      padding: .5em;
+    z-index: 0;
+  }
+
+  .menu {
+    height: 25vh;
+    padding: 1em;
+    overflow: auto;
+    color: #3e362a;
+    font-size: .65em;
+    line-height: 1.5;
+    padding-right: 55px;
+    z-index: 9999;
+    .fontThin;
+
+    .menuSectionTitle {
+      font-size: 1.2em;
+      font-weight: bold;
+      border-bottom: 1px solid;
       display: inline-block;
-      font-size: .8em;
+    }
+
+    .menuEle {
+      cursor: pointer;
+      display: inline-block;
+      padding: .3em;
+
+      &.active {
+        font-style: italic;
+        font-weight: bold;
+      }
+
+      &:hover {
+        font-weight: bold;
+      }
     }
   }
+
+  .vizContent {
+    opacity: .4;
+    z-index: 1;
+
+    .contentTitle {
+      font-size: 2em;
+      font-style: italic;
+      padding-bottom: .2em;
+    }
+
+    .contentSubtitle {
+      font-size: 1em;
+      padding-bottom: .5em;
+      font-style: italic;
+    }
+
+    .contentText {
+      font-size: .9em;
+      line-height: 1.2;
+    }
+  }
+
+  .vizContainer {
+    position: absolute;
+    top: 25vh;
+    right: 0;
+    height: 75vh;
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+
+    .magContainer {
+      display: inline-block;
+      position: relative;
+      padding: 60px 2em;
+      height: 100vh;
+      
+      .magTitle {
+        font-style: italic;
+        opacity: .6;
+        font-size: 1.1em;
+        text-align: center;
+        margin-bottom: 1em;
+      }
+    }
+
+    .edContainer {
+      display: flex;
+      z-index: 2;
+    }
+
+    .node {
+      width: 3px;
+      height: 5px;
+      display: block;
+      z-index: 3;
+      position: relative;
+
+      &::before {
+        content: '';
+        pointer-events: none;
+        position: absolute;
+        width: 1px;
+        height: 3px;
+        background-color: #252425;
+        margin: 1px;
+        .transition();
+        z-index: 1;
+        opacity: 1;
+      }
+
+      &:hover {
+        &::before {
+          width: 20px;
+          height: 20px;
+          background-color: lighten(@sitePurple, 15%);
+          transform: translate(-50%, -50%);
+          border-radius: 50%;
+          z-index: 0;
+        }
+      }
+
+      &.active-c, &.hold-active-c {
+        &::before {
+          width: 10px;
+          height: 10px;
+          background-color: lighten(@siteBlue, 15%);
+          transform: translate(-50%, -50%);
+          opacity: .5;
+        }
+      }
+
+      &.active-t, &.hold-active-t {
+        &::before {
+          width: 10px;
+          height: 10px;
+          background-color: lighten(@siteOrange, 15%);
+          transform: translate(-50%, -50%);
+          opacity: .5;
+        }
+      }
+
+      &.active-g, &.hold-active-g {
+        &::before {
+          width: 10px;
+          height: 10px;
+          background-color: rgb(91, 151, 73);
+          transform: translate(-50%, -50%);
+          opacity: .5;
+        }
+      }
+    }
+  }
+
+  
 
   #taxRels {
     z-index: 9999;

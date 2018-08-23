@@ -35,3 +35,66 @@
     }
   }
 }
+
+.ic_all {
+  .menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 1em;
+    overflow: auto;
+    height: 100vh;
+    color: #3e362a;
+    font-size: .75em;
+    line-height: 1.5;
+    .fontThin;
+
+    .menuSectionTitle {
+      font-size: 1.2em;
+      font-weight: bold;
+      border-bottom: 1px solid;
+      margin: 1em 0;
+      display: inline-block;
+    }
+
+    .menuEle {
+      cursor: pointer;
+      display: block;
+      padding: 0;
+
+      &.active {
+        font-style: italic;
+        font-weight: bold;
+      }
+
+      &:hover {
+        font-weight: bold;
+      }
+    }
+  }
+
+  .vizContainer {
+    top: 0;
+    right: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    z-index: 2;
+  }
+
+  .edContainer {
+    .ed {
+      position: absolute;
+      width: 10px;
+      height: 1px;
+      display: block;
+      left: 21px;
+      margin-top: 2px;
+      background-color: #252425;
+
+      &:hover{
+        height: 3px;
+      }
+    }
+  }
+}

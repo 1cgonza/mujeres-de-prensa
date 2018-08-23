@@ -1,18 +1,6 @@
-import svg from 'svg.js';
 import slug from 'slugg';
-import {months} from '../../utils/months';
 import req from '../../utils/req';
-import {el, mount} from 'redom';
-
-const colors = [
-  '#38acc6', // Blue
-  '#d79f2e', // Mustard
-  '#b74ea3', // Purple
-  '#c2401f', // Red
-  '#fa8613', // Orange
-  '#40ad81', // Green
-];
-const colorsL = colors.length;
+import Canvas from './Canvas';
 
 const magazines = [
   {slug: 'mireya', name: 'Mireya', key: 'Mireya'},
@@ -23,178 +11,286 @@ const magazines = [
   {slug: 'mujer', name: 'Mujer', key: 'Mujer'}
 ];
 
-function random(min, max, isFloat) {
-  var val = Math.floor(Math.random() * (max - min)) + min;
-
-  if (isFloat) {
-    val = Math.random() * (max - min) + min;
-  }
-
-  return val;
-};
-
 export default class Connections {
   constructor(container) {
     if (!container) {
       return false;
     }
-    let pad = 140;
-    let stageW = window.innerWidth;
-    let stageH = window.innerHeight;
-    let categories = [];
-    let themes = [];
-    let genres = [];
-    let yearStart = 99999;
-    let yearEnd = 0;
-    let timeRange = 0;
-    let stepW = 0;
-    let numEditions = 0;
-    let nodeSize = 5;
 
-    let svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.id = 'taxRels';
-    svg.setAttribute('viewBox', `0 0 ${stageW} ${stageH}`);
-    svg.setAttribute('width', stageW);
-    svg.setAttribute('height', stageH);
-    svg.setAttributeNS('http://www.w3.org/2000/xmlns/', 'xmlns:xlink', 'http://www.w3.org/1999/xlink');
-    container.appendChild(svg);
+    this.container = container;
+    this.categories = [];
+    this.themes = [];
+    this.genres = [];
+    this.totalArticles = 0;
+    this.totalCats = 0;
+    this.totalThemes = 0;
+    this.totalGenres = 0;
+    this.activeElements = 0;
+    this.hovering = false;
 
-    container.classList.add('gridWrapper');
+    this.getData().then(() => {
+      this.stage = document.createElement('div');
+      this.content = document.createElement('div');
+      this.contentTitle = document.createElement('h2');
+      this.contentSubTitle = document.createElement('h3');
+      this.contentText = document.createElement('p');
+      this.stage.className = 'vizContainer m-all t-80 d-80 ld-85';
+      this.content.className = 'vizContent absoluteCenter';
+      this.contentTitle.className = 'contentTitle';
+      this.contentSubTitle.className = 'contentSubtitle';
+      this.contentText.className = 'contentText';
+      this.content.appendChild(this.contentTitle);
+      this.content.appendChild(this.contentSubTitle);
+      this.content.appendChild(this.contentText);
+      this.container.appendChild(this.content);
+      this.container.appendChild(this.stage);
 
-    req('/assets/db/Mireya-temas.json').then(data => {
-      let db = Object.keys(data).sort((a, b) => {
-        let edA = Array.isArray(data[a][0].ed) ? data[a][0].ed[0] : data[a][0].ed;
-        let edB = Array.isArray(data[b][0].ed) ? data[b][0].ed[0] : data[b][0].ed;
-        return edA - edB;
-      });
+      for (let mag in this.data) {
+        let d = this.data[mag];
+        let magContainer = document.createElement('div');
+        let magTitle = document.createElement('h2');
+        let magI = magazines.findIndex(obj => obj.key === mag);
+        magTitle.innerText = magazines[magI].name;
+        magTitle.className = 'magTitle';
 
-      db.forEach(edKey => {
-        data[edKey].forEach(article => {
-          if (article.hasOwnProperty('category')) {
-            article.category.forEach(category => {
-              let name = slug(category);
+        magContainer.className = 'magContainer';
+        magContainer.appendChild(magTitle);
+        this.stage.appendChild(magContainer);
 
-              if (categories.indexOf(name) < 0) {
-                categories.push(name);
-              }
-            });
-          }
+        let db = Object.keys(d).sort((a, b) => {
+          let edA = Array.isArray(d[a][0].ed) ? d[a][0].ed[0] : d[a][0].ed;
+          let edB = Array.isArray(d[b][0].ed) ? d[b][0].ed[0] : d[b][0].ed;
+          return edA - edB;
+        });
 
-          if (article.hasOwnProperty('genres')) {
-            article.genres.forEach(genre => {
-              let name = slug(genre);
+        db.forEach(ed => {
+          let edContainer = document.createElement('div');
+          let edBtn = document.createElement('span');
+          edBtn.className = 'ed';
+          edContainer.className = `edContainer ${ed}`;
+          edContainer.appendChild(edBtn);
+          magContainer.appendChild(edContainer);
 
-              if (genres.indexOf(name) < 0) {
-                genres.push(name);
-              }
-            });
-          }
+          let firstChild = this.data[mag][ed][0];
+          edBtn.onmouseenter = () => {
+            this.renderContent(`${magazines[magI].name}, ${ed}`, `${firstChild.month.join(', ')} - ${firstChild.year}`);
+          };
 
-          if (article.hasOwnProperty('theme')) {
-            let name = slug(article.theme);
+          edBtn.onmouseleave = () => {
+            this.clearContent();
+          };
 
-            if (themes.indexOf(name) < 0) {
-              themes.push(slug(name));
+          this.data[mag][ed].forEach(article => {
+            this.totalArticles++;
+            let point = document.createElement('span');
+            point.className = `node`;
+
+            if (article.category) {
+              article.category.forEach(cat => point.classList.add(`c-${slug(cat)}`));
+              this.totalCats += article.category.length;
             }
-          }
 
-          if (Array.isArray(article.ed)) {
-            numEditions = article.ed[article.ed.length - 1] > numEditions ? article.ed[article.ed.length - 1] : numEditions;
+            if (article.genres) {
+              article.genres.forEach(cat => point.classList.add(`g-${slug(cat)}`));
+              this.totalGenres += article.genres.length;
+            }
+
+            if (article.theme) {
+              point.classList.add(`t-${slug(article.theme)}`);
+              this.totalThemes++;
+            }
+
+            let subTitle = `${magazines[magI].name}, ed.${article.ed}, ${article.month.join(', ')}, ${article.year}`;
+            let text = article.hasOwnProperty('category') ? `Categorías: ${article.category.join(', ')}\n` : '';
+            text += article.hasOwnProperty('theme') ? `Temas: ${article.theme}\n` : '';
+            text += article.hasOwnProperty('genres') ? `Géneros: ${article.genres.join(', ')}\n` : '';
+            text += article.hasOwnProperty('pages') ? `pg: ${article.pages.join(', ')}\n` : '';
+
+            point.onmouseenter = () => {
+              this.renderContent(article.title, subTitle, text);
+            };
+
+            point.onmouseleave = () => {
+              this.clearContent();
+            };
+
+            edContainer.appendChild(point);
+          });
+        });
+      }
+
+      this.buildMenu('m-100 t-20 d-20 ld-15');
+      this.canvas = new Canvas(this.container, this.totalCats, this.totalThemes, this.totalGenres);
+    });
+  }
+
+  renderContent(title, subtitle, text) {
+    if (title) {
+      this.contentTitle.innerText = title;
+    }
+
+    if (subtitle) {
+      this.contentSubTitle.innerText = subtitle;
+    }
+
+    if (text) {
+      this.contentText.innerText = text;
+    }
+  }
+
+  clearContent() {
+    this.contentTitle.innerText = '';
+    this.contentSubTitle.innerText = '';
+    this.contentText.innerText = '';
+  }
+
+  buildMenu(grid) {
+    this._counter = 0;
+    this.menu = document.createElement('div');
+    this.menu.className = `menu ${grid}`;
+    this.container.appendChild(this.menu);
+    this.buildMenuSection(this.categories, 'Categorias', 'c');
+    this.buildMenuSection(this.themes, 'Temas', 't');
+    this.buildMenuSection(this.genres, 'Géneros', 'g');
+  }
+
+  buildMenuSection(arr, name, key) {
+    let container = document.createElement('div');
+    let title = document.createElement('h3');
+    container.className = 'menuSection';
+    title.className = 'menuSectionTitle';
+    title.innerText = name;
+
+    container.appendChild(title);
+
+    arr.forEach(names => {
+      this._counter++;
+      let ele = document.createElement('p');
+      ele.className = 'menuEle';
+      ele.innerText = `(${this._counter}) ${names[1]}`;
+      ele.dataset.target = names[0];
+      ele.dataset.id = this._counter;
+
+      container.appendChild(ele);
+      let rels = this.stage.querySelectorAll(`.${key}-${names[0]}`);
+      let relsLen = rels.length;
+      let animReq;
+      let classSearch = `active-${key}`;
+
+      ele.onmouseenter = () => {
+        this.hovering = true;
+
+        if (this.activeElements > 0) {
+          this.canvas[`add${key}`](relsLen);
+        } else {
+          this.canvas[`draw${key}`](relsLen);
+        }
+
+        let i = 0;
+
+        function loop() {
+          if (i < relsLen) {
+            if (relsLen - i >= 5) {
+              rels[i++].classList.add(classSearch);
+              rels[i++].classList.add(classSearch);
+              rels[i++].classList.add(classSearch);
+              rels[i++].classList.add(classSearch);
+              rels[i++].classList.add(classSearch);
+            } else {
+              for (let j = i; j < relsLen; j++) {
+                rels[j].classList.add(classSearch);
+                i++;
+              }
+            }
+            animReq = requestAnimationFrame(loop);
           } else {
-            numEditions = article.ed > numEditions ? article.ed : numEditions;
+            window.cancelAnimationFrame(animReq);
           }
+        }
+        loop();
+      };
 
-          yearStart = article.year < yearStart ? article.year : yearStart;
-          yearEnd = article.year > yearEnd ? article.year : yearEnd;
+      ele.onmouseleave = () => {
+        this.hovering = false;
+        window.cancelAnimationFrame(animReq);
+        rels.forEach(node => {
+          node.classList.remove(classSearch);
         });
-      });
 
-      let blocksW = stageW / numEditions;
-      let margin = blocksW / 4;
-      let stepW = blocksW - margin;
-      let blockH = stageH - 50;
-      let categoryRels = {};
-      let genresRels = {};
-      let themesRels = {};
-      timeRange = (yearEnd - yearStart) + 1;
-      console.log(db, data);
-      db.forEach(edKey => {
-        let collection = data[edKey];
-        let ed = Array.isArray(collection[0].ed) ? collection[0].ed[0] - 1 : collection[0].ed - 1;
-        let _stepW = Array.isArray(collection[0].ed) ? `w${collection[0].ed.length}` : 'w1';
-        let articleStep = blockH / collection.length;
-        let box = document.createElement('div');
-        box.className = `book ${_stepW}`;
+        if (this.activeElements === 0) {
+          setTimeout(() => {
+            if (!this.hovering) {
+              this.canvas.drawAll();
+            }            
+          }, 200);
+        }
+      };
 
-        let info = document.createElement('div');
-        let title = document.createElement('p');
-        let date = document.createElement('p');
-        info.className = 'info';
-        title.className = 'title';
-        title.innerText = `No. ${Array.isArray(collection[0].ed) ? collection[0].ed.join(' & ') : collection[0].ed}`;
-        date.className = 'date';
-        date.innerText = `${collection[0].month.join(', ')}, ${collection[0].year.toString().slice(2, 4)}`;
+      ele.onclick = () => {
+        if (ele.classList.contains('active')) {
+          this.activeElements--;
+          ele.classList.remove('active');
+          rels.forEach(node => {
+            node.classList.remove(`hold-${classSearch}`);
+          });
+        } else {
+          this.activeElements++;
+          ele.classList.add('active');
+          rels.forEach(node => {
+            node.classList.add(`hold-${classSearch}`);
+          });
+        }
+      };
+    });
 
-        info.appendChild(title);
-        info.appendChild(date);
-        box.appendChild(info);
-        container.appendChild(box);
+    this.menu.appendChild(container);
+  }
 
-        collection.forEach((article, i) => {
-          let ed = Array.isArray(article.ed) ? article.ed[0] - 1 : article.ed - 1;
-          let y = (i * articleStep);
-          let node = document.createElement('span');
-          box.appendChild(node);
+  getData() {
+    return new Promise((resolve) => {
+      req('/assets/db/temas.json').then(data => {
+        this.data = data;
 
-          node.dataset.title = article.title;
+        for (let mag in data) {
+          let d = data[mag];
+          let db = Object.keys(d).sort((a, b) => {
+            let edA = Array.isArray(d[a][0].ed) ? d[a][0].ed[0] : d[a][0].ed;
+            let edB = Array.isArray(d[b][0].ed) ? d[b][0].ed[0] : d[b][0].ed;
+            return edA - edB;
+          });
 
-          if (article.hasOwnProperty('category')) {
-            article.category.forEach(cat => {
-              let name = slug(cat);
-              node.classList.add(`cat-${name}`);
-            });
-          }
-
-          if (article.hasOwnProperty('genres')) {
-            article.genres.forEach(genre => {
-              let name = slug(genre);
-              node.classList.add(`gen-${name}`);
-            });
-          }
-
-          if (article.hasOwnProperty('theme')) {
-            let name = slug(article.theme);
-            node.classList.add(`the-${name}`);
-          }
-
-          node.onmouseenter = () => {
-            let list = node.classList;
-            let x1 = node.offsetLeft + 8;
-            let y1 = node.offsetTop + 8;
-
-            for (let i = 0; i < list.length; i++) {
-              let key = list[i];
-              let matches = container.querySelectorAll(`.${key}`);
-
-              for (let j = 0; j < matches.length; j++) {
-                let target = matches[j];
-                let path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-                let x2 = target.offsetLeft + 8;
-                let y2 = target.offsetTop + 8;
-                let c1y = y1 > y2 ? (y2 - y1) / 2 : (y1 - y2) / 2;
-                let c1x = x1 < x2 ? (x2 - x1) / 2 : (x1 + (x1 - x2) / 2);
-                path.setAttributeNS(null, 'd', `M${x1} ${y1} C ${c1x} ${y1}, ${c1x} ${y2}, ${x2} ${y2}`);
-                path.setAttributeNS(null, 'stroke', colors[random(0, colorsL)]);
-                path.setAttributeNS(null, 'fill', 'transparent');
-                svg.appendChild(path);
+          db.forEach(edKey => {
+            d[edKey].forEach(article => {
+              if (article.hasOwnProperty('category')) {
+                article.category.forEach(category => {
+                  if (this.categories.findIndex(arr => arr[1] === category) < 0) {
+                    this.categories.push([slug(category), category]);
+                  }
+                });
               }
-            }
-          };
 
-          node.onmouseleave = () => {
-            svg.innerHTML = '';
-          };
-        });
+              if (article.hasOwnProperty('genres')) {
+                article.genres.forEach(genre => {
+                  if (this.genres.findIndex(arr => arr[1] === genre) < 0) {
+                    this.genres.push([slug(genre), genre]);
+                  }
+                });
+              }
+
+              if (article.hasOwnProperty('theme')) {
+                if (this.themes.findIndex(arr => arr[1] === article.theme) < 0) {
+                  this.themes.push([slug(article.theme), article.theme]);
+                }
+              }
+            });
+          });
+        }
+
+        this.categories.sort((a, b) => a[0] > b[0] ? 1 : -1);
+        this.genres.sort((a, b) => a[0] > b[0] ? 1 : -1);
+        this.themes.sort((a, b) => a[0] > b[0] ? 1 : -1);
+
+        resolve();
       });
     });
   }

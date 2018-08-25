@@ -2,13 +2,25 @@
 {% extends data.outerLayout %}
 {% set context = data.piece or data.page %}
 
-{% block startHead %} {% if data.global.defaultColor %}
-<style>
-  .themeColor {color: {{data.global.defaultColor}}}
-  .themeBgColor {background-color: {{data.global.defaultColor}}}
-  .bgColorBlock::before {background-color: {{data.global.defaultColor}}}
-</style>
-{% endif %} {% endblock %}
+{% block startHead %}
+  {% if data.global.analytics %}
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ data.global.analytics }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', {{data.global.analytics | json}});
+    </script>
+  {% endif %}
+  {% if data.global.defaultColor %}
+  <style>
+    .themeColor {color: {{data.global.defaultColor}}}
+    .themeBgColor {background-color: {{data.global.defaultColor}}}
+    .bgColorBlock::before {background-color: {{data.global.defaultColor}}}
+  </style>
+  {% endif %}
+{% endblock %}
 
 {% if context %}
   {% set ogImageDefault = apos.images.first(data.global.ogImage, 'ogImage') or apos.images.first(context.body, 'body') %}
@@ -154,18 +166,7 @@
   {% endblock %}
 
   {% block afterMain %}
-    {% if data.global.analytics %}
-      <script type="text/javascript">
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', {{ data.global.analytics | json }} ]);
-        _gaq.push(['_trackPageview']);
-        (function() {
-          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
-      </script>
-    {% endif %}
+    
   {% endblock %}
 {% else %}
 

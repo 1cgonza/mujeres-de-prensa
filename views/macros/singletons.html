@@ -31,11 +31,12 @@
   }) }}
 {% endmacro %}
 
-{% macro getImageSection(context, name, limit, addLabel, editLabel) %}
+{% macro getImageSection(context, name, limit, addLabel, editLabel, size) %}
+  {% set imgSize = size or 'full' %}
   {{ apos.singleton(context, name, 'apostrophe-images', {
       addLabel: addLabel,
       editLabel: editLabel,
-      size: 'full',
+      size: imgSize,
       noHeight: true,
       focalPoint: true,
       limit: limit,
